@@ -1,0 +1,505 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="the_lazyModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="chat_messages">
+          <Key>
+            <PropertyRef Name="message_id" />
+          </Key>
+          <Property Name="message_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="text" Type="varchar" MaxLength="100" />
+          <Property Name="room_id" Type="int" />
+          <Property Name="timestamp" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'def.the_lazy.chat_rooms' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="chat_rooms">
+          <Key>
+            <PropertyRef Name="room_id" />
+            <PropertyRef Name="type" />
+          </Key>
+          <Property Name="room_id" Type="int" Nullable="false" />
+          <Property Name="creator_user_id" Type="int" />
+          <Property Name="type" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="element_comments">
+          <Key>
+            <PropertyRef Name="comment_id" />
+          </Key>
+          <Property Name="comment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="element_id" Type="int" Nullable="false" />
+          <Property Name="text" Type="varchar" MaxLength="200" />
+          <Property Name="mark" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="elements">
+          <Key>
+            <PropertyRef Name="element_id" />
+          </Key>
+          <Property Name="element_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" />
+          <Property Name="description" Type="varchar" MaxLength="600" />
+          <Property Name="price" Type="int" />
+        </EntityType>
+        <EntityType Name="likes">
+          <Key>
+            <PropertyRef Name="like_id" />
+          </Key>
+          <Property Name="like_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="element_id" Type="int" Nullable="false" />
+          <Property Name="type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="notifications">
+          <Key>
+            <PropertyRef Name="notification_id" />
+          </Key>
+          <Property Name="notification_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="posts">
+          <Key>
+            <PropertyRef Name="post_id" />
+          </Key>
+          <Property Name="post_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="parent_post_id" Type="int" />
+          <Property Name="subject" Type="varchar" MaxLength="45" />
+          <Property Name="text" Type="varchar" MaxLength="120" />
+        </EntityType>
+        <EntityType Name="purchases">
+          <Key>
+            <PropertyRef Name="purchase_id" />
+          </Key>
+          <Property Name="purchase_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="element_id" Type="int" Nullable="false" />
+          <Property Name="price" Type="int" />
+        </EntityType>
+        <EntityType Name="reports">
+          <Key>
+            <PropertyRef Name="report_id" />
+          </Key>
+          <Property Name="report_id" Type="int" Nullable="false" />
+          <Property Name="reporter_id" Type="int" />
+          <Property Name="reported_id" Type="int" />
+          <Property Name="reason" Type="varchar" MaxLength="130" />
+          <Property Name="level" Type="int" />
+        </EntityType>
+        <EntityType Name="requests">
+          <Key>
+            <PropertyRef Name="request_id" />
+          </Key>
+          <Property Name="request_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="subject_id" Type="int" />
+          <Property Name="text" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="sessions">
+          <Key>
+            <PropertyRef Name="session_id" />
+          </Key>
+          <Property Name="session_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="ipendpoint" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="create_time" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="update_time" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="subjects">
+          <Key>
+            <PropertyRef Name="subject_id" />
+          </Key>
+          <Property Name="subject_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="255" />
+          <Property Name="password" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="permission_level" Type="int" Nullable="false" />
+          <Property Name="create_time" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="group_id" Type="int" />
+        </EntityType>
+        <Function Name="CloseAllSessionsForUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="the_lazy">
+          <Parameter Name="p_user_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CloseSession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="the_lazy">
+          <Parameter Name="p_session_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="KeepSessionAlive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="the_lazy">
+          <Parameter Name="p_session_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LoginUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="the_lazy">
+          <Parameter Name="p_username" Type="varchar" Mode="In" />
+          <Parameter Name="p_password" Type="varchar" Mode="In" />
+          <Parameter Name="p_ipendpoint" Type="varchar" Mode="In" />
+          <Parameter Name="p_session_id" Type="int" Mode="Out" />
+        </Function>
+        <Function Name="RegisterUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="the_lazy">
+          <Parameter Name="d_username" Type="varchar" Mode="In" />
+          <Parameter Name="pass" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="result" Type="int" Mode="Out" />
+        </Function>
+        <EntityContainer Name="the_lazyModelStoreContainer">
+          <EntitySet Name="chat_messages" EntityType="Self.chat_messages" Schema="the_lazy" store:Type="Tables" />
+          <EntitySet Name="element_comments" EntityType="Self.element_comments" Schema="the_lazy" store:Type="Tables" />
+          <EntitySet Name="elements" EntityType="Self.elements" Schema="the_lazy" store:Type="Tables" />
+          <EntitySet Name="likes" EntityType="Self.likes" Schema="the_lazy" store:Type="Tables" />
+          <EntitySet Name="notifications" EntityType="Self.notifications" Schema="the_lazy" store:Type="Tables" />
+          <EntitySet Name="posts" EntityType="Self.posts" Schema="the_lazy" store:Type="Tables" />
+          <EntitySet Name="purchases" EntityType="Self.purchases" Schema="the_lazy" store:Type="Tables" />
+          <EntitySet Name="reports" EntityType="Self.reports" Schema="the_lazy" store:Type="Tables" />
+          <EntitySet Name="requests" EntityType="Self.requests" Schema="the_lazy" store:Type="Tables" />
+          <EntitySet Name="sessions" EntityType="Self.sessions" Schema="the_lazy" store:Type="Tables" />
+          <EntitySet Name="subjects" EntityType="Self.subjects" Schema="the_lazy" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="the_lazy" store:Type="Tables" />
+          <EntitySet Name="chat_rooms" EntityType="Self.chat_rooms" store:Type="Tables" store:Schema="the_lazy">
+            <DefiningQuery>SELECT
+`chat_rooms`.`room_id`, 
+`chat_rooms`.`creator_user_id`, 
+`chat_rooms`.`type`, 
+`chat_rooms`.`name`
+FROM `chat_rooms` AS `chat_rooms`</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="the_lazyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="chat_messages">
+          <Key>
+            <PropertyRef Name="message_id" />
+          </Key>
+          <Property Name="message_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="text" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="room_id" Type="Int32" />
+          <Property Name="timestamp" Type="DateTime" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="element_comments">
+          <Key>
+            <PropertyRef Name="comment_id" />
+          </Key>
+          <Property Name="comment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="element_id" Type="Int32" Nullable="false" />
+          <Property Name="text" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="mark" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="elements">
+          <Key>
+            <PropertyRef Name="element_id" />
+          </Key>
+          <Property Name="element_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Int32" />
+        </EntityType>
+        <EntityType Name="likes">
+          <Key>
+            <PropertyRef Name="like_id" />
+          </Key>
+          <Property Name="like_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="element_id" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="notifications">
+          <Key>
+            <PropertyRef Name="notification_id" />
+          </Key>
+          <Property Name="notification_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="posts">
+          <Key>
+            <PropertyRef Name="post_id" />
+          </Key>
+          <Property Name="post_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="parent_post_id" Type="Int32" />
+          <Property Name="subject" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="text" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="purchases">
+          <Key>
+            <PropertyRef Name="purchase_id" />
+          </Key>
+          <Property Name="purchase_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="element_id" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Int32" />
+        </EntityType>
+        <EntityType Name="reports">
+          <Key>
+            <PropertyRef Name="report_id" />
+          </Key>
+          <Property Name="report_id" Type="Int32" Nullable="false" />
+          <Property Name="reporter_id" Type="Int32" />
+          <Property Name="reported_id" Type="Int32" />
+          <Property Name="reason" Type="String" MaxLength="130" FixedLength="false" Unicode="false" />
+          <Property Name="level" Type="Int32" />
+        </EntityType>
+        <EntityType Name="requests">
+          <Key>
+            <PropertyRef Name="request_id" />
+          </Key>
+          <Property Name="request_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="subject_id" Type="Int32" />
+          <Property Name="text" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sessions">
+          <Key>
+            <PropertyRef Name="session_id" />
+          </Key>
+          <Property Name="session_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="ipendpoint" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="create_time" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="update_time" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="subjects">
+          <Key>
+            <PropertyRef Name="subject_id" />
+          </Key>
+          <Property Name="subject_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="permission_level" Type="Int32" Nullable="false" />
+          <Property Name="create_time" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="group_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="chat_rooms">
+          <Key>
+            <PropertyRef Name="room_id" />
+            <PropertyRef Name="type" />
+          </Key>
+          <Property Name="room_id" Type="Int32" Nullable="false" />
+          <Property Name="creator_user_id" Type="Int32" />
+          <Property Name="type" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="the_lazyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="chat_messages" EntityType="Self.chat_messages" />
+          <EntitySet Name="element_comments" EntityType="Self.element_comments" />
+          <EntitySet Name="elements" EntityType="Self.elements" />
+          <EntitySet Name="likes" EntityType="Self.likes" />
+          <EntitySet Name="notifications" EntityType="Self.notifications" />
+          <EntitySet Name="posts" EntityType="Self.posts" />
+          <EntitySet Name="purchases" EntityType="Self.purchases" />
+          <EntitySet Name="reports" EntityType="Self.reports" />
+          <EntitySet Name="requests" EntityType="Self.requests" />
+          <EntitySet Name="sessions" EntityType="Self.sessions" />
+          <EntitySet Name="subjects" EntityType="Self.subjects" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <EntitySet Name="chat_rooms" EntityType="Self.chat_rooms" />
+          <FunctionImport Name="CloseAllSessionsForUser">
+          <Parameter Name="p_user_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CloseSession">
+          <Parameter Name="p_session_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="KeepSessionAlive">
+          <Parameter Name="p_session_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LoginUser">
+            <Parameter Name="p_username" Mode="In" Type="String" />
+            <Parameter Name="p_password" Mode="In" Type="String" />
+            <Parameter Name="p_ipendpoint" Mode="In" Type="String" />
+            <Parameter Name="p_session_id" Mode="Out" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RegisterUser">
+            <Parameter Name="d_username" Mode="In" Type="String" />
+            <Parameter Name="pass" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="result" Mode="Out" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="the_lazyModelStoreContainer" CdmEntityContainer="the_lazyEntities">
+          <EntitySetMapping Name="chat_messages">
+            <EntityTypeMapping TypeName="the_lazyModel.chat_messages">
+              <MappingFragment StoreEntitySet="chat_messages">
+                <ScalarProperty Name="message_id" ColumnName="message_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="element_comments">
+            <EntityTypeMapping TypeName="the_lazyModel.element_comments">
+              <MappingFragment StoreEntitySet="element_comments">
+                <ScalarProperty Name="comment_id" ColumnName="comment_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="element_id" ColumnName="element_id" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="mark" ColumnName="mark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="elements">
+            <EntityTypeMapping TypeName="the_lazyModel.elements">
+              <MappingFragment StoreEntitySet="elements">
+                <ScalarProperty Name="element_id" ColumnName="element_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="likes">
+            <EntityTypeMapping TypeName="the_lazyModel.likes">
+              <MappingFragment StoreEntitySet="likes">
+                <ScalarProperty Name="like_id" ColumnName="like_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="element_id" ColumnName="element_id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="notifications">
+            <EntityTypeMapping TypeName="the_lazyModel.notifications">
+              <MappingFragment StoreEntitySet="notifications">
+                <ScalarProperty Name="notification_id" ColumnName="notification_id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="posts">
+            <EntityTypeMapping TypeName="the_lazyModel.posts">
+              <MappingFragment StoreEntitySet="posts">
+                <ScalarProperty Name="post_id" ColumnName="post_id" />
+                <ScalarProperty Name="parent_post_id" ColumnName="parent_post_id" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="text" ColumnName="text" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="purchases">
+            <EntityTypeMapping TypeName="the_lazyModel.purchases">
+              <MappingFragment StoreEntitySet="purchases">
+                <ScalarProperty Name="purchase_id" ColumnName="purchase_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="element_id" ColumnName="element_id" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reports">
+            <EntityTypeMapping TypeName="the_lazyModel.reports">
+              <MappingFragment StoreEntitySet="reports">
+                <ScalarProperty Name="report_id" ColumnName="report_id" />
+                <ScalarProperty Name="reporter_id" ColumnName="reporter_id" />
+                <ScalarProperty Name="reported_id" ColumnName="reported_id" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="level" ColumnName="level" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="requests">
+            <EntityTypeMapping TypeName="the_lazyModel.requests">
+              <MappingFragment StoreEntitySet="requests">
+                <ScalarProperty Name="request_id" ColumnName="request_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+                <ScalarProperty Name="text" ColumnName="text" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sessions">
+            <EntityTypeMapping TypeName="the_lazyModel.sessions">
+              <MappingFragment StoreEntitySet="sessions">
+                <ScalarProperty Name="session_id" ColumnName="session_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="ipendpoint" ColumnName="ipendpoint" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="update_time" ColumnName="update_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subjects">
+            <EntityTypeMapping TypeName="the_lazyModel.subjects">
+              <MappingFragment StoreEntitySet="subjects">
+                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="the_lazyModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="permission_level" ColumnName="permission_level" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="group_id" ColumnName="group_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="chat_rooms">
+            <EntityTypeMapping TypeName="the_lazyModel.chat_rooms">
+              <MappingFragment StoreEntitySet="chat_rooms">
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="creator_user_id" ColumnName="creator_user_id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CloseAllSessionsForUser" FunctionName="the_lazyModel.Store.CloseAllSessionsForUser" />
+          <FunctionImportMapping FunctionImportName="CloseSession" FunctionName="the_lazyModel.Store.CloseSession" />
+          <FunctionImportMapping FunctionImportName="KeepSessionAlive" FunctionName="the_lazyModel.Store.KeepSessionAlive" />
+          <FunctionImportMapping FunctionImportName="LoginUser" FunctionName="the_lazyModel.Store.LoginUser" />
+          <FunctionImportMapping FunctionImportName="RegisterUser" FunctionName="the_lazyModel.Store.RegisterUser" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
