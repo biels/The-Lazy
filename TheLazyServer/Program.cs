@@ -16,6 +16,7 @@ namespace TheLazyServer
             {
                 host.Open();
                 Console.WriteLine("Servidor obert");
+                Console.ReadLine();
             }
         }
     }

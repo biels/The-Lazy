@@ -49,6 +49,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System" />
@@ -57,15 +60,18 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="Application.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Worker.vb" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -135,6 +141,141 @@
       <Project>{60842efa-961f-4b53-90db-c8aaa5f8bced}</Project>
       <Name>TheLazyInterfaces</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\Icones\Action-Log.png" />
+    <Resource Include="media\Icones\Add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\Icones\Bullet-Add.png" />
+    <Resource Include="media\Icones\Bullet-Arrow-Bottom.png" />
+    <Resource Include="media\Icones\Bullet-Arrow-Down.png" />
+    <Resource Include="media\Icones\Bullet-Arrow-Top.png" />
+    <Resource Include="media\Icones\Bullet-Arrow-Up.png" />
+    <Resource Include="media\Icones\Bullet-Black.png" />
+    <Resource Include="media\Icones\Bullet-Blue.png" />
+    <Resource Include="media\Icones\Bullet-Delete.png" />
+    <Resource Include="media\Icones\Bullet-Disk.png" />
+    <Resource Include="media\Icones\Bullet-Error.png" />
+    <Resource Include="media\Icones\Bullet-Feed.png" />
+    <Resource Include="media\Icones\Bullet-Go.png" />
+    <Resource Include="media\Icones\Bullet-Green.png" />
+    <Resource Include="media\Icones\Bullet-Key.png" />
+    <Resource Include="media\Icones\Bullet-Orange.png" />
+    <Resource Include="media\Icones\Bullet-Picture.png" />
+    <Resource Include="media\Icones\Bullet-Pink.png" />
+    <Resource Include="media\Icones\Bullet-Purple.png" />
+    <Resource Include="media\Icones\Bullet-Red.png" />
+    <Resource Include="media\Icones\Bullet-Star.png" />
+    <Resource Include="media\Icones\Bullet-Toggle-Minus.png" />
+    <Resource Include="media\Icones\Bullet-Toggle-Plus.png" />
+    <Resource Include="media\Icones\Bullet-White.png" />
+    <Resource Include="media\Icones\Bullet-Wrench.png" />
+    <Resource Include="media\Icones\Bullet-Yellow.png" />
+    <Resource Include="media\Icones\Card-Amex-Green.png" />
+    <Resource Include="media\Icones\Card-Chase.png" />
+    <Resource Include="media\Icones\Card-Money.png" />
+    <Resource Include="media\Icones\Connect.png" />
+    <Resource Include="media\Icones\Cross.png" />
+    <Resource Include="media\Icones\Ddr-Memory.png" />
+    <Resource Include="media\Icones\Delete.png" />
+    <Resource Include="media\Icones\Derivatives.png" />
+    <Resource Include="media\Icones\Diamond.png" />
+    <Resource Include="media\Icones\Dice.png" />
+    <Resource Include="media\Icones\Disconnect.png" />
+    <Resource Include="media\Icones\Disk-Multiple.png" />
+    <Resource Include="media\Icones\Disk.png" />
+    <Resource Include="media\Icones\Dns-Setting.png" />
+    <Resource Include="media\Icones\Dns.png" />
+    <Resource Include="media\Icones\Document-Back.png" />
+    <Resource Include="media\Icones\Document-Background.png" />
+    <Resource Include="media\Icones\Document-Break.png" />
+    <Resource Include="media\Icones\Document-Center.png" />
+    <Resource Include="media\Icones\Document-Check-Compatibility.png" />
+    <Resource Include="media\Icones\Document-Comment-Above.png" />
+    <Resource Include="media\Icones\Document-Comment-Behind.png" />
+    <Resource Include="media\Icones\Document-Comment-Below.png" />
+    <Resource Include="media\Icones\Document-Comments.png" />
+    <Resource Include="media\Icones\Document-Copies.png" />
+    <Resource Include="media\Icones\Document-Editing.png" />
+    <Resource Include="media\Icones\Document-Empty.png" />
+    <Resource Include="media\Icones\Document-Export.png" />
+    <Resource Include="media\Icones\Document-Font-Wizard.png" />
+    <Resource Include="media\Icones\Document-Font.png" />
+    <Resource Include="media\Icones\Document-Image-Hor.png" />
+    <Resource Include="media\Icones\Document-Image-Ver.png" />
+    <Resource Include="media\Icones\Document-Image.png" />
+    <Resource Include="media\Icones\Document-Import.png" />
+    <Resource Include="media\Icones\Document-Index.png" />
+    <Resource Include="media\Icones\Document-Info.png" />
+    <Resource Include="media\Icones\Document-Insert.png" />
+    <Resource Include="media\Icones\Document-Inspect.png" />
+    <Resource Include="media\Icones\Document-Inspector.png" />
+    <Resource Include="media\Icones\Document-Layout.png" />
+    <Resource Include="media\Icones\Document-Margins.png" />
+    <Resource Include="media\Icones\Document-Mark-As-Final.png" />
+    <Resource Include="media\Icones\Document-Move.png" />
+    <Resource Include="media\Icones\Document-Next.png" />
+    <Resource Include="media\Icones\Document-Notes.png" />
+    <Resource Include="media\Icones\Document-Num.png" />
+    <Resource Include="media\Icones\Document-Page-Last.png" />
+    <Resource Include="media\Icones\Document-Page-Next.png" />
+    <Resource Include="media\Icones\Document-Page-Previous.png" />
+    <Resource Include="media\Icones\Document-Page.png" />
+    <Resource Include="media\Icones\Document-Plus.png" />
+    <Resource Include="media\Icones\Document-Prepare.png" />
+    <Resource Include="media\Icones\Document-Properties.png" />
+    <Resource Include="media\Icones\Document-Quote.png" />
+    <Resource Include="media\Icones\Document-Redirect.png" />
+    <Resource Include="media\Icones\Document-Rename.png" />
+    <Resource Include="media\Icones\Document-Shapes.png" />
+    <Resource Include="media\Icones\Document-Shred.png" />
+    <Resource Include="media\Icones\Document-Signature.png" />
+    <Resource Include="media\Icones\Document-Spacing.png" />
+    <Resource Include="media\Icones\Document-Split.png" />
+    <Resource Include="media\Icones\Document-Stand.png" />
+    <Resource Include="media\Icones\Document-Tag.png" />
+    <Resource Include="media\Icones\Document-Todo.png" />
+    <Resource Include="media\Icones\Document-Valid.png" />
+    <Resource Include="media\Icones\Document-Vertical.png" />
+    <Resource Include="media\Icones\Document-View-Book.png" />
+    <Resource Include="media\Icones\Documents-Email.png" />
+    <Resource Include="media\Icones\Download.png" />
+    <Resource Include="media\Icones\Flashdisk.png" />
+    <Resource Include="media\Icones\Folder-Key.png" />
+    <Resource Include="media\Icones\Lightbulb-Add.png" />
+    <Resource Include="media\Icones\Lightbulb-Delete.png" />
+    <Resource Include="media\Icones\Lightbulb-Off.png" />
+    <Resource Include="media\Icones\Lightbulb.png" />
+    <Resource Include="media\Icones\Lightning-Add.png" />
+    <Resource Include="media\Icones\Lightning-Delete.png" />
+    <Resource Include="media\Icones\Lightning-Go.png" />
+    <Resource Include="media\Icones\Lightning.png" />
+    <Resource Include="media\Icones\Link-Add.png" />
+    <Resource Include="media\Icones\Link-Break.png" />
+    <Resource Include="media\Icones\Link-Delete.png" />
+    <Resource Include="media\Icones\Link-Edit.png" />
+    <Resource Include="media\Icones\Link-Go.png" />
+    <Resource Include="media\Icones\Link.png" />
+    <Resource Include="media\Icones\Network-Share.png" />
+    <Resource Include="media\Icones\Note-Add.png" />
+    <Resource Include="media\Icones\Note-Delete.png" />
+    <Resource Include="media\Icones\Note-Edit.png" />
+    <Resource Include="media\Icones\Note-Error.png" />
+    <Resource Include="media\Icones\Note-Go.png" />
+    <Resource Include="media\Icones\Note.png" />
+    <Resource Include="media\Icones\Winrar-Add.png" />
+    <Resource Include="media\Icones\Winrar-Extract.png" />
+    <Resource Include="media\Icones\Winrar-View.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\Imatges\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\Imatges\biglogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\Imatges\newlogo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

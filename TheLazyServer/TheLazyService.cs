@@ -13,6 +13,7 @@ namespace TheLazyServer
     {
         public void DoWork()
         {
+            Console.WriteLine("Work done!");
         }
     }
 }
