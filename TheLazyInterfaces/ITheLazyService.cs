@@ -13,5 +13,7 @@ namespace TheLazyInterfaces
     {
         [OperationContract]
         void DoWork();
+        [OperationContract]
+        List<String> getPosts();
     }
 }

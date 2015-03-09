@@ -12,15 +12,18 @@ namespace TheLazyServer
     using System;
     using System.Collections.Generic;
     
-    public partial class chat_messages
+    public partial class academic_levels
     {
-        public int message_id { get; set; }
-        public int user_id { get; set; }
-        public string text { get; set; }
-        public Nullable<int> room_id { get; set; }
-        public Nullable<System.DateTime> timestamp { get; set; }
+        public academic_levels()
+        {
+            this.groups = new HashSet<groups>();
+            this.subjects = new HashSet<subjects>();
+        }
     
-        public virtual chat_rooms chat_rooms { get; set; }
-        public virtual users users { get; set; }
+        public int academic_level_id { get; set; }
+        public string name { get; set; }
+    
+        public virtual ICollection<groups> groups { get; set; }
+        public virtual ICollection<subjects> subjects { get; set; }
     }
 }

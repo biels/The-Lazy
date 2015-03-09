@@ -12,4 +12,8 @@
         ' Worker.Work()
         MsgBox("Funció no implementada")
     End Sub
+
+    Private Sub Window_MouseDown(sender As Object, e As MouseButtonEventArgs)
+        DragMove()
+    End Sub
 End Class

@@ -14,12 +14,41 @@ namespace TheLazyServer
     
     public partial class users
     {
+        public users()
+        {
+            this.chat_messages = new HashSet<chat_messages>();
+            this.chat_rooms = new HashSet<chat_rooms>();
+            this.element_comments = new HashSet<element_comments>();
+            this.elements = new HashSet<elements>();
+            this.likes = new HashSet<likes>();
+            this.notifications = new HashSet<notifications>();
+            this.posts = new HashSet<posts>();
+            this.purchases = new HashSet<purchases>();
+            this.reports = new HashSet<reports>();
+            this.reports1 = new HashSet<reports>();
+            this.sessions = new HashSet<sessions>();
+        }
+    
         public int user_id { get; set; }
         public string username { get; set; }
         public string email { get; set; }
         public string password { get; set; }
+        public string real_name { get; set; }
         public int permission_level { get; set; }
+        public int group_id { get; set; }
         public System.DateTime create_time { get; set; }
-        public Nullable<int> group_id { get; set; }
+    
+        public virtual ICollection<chat_messages> chat_messages { get; set; }
+        public virtual ICollection<chat_rooms> chat_rooms { get; set; }
+        public virtual ICollection<element_comments> element_comments { get; set; }
+        public virtual ICollection<elements> elements { get; set; }
+        public virtual groups groups { get; set; }
+        public virtual ICollection<likes> likes { get; set; }
+        public virtual ICollection<notifications> notifications { get; set; }
+        public virtual ICollection<posts> posts { get; set; }
+        public virtual ICollection<purchases> purchases { get; set; }
+        public virtual ICollection<reports> reports { get; set; }
+        public virtual ICollection<reports> reports1 { get; set; }
+        public virtual ICollection<sessions> sessions { get; set; }
     }
 }

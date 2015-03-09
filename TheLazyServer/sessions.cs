@@ -20,5 +20,7 @@ namespace TheLazyServer
         public int status { get; set; }
         public System.DateTime create_time { get; set; }
         public System.DateTime update_time { get; set; }
+    
+        public virtual users users { get; set; }
     }
 }

@@ -14,9 +14,26 @@ namespace TheLazyServer
     
     public partial class elements
     {
+        public elements()
+        {
+            this.element_comments = new HashSet<element_comments>();
+            this.likes = new HashSet<likes>();
+            this.purchases = new HashSet<purchases>();
+            this.reports = new HashSet<reports>();
+        }
+    
         public int element_id { get; set; }
+        public int user_id { get; set; }
+        public int subject_id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public Nullable<int> price { get; set; }
+    
+        public virtual ICollection<element_comments> element_comments { get; set; }
+        public virtual ICollection<likes> likes { get; set; }
+        public virtual ICollection<purchases> purchases { get; set; }
+        public virtual ICollection<reports> reports { get; set; }
+        public virtual subjects subjects { get; set; }
+        public virtual users users { get; set; }
     }
 }

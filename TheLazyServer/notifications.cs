@@ -15,6 +15,10 @@ namespace TheLazyServer
     public partial class notifications
     {
         public int notification_id { get; set; }
+        public int user_id { get; set; }
         public string type { get; set; }
+        public bool seen { get; set; }
+    
+        public virtual users users { get; set; }
     }
 }

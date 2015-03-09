@@ -12,11 +12,17 @@ namespace TheLazyServer
     using System;
     using System.Collections.Generic;
     
-    public partial class requests
+    public partial class education_centers
     {
-        public int request_id { get; set; }
-        public Nullable<int> user_id { get; set; }
-        public Nullable<int> subject_id { get; set; }
-        public string text { get; set; }
+        public education_centers()
+        {
+            this.groups = new HashSet<groups>();
+        }
+    
+        public int education_center_id { get; set; }
+        public string name { get; set; }
+        public string location { get; set; }
+    
+        public virtual ICollection<groups> groups { get; set; }
     }
 }

@@ -4,20 +4,44 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ac4c9657b03a4c86b7e255b838f816de" Name="Diagram1">
-        <EntityTypeShape EntityType="the_lazyModel.chat_messages" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="the_lazyModel.element_comments" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="the_lazyModel.elements" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="the_lazyModel.likes" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="the_lazyModel.notifications" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="the_lazyModel.posts" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="the_lazyModel.purchases" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="the_lazyModel.reports" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="the_lazyModel.requests" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="the_lazyModel.sessions" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="the_lazyModel.subjects" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="the_lazyModel.users" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="the_lazyModel.chat_rooms" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="eb347e3738fb40c4a7bd0e380ae1929b" Name="Diagram1" ZoomLevel="40">
+        <EntityTypeShape EntityType="the_lazyModel.academic_levels" Width="1.5" PointX="1.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="the_lazyModel.chat_messages" Width="1.5" PointX="9.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="the_lazyModel.chat_rooms" Width="1.5" PointX="12" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="the_lazyModel.education_centers" Width="1.5" PointX="1.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="the_lazyModel.element_comments" Width="1.5" PointX="7.5" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="the_lazyModel.elements" Width="1.5" PointX="9.75" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="the_lazyModel.groups" Width="1.5" PointX="3.25" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="the_lazyModel.likes" Width="1.5" PointX="12" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="the_lazyModel.notifications" Width="1.5" PointX="7.5" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="the_lazyModel.posts" Width="1.5" PointX="3.125" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="the_lazyModel.purchases" Width="1.5" PointX="12" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="the_lazyModel.reports" Width="1.5" PointX="12" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="the_lazyModel.sessions" Width="1.5" PointX="7.5" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="the_lazyModel.subjects" Width="1.5" PointX="3.25" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="the_lazyModel.users" Width="1.5" PointX="5.25" PointY="14.75" IsExpanded="true" />
+        <AssociationConnector Association="the_lazyModel.academic_level_id" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.academic_lvl" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.key_chat_room_id_messages" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.key_user_id_chat_messages" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.key_user_id_chat_rooms" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.education_center_id" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.key_element_id_comments" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.key_user_id_comments" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.key_element_id_likes" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.key_element_id_purchases" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.key_related_element_id_reports" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.key_subject_id" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.key_user_id" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.group_id" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.key_user_id_likes" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.key_user_id_notifications" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.key_related_post_id_reports" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.key_user_id_posts" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.key_user_id_purchases" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.key_reported_id_reports" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.key_reporter_id_reports" ManuallyRouted="false" />
+        <AssociationConnector Association="the_lazyModel.key_user_id_sessions" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

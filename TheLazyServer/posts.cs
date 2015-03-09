@@ -14,9 +14,18 @@ namespace TheLazyServer
     
     public partial class posts
     {
+        public posts()
+        {
+            this.reports = new HashSet<reports>();
+        }
+    
         public int post_id { get; set; }
         public Nullable<int> parent_post_id { get; set; }
+        public int user_id { get; set; }
         public string subject { get; set; }
         public string text { get; set; }
+    
+        public virtual ICollection<reports> reports { get; set; }
+        public virtual users users { get; set; }
     }
 }

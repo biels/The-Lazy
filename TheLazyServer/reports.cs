@@ -15,9 +15,16 @@ namespace TheLazyServer
     public partial class reports
     {
         public int report_id { get; set; }
-        public Nullable<int> reporter_id { get; set; }
-        public Nullable<int> reported_id { get; set; }
+        public int reporter_id { get; set; }
+        public int reported_id { get; set; }
+        public Nullable<int> related_element_id { get; set; }
+        public Nullable<int> related_post_id { get; set; }
         public string reason { get; set; }
         public Nullable<int> level { get; set; }
+    
+        public virtual elements elements { get; set; }
+        public virtual posts posts { get; set; }
+        public virtual users users { get; set; }
+        public virtual users users1 { get; set; }
     }
 }

@@ -14,9 +14,17 @@ namespace TheLazyServer
     
     public partial class chat_rooms
     {
+        public chat_rooms()
+        {
+            this.chat_messages = new HashSet<chat_messages>();
+        }
+    
         public int room_id { get; set; }
-        public Nullable<int> creator_user_id { get; set; }
+        public int creator_user_id { get; set; }
         public int type { get; set; }
         public string name { get; set; }
+    
+        public virtual ICollection<chat_messages> chat_messages { get; set; }
+        public virtual users users { get; set; }
     }
 }

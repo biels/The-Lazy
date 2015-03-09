@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Containers\PostInfo.cs" />
+    <Compile Include="Containers\UserInfo.cs" />
     <Compile Include="ITheLazyService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

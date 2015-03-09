@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="academic_levels.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="chat_messages.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -71,10 +74,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.edmx</DependentUpon>
     </Compile>
+    <Compile Include="education_centers.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="elements.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="element_comments.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="groups.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="likes.cs">
@@ -92,9 +101,6 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="reports.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="requests.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="sessions.cs">

@@ -4,7 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="the_lazyModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="the_lazyModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="academic_levels">
+          <Key>
+            <PropertyRef Name="academic_level_id" />
+          </Key>
+          <Property Name="academic_level_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
         <EntityType Name="chat_messages">
           <Key>
             <PropertyRef Name="message_id" />
@@ -15,17 +22,22 @@
           <Property Name="room_id" Type="int" />
           <Property Name="timestamp" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'def.the_lazy.chat_rooms' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="chat_rooms">
           <Key>
             <PropertyRef Name="room_id" />
-            <PropertyRef Name="type" />
           </Key>
-          <Property Name="room_id" Type="int" Nullable="false" />
-          <Property Name="creator_user_id" Type="int" />
+          <Property Name="room_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="creator_user_id" Type="int" Nullable="false" />
           <Property Name="type" Type="int" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="education_centers">
+          <Key>
+            <PropertyRef Name="education_center_id" />
+          </Key>
+          <Property Name="education_center_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="location" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="element_comments">
           <Key>
@@ -42,9 +54,20 @@ advertencia 6002: La tabla o vista 'def.the_lazy.chat_rooms' no tiene definida n
             <PropertyRef Name="element_id" />
           </Key>
           <Property Name="element_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="45" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="subject_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="600" />
           <Property Name="price" Type="int" />
+        </EntityType>
+        <EntityType Name="groups">
+          <Key>
+            <PropertyRef Name="group_id" />
+          </Key>
+          <Property Name="group_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="group_code" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="academic_level_id" Type="int" Nullable="false" />
+          <Property Name="education_center_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="likes">
           <Key>
@@ -60,7 +83,9 @@ advertencia 6002: La tabla o vista 'def.the_lazy.chat_rooms' no tiene definida n
             <PropertyRef Name="notification_id" />
           </Key>
           <Property Name="notification_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="type" Type="varchar" MaxLength="45" />
+          <Property Name="seen" Type="bool" Nullable="false" />
         </EntityType>
         <EntityType Name="posts">
           <Key>
@@ -68,6 +93,7 @@ advertencia 6002: La tabla o vista 'def.the_lazy.chat_rooms' no tiene definida n
           </Key>
           <Property Name="post_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="parent_post_id" Type="int" />
+          <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="subject" Type="varchar" MaxLength="45" />
           <Property Name="text" Type="varchar" MaxLength="120" />
         </EntityType>
@@ -85,19 +111,12 @@ advertencia 6002: La tabla o vista 'def.the_lazy.chat_rooms' no tiene definida n
             <PropertyRef Name="report_id" />
           </Key>
           <Property Name="report_id" Type="int" Nullable="false" />
-          <Property Name="reporter_id" Type="int" />
-          <Property Name="reported_id" Type="int" />
+          <Property Name="reporter_id" Type="int" Nullable="false" />
+          <Property Name="reported_id" Type="int" Nullable="false" />
+          <Property Name="related_element_id" Type="int" />
+          <Property Name="related_post_id" Type="int" />
           <Property Name="reason" Type="varchar" MaxLength="130" />
           <Property Name="level" Type="int" />
-        </EntityType>
-        <EntityType Name="requests">
-          <Key>
-            <PropertyRef Name="request_id" />
-          </Key>
-          <Property Name="request_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="user_id" Type="int" />
-          <Property Name="subject_id" Type="int" />
-          <Property Name="text" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="sessions">
           <Key>
@@ -115,7 +134,8 @@ advertencia 6002: La tabla o vista 'def.the_lazy.chat_rooms' no tiene definida n
             <PropertyRef Name="subject_id" />
           </Key>
           <Property Name="subject_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="45" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="academic_level_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="users">
           <Key>
@@ -125,10 +145,293 @@ advertencia 6002: La tabla o vista 'def.the_lazy.chat_rooms' no tiene definida n
           <Property Name="username" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="255" />
           <Property Name="password" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="real_name" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="permission_level" Type="int" Nullable="false" />
+          <Property Name="group_id" Type="int" Nullable="false" />
           <Property Name="create_time" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="group_id" Type="int" />
         </EntityType>
+        <Association Name="academic_level_id">
+          <End Role="academic_levels" Type="Self.academic_levels" Multiplicity="1" />
+          <End Role="groups" Type="Self.groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="academic_levels">
+              <PropertyRef Name="academic_level_id" />
+            </Principal>
+            <Dependent Role="groups">
+              <PropertyRef Name="academic_level_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="academic_lvl">
+          <End Role="academic_levels" Type="Self.academic_levels" Multiplicity="1" />
+          <End Role="subjects" Type="Self.subjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="academic_levels">
+              <PropertyRef Name="academic_level_id" />
+            </Principal>
+            <Dependent Role="subjects">
+              <PropertyRef Name="academic_level_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="education_center_id">
+          <End Role="education_centers" Type="Self.education_centers" Multiplicity="1" />
+          <End Role="groups" Type="Self.groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="education_centers">
+              <PropertyRef Name="education_center_id" />
+            </Principal>
+            <Dependent Role="groups">
+              <PropertyRef Name="education_center_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="group_id">
+          <End Role="groups" Type="Self.groups" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groups">
+              <PropertyRef Name="group_id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_chat_room_id_messages">
+          <End Role="chat_rooms" Type="Self.chat_rooms" Multiplicity="0..1" />
+          <End Role="chat_messages" Type="Self.chat_messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="chat_rooms">
+              <PropertyRef Name="room_id" />
+            </Principal>
+            <Dependent Role="chat_messages">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_element_id_comments">
+          <End Role="elements" Type="Self.elements" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="element_comments" Type="Self.element_comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="elements">
+              <PropertyRef Name="element_id" />
+            </Principal>
+            <Dependent Role="element_comments">
+              <PropertyRef Name="element_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_element_id_likes">
+          <End Role="elements" Type="Self.elements" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="likes" Type="Self.likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="elements">
+              <PropertyRef Name="element_id" />
+            </Principal>
+            <Dependent Role="likes">
+              <PropertyRef Name="element_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_element_id_purchases">
+          <End Role="elements" Type="Self.elements" Multiplicity="1" />
+          <End Role="purchases" Type="Self.purchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="elements">
+              <PropertyRef Name="element_id" />
+            </Principal>
+            <Dependent Role="purchases">
+              <PropertyRef Name="element_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_related_element_id_reports">
+          <End Role="elements" Type="Self.elements" Multiplicity="0..1" />
+          <End Role="reports" Type="Self.reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="elements">
+              <PropertyRef Name="element_id" />
+            </Principal>
+            <Dependent Role="reports">
+              <PropertyRef Name="related_element_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_related_post_id_reports">
+          <End Role="posts" Type="Self.posts" Multiplicity="0..1" />
+          <End Role="reports" Type="Self.reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="posts">
+              <PropertyRef Name="post_id" />
+            </Principal>
+            <Dependent Role="reports">
+              <PropertyRef Name="related_post_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_reported_id_reports">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="reports" Type="Self.reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="reports">
+              <PropertyRef Name="reported_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_reporter_id_reports">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="reports" Type="Self.reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="reports">
+              <PropertyRef Name="reporter_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_subject_id">
+          <End Role="subjects" Type="Self.subjects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="elements" Type="Self.elements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subjects">
+              <PropertyRef Name="subject_id" />
+            </Principal>
+            <Dependent Role="elements">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_user_id">
+          <End Role="users" Type="Self.users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="elements" Type="Self.elements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="elements">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_user_id_chat_messages">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="chat_messages" Type="Self.chat_messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="chat_messages">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_user_id_chat_rooms">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="chat_rooms" Type="Self.chat_rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="chat_rooms">
+              <PropertyRef Name="creator_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_user_id_comments">
+          <End Role="users" Type="Self.users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="element_comments" Type="Self.element_comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="element_comments">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_user_id_likes">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="likes" Type="Self.likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="likes">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_user_id_notifications">
+          <End Role="users" Type="Self.users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="notifications" Type="Self.notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="notifications">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_user_id_posts">
+          <End Role="users" Type="Self.users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="posts" Type="Self.posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="posts">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_user_id_purchases">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="purchases" Type="Self.purchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="purchases">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_user_id_sessions">
+          <End Role="users" Type="Self.users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="sessions" Type="Self.sessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="sessions">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="CloseAllSessionsForUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="the_lazy">
           <Parameter Name="p_user_id" Type="int" Mode="In" />
         </Function>
@@ -151,31 +454,124 @@ advertencia 6002: La tabla o vista 'def.the_lazy.chat_rooms' no tiene definida n
           <Parameter Name="result" Type="int" Mode="Out" />
         </Function>
         <EntityContainer Name="the_lazyModelStoreContainer">
+          <EntitySet Name="academic_levels" EntityType="Self.academic_levels" Schema="the_lazy" store:Type="Tables" />
           <EntitySet Name="chat_messages" EntityType="Self.chat_messages" Schema="the_lazy" store:Type="Tables" />
+          <EntitySet Name="chat_rooms" EntityType="Self.chat_rooms" Schema="the_lazy" store:Type="Tables" />
+          <EntitySet Name="education_centers" EntityType="Self.education_centers" Schema="the_lazy" store:Type="Tables" />
           <EntitySet Name="element_comments" EntityType="Self.element_comments" Schema="the_lazy" store:Type="Tables" />
           <EntitySet Name="elements" EntityType="Self.elements" Schema="the_lazy" store:Type="Tables" />
+          <EntitySet Name="groups" EntityType="Self.groups" Schema="the_lazy" store:Type="Tables" />
           <EntitySet Name="likes" EntityType="Self.likes" Schema="the_lazy" store:Type="Tables" />
           <EntitySet Name="notifications" EntityType="Self.notifications" Schema="the_lazy" store:Type="Tables" />
           <EntitySet Name="posts" EntityType="Self.posts" Schema="the_lazy" store:Type="Tables" />
           <EntitySet Name="purchases" EntityType="Self.purchases" Schema="the_lazy" store:Type="Tables" />
           <EntitySet Name="reports" EntityType="Self.reports" Schema="the_lazy" store:Type="Tables" />
-          <EntitySet Name="requests" EntityType="Self.requests" Schema="the_lazy" store:Type="Tables" />
           <EntitySet Name="sessions" EntityType="Self.sessions" Schema="the_lazy" store:Type="Tables" />
           <EntitySet Name="subjects" EntityType="Self.subjects" Schema="the_lazy" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="the_lazy" store:Type="Tables" />
-          <EntitySet Name="chat_rooms" EntityType="Self.chat_rooms" store:Type="Tables" store:Schema="the_lazy">
-            <DefiningQuery>SELECT
-`chat_rooms`.`room_id`, 
-`chat_rooms`.`creator_user_id`, 
-`chat_rooms`.`type`, 
-`chat_rooms`.`name`
-FROM `chat_rooms` AS `chat_rooms`</DefiningQuery>
-          </EntitySet>
+          <AssociationSet Name="academic_level_id" Association="Self.academic_level_id">
+            <End Role="academic_levels" EntitySet="academic_levels" />
+            <End Role="groups" EntitySet="groups" />
+          </AssociationSet>
+          <AssociationSet Name="academic_lvl" Association="Self.academic_lvl">
+            <End Role="academic_levels" EntitySet="academic_levels" />
+            <End Role="subjects" EntitySet="subjects" />
+          </AssociationSet>
+          <AssociationSet Name="education_center_id" Association="Self.education_center_id">
+            <End Role="education_centers" EntitySet="education_centers" />
+            <End Role="groups" EntitySet="groups" />
+          </AssociationSet>
+          <AssociationSet Name="group_id" Association="Self.group_id">
+            <End Role="groups" EntitySet="groups" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="key_chat_room_id_messages" Association="Self.key_chat_room_id_messages">
+            <End Role="chat_rooms" EntitySet="chat_rooms" />
+            <End Role="chat_messages" EntitySet="chat_messages" />
+          </AssociationSet>
+          <AssociationSet Name="key_element_id_comments" Association="Self.key_element_id_comments">
+            <End Role="elements" EntitySet="elements" />
+            <End Role="element_comments" EntitySet="element_comments" />
+          </AssociationSet>
+          <AssociationSet Name="key_element_id_likes" Association="Self.key_element_id_likes">
+            <End Role="elements" EntitySet="elements" />
+            <End Role="likes" EntitySet="likes" />
+          </AssociationSet>
+          <AssociationSet Name="key_element_id_purchases" Association="Self.key_element_id_purchases">
+            <End Role="elements" EntitySet="elements" />
+            <End Role="purchases" EntitySet="purchases" />
+          </AssociationSet>
+          <AssociationSet Name="key_related_element_id_reports" Association="Self.key_related_element_id_reports">
+            <End Role="elements" EntitySet="elements" />
+            <End Role="reports" EntitySet="reports" />
+          </AssociationSet>
+          <AssociationSet Name="key_related_post_id_reports" Association="Self.key_related_post_id_reports">
+            <End Role="posts" EntitySet="posts" />
+            <End Role="reports" EntitySet="reports" />
+          </AssociationSet>
+          <AssociationSet Name="key_reported_id_reports" Association="Self.key_reported_id_reports">
+            <End Role="users" EntitySet="users" />
+            <End Role="reports" EntitySet="reports" />
+          </AssociationSet>
+          <AssociationSet Name="key_reporter_id_reports" Association="Self.key_reporter_id_reports">
+            <End Role="users" EntitySet="users" />
+            <End Role="reports" EntitySet="reports" />
+          </AssociationSet>
+          <AssociationSet Name="key_subject_id" Association="Self.key_subject_id">
+            <End Role="subjects" EntitySet="subjects" />
+            <End Role="elements" EntitySet="elements" />
+          </AssociationSet>
+          <AssociationSet Name="key_user_id" Association="Self.key_user_id">
+            <End Role="users" EntitySet="users" />
+            <End Role="elements" EntitySet="elements" />
+          </AssociationSet>
+          <AssociationSet Name="key_user_id_chat_messages" Association="Self.key_user_id_chat_messages">
+            <End Role="users" EntitySet="users" />
+            <End Role="chat_messages" EntitySet="chat_messages" />
+          </AssociationSet>
+          <AssociationSet Name="key_user_id_chat_rooms" Association="Self.key_user_id_chat_rooms">
+            <End Role="users" EntitySet="users" />
+            <End Role="chat_rooms" EntitySet="chat_rooms" />
+          </AssociationSet>
+          <AssociationSet Name="key_user_id_comments" Association="Self.key_user_id_comments">
+            <End Role="users" EntitySet="users" />
+            <End Role="element_comments" EntitySet="element_comments" />
+          </AssociationSet>
+          <AssociationSet Name="key_user_id_likes" Association="Self.key_user_id_likes">
+            <End Role="users" EntitySet="users" />
+            <End Role="likes" EntitySet="likes" />
+          </AssociationSet>
+          <AssociationSet Name="key_user_id_notifications" Association="Self.key_user_id_notifications">
+            <End Role="users" EntitySet="users" />
+            <End Role="notifications" EntitySet="notifications" />
+          </AssociationSet>
+          <AssociationSet Name="key_user_id_posts" Association="Self.key_user_id_posts">
+            <End Role="users" EntitySet="users" />
+            <End Role="posts" EntitySet="posts" />
+          </AssociationSet>
+          <AssociationSet Name="key_user_id_purchases" Association="Self.key_user_id_purchases">
+            <End Role="users" EntitySet="users" />
+            <End Role="purchases" EntitySet="purchases" />
+          </AssociationSet>
+          <AssociationSet Name="key_user_id_sessions" Association="Self.key_user_id_sessions">
+            <End Role="users" EntitySet="users" />
+            <End Role="sessions" EntitySet="sessions" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="the_lazyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="academic_levels">
+          <Key>
+            <PropertyRef Name="academic_level_id" />
+          </Key>
+          <Property Name="academic_level_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="groups" Relationship="Self.academic_level_id" FromRole="academic_levels" ToRole="groups" />
+          <NavigationProperty Name="subjects" Relationship="Self.academic_lvl" FromRole="academic_levels" ToRole="subjects" />
+        </EntityType>
         <EntityType Name="chat_messages">
           <Key>
             <PropertyRef Name="message_id" />
@@ -185,6 +581,28 @@ FROM `chat_rooms` AS `chat_rooms`</DefiningQuery>
           <Property Name="text" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="room_id" Type="Int32" />
           <Property Name="timestamp" Type="DateTime" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="chat_rooms" Relationship="Self.key_chat_room_id_messages" FromRole="chat_messages" ToRole="chat_rooms" />
+          <NavigationProperty Name="users" Relationship="Self.key_user_id_chat_messages" FromRole="chat_messages" ToRole="users" />
+        </EntityType>
+        <EntityType Name="chat_rooms">
+          <Key>
+            <PropertyRef Name="room_id" />
+          </Key>
+          <Property Name="room_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="creator_user_id" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="chat_messages" Relationship="Self.key_chat_room_id_messages" FromRole="chat_rooms" ToRole="chat_messages" />
+          <NavigationProperty Name="users" Relationship="Self.key_user_id_chat_rooms" FromRole="chat_rooms" ToRole="users" />
+        </EntityType>
+        <EntityType Name="education_centers">
+          <Key>
+            <PropertyRef Name="education_center_id" />
+          </Key>
+          <Property Name="education_center_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="location" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="groups" Relationship="Self.education_center_id" FromRole="education_centers" ToRole="groups" />
         </EntityType>
         <EntityType Name="element_comments">
           <Key>
@@ -195,15 +613,37 @@ FROM `chat_rooms` AS `chat_rooms`</DefiningQuery>
           <Property Name="element_id" Type="Int32" Nullable="false" />
           <Property Name="text" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="mark" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="elements" Relationship="Self.key_element_id_comments" FromRole="element_comments" ToRole="elements" />
+          <NavigationProperty Name="users" Relationship="Self.key_user_id_comments" FromRole="element_comments" ToRole="users" />
         </EntityType>
         <EntityType Name="elements">
           <Key>
             <PropertyRef Name="element_id" />
           </Key>
           <Property Name="element_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="subject_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
           <Property Name="price" Type="Int32" />
+          <NavigationProperty Name="element_comments" Relationship="Self.key_element_id_comments" FromRole="elements" ToRole="element_comments" />
+          <NavigationProperty Name="likes" Relationship="Self.key_element_id_likes" FromRole="elements" ToRole="likes" />
+          <NavigationProperty Name="purchases" Relationship="Self.key_element_id_purchases" FromRole="elements" ToRole="purchases" />
+          <NavigationProperty Name="reports" Relationship="Self.key_related_element_id_reports" FromRole="elements" ToRole="reports" />
+          <NavigationProperty Name="subjects" Relationship="Self.key_subject_id" FromRole="elements" ToRole="subjects" />
+          <NavigationProperty Name="users" Relationship="Self.key_user_id" FromRole="elements" ToRole="users" />
+        </EntityType>
+        <EntityType Name="groups">
+          <Key>
+            <PropertyRef Name="group_id" />
+          </Key>
+          <Property Name="group_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="group_code" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="academic_level_id" Type="Int32" Nullable="false" />
+          <Property Name="education_center_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="academic_levels" Relationship="Self.academic_level_id" FromRole="groups" ToRole="academic_levels" />
+          <NavigationProperty Name="education_centers" Relationship="Self.education_center_id" FromRole="groups" ToRole="education_centers" />
+          <NavigationProperty Name="users" Relationship="Self.group_id" FromRole="groups" ToRole="users" />
         </EntityType>
         <EntityType Name="likes">
           <Key>
@@ -213,13 +653,18 @@ FROM `chat_rooms` AS `chat_rooms`</DefiningQuery>
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="element_id" Type="Int32" Nullable="false" />
           <Property Name="type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="elements" Relationship="Self.key_element_id_likes" FromRole="likes" ToRole="elements" />
+          <NavigationProperty Name="users" Relationship="Self.key_user_id_likes" FromRole="likes" ToRole="users" />
         </EntityType>
         <EntityType Name="notifications">
           <Key>
             <PropertyRef Name="notification_id" />
           </Key>
           <Property Name="notification_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="seen" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.key_user_id_notifications" FromRole="notifications" ToRole="users" />
         </EntityType>
         <EntityType Name="posts">
           <Key>
@@ -227,8 +672,11 @@ FROM `chat_rooms` AS `chat_rooms`</DefiningQuery>
           </Key>
           <Property Name="post_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="parent_post_id" Type="Int32" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="subject" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="text" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="reports" Relationship="Self.key_related_post_id_reports" FromRole="posts" ToRole="reports" />
+          <NavigationProperty Name="users" Relationship="Self.key_user_id_posts" FromRole="posts" ToRole="users" />
         </EntityType>
         <EntityType Name="purchases">
           <Key>
@@ -238,25 +686,24 @@ FROM `chat_rooms` AS `chat_rooms`</DefiningQuery>
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="element_id" Type="Int32" Nullable="false" />
           <Property Name="price" Type="Int32" />
+          <NavigationProperty Name="elements" Relationship="Self.key_element_id_purchases" FromRole="purchases" ToRole="elements" />
+          <NavigationProperty Name="users" Relationship="Self.key_user_id_purchases" FromRole="purchases" ToRole="users" />
         </EntityType>
         <EntityType Name="reports">
           <Key>
             <PropertyRef Name="report_id" />
           </Key>
           <Property Name="report_id" Type="Int32" Nullable="false" />
-          <Property Name="reporter_id" Type="Int32" />
-          <Property Name="reported_id" Type="Int32" />
+          <Property Name="reporter_id" Type="Int32" Nullable="false" />
+          <Property Name="reported_id" Type="Int32" Nullable="false" />
+          <Property Name="related_element_id" Type="Int32" />
+          <Property Name="related_post_id" Type="Int32" />
           <Property Name="reason" Type="String" MaxLength="130" FixedLength="false" Unicode="false" />
           <Property Name="level" Type="Int32" />
-        </EntityType>
-        <EntityType Name="requests">
-          <Key>
-            <PropertyRef Name="request_id" />
-          </Key>
-          <Property Name="request_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="user_id" Type="Int32" />
-          <Property Name="subject_id" Type="Int32" />
-          <Property Name="text" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="elements" Relationship="Self.key_related_element_id_reports" FromRole="reports" ToRole="elements" />
+          <NavigationProperty Name="posts" Relationship="Self.key_related_post_id_reports" FromRole="reports" ToRole="posts" />
+          <NavigationProperty Name="users" Relationship="Self.key_reported_id_reports" FromRole="reports" ToRole="users" />
+          <NavigationProperty Name="users1" Relationship="Self.key_reporter_id_reports" FromRole="reports" ToRole="users" />
         </EntityType>
         <EntityType Name="sessions">
           <Key>
@@ -268,13 +715,17 @@ FROM `chat_rooms` AS `chat_rooms`</DefiningQuery>
           <Property Name="status" Type="Int32" Nullable="false" />
           <Property Name="create_time" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="update_time" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.key_user_id_sessions" FromRole="sessions" ToRole="users" />
         </EntityType>
         <EntityType Name="subjects">
           <Key>
             <PropertyRef Name="subject_id" />
           </Key>
           <Property Name="subject_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="academic_level_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="academic_levels" Relationship="Self.academic_lvl" FromRole="subjects" ToRole="academic_levels" />
+          <NavigationProperty Name="elements" Relationship="Self.key_subject_id" FromRole="subjects" ToRole="elements" />
         </EntityType>
         <EntityType Name="users">
           <Key>
@@ -284,62 +735,424 @@ FROM `chat_rooms` AS `chat_rooms`</DefiningQuery>
           <Property Name="username" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="password" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="real_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="permission_level" Type="Int32" Nullable="false" />
+          <Property Name="group_id" Type="Int32" Nullable="false" />
           <Property Name="create_time" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="group_id" Type="Int32" />
+          <NavigationProperty Name="chat_messages" Relationship="Self.key_user_id_chat_messages" FromRole="users" ToRole="chat_messages" />
+          <NavigationProperty Name="chat_rooms" Relationship="Self.key_user_id_chat_rooms" FromRole="users" ToRole="chat_rooms" />
+          <NavigationProperty Name="element_comments" Relationship="Self.key_user_id_comments" FromRole="users" ToRole="element_comments" />
+          <NavigationProperty Name="elements" Relationship="Self.key_user_id" FromRole="users" ToRole="elements" />
+          <NavigationProperty Name="groups" Relationship="Self.group_id" FromRole="users" ToRole="groups" />
+          <NavigationProperty Name="likes" Relationship="Self.key_user_id_likes" FromRole="users" ToRole="likes" />
+          <NavigationProperty Name="notifications" Relationship="Self.key_user_id_notifications" FromRole="users" ToRole="notifications" />
+          <NavigationProperty Name="posts" Relationship="Self.key_user_id_posts" FromRole="users" ToRole="posts" />
+          <NavigationProperty Name="purchases" Relationship="Self.key_user_id_purchases" FromRole="users" ToRole="purchases" />
+          <NavigationProperty Name="reports" Relationship="Self.key_reported_id_reports" FromRole="users" ToRole="reports" />
+          <NavigationProperty Name="reports1" Relationship="Self.key_reporter_id_reports" FromRole="users" ToRole="reports" />
+          <NavigationProperty Name="sessions" Relationship="Self.key_user_id_sessions" FromRole="users" ToRole="sessions" />
         </EntityType>
-        <EntityType Name="chat_rooms">
-          <Key>
-            <PropertyRef Name="room_id" />
-            <PropertyRef Name="type" />
-          </Key>
-          <Property Name="room_id" Type="Int32" Nullable="false" />
-          <Property Name="creator_user_id" Type="Int32" />
-          <Property Name="type" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityContainer Name="the_lazyEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="academic_level_id">
+          <End Role="academic_levels" Type="Self.academic_levels" Multiplicity="1" />
+          <End Role="groups" Type="Self.groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="academic_levels">
+              <PropertyRef Name="academic_level_id" />
+            </Principal>
+            <Dependent Role="groups">
+              <PropertyRef Name="academic_level_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="academic_lvl">
+          <End Role="academic_levels" Type="Self.academic_levels" Multiplicity="1" />
+          <End Role="subjects" Type="Self.subjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="academic_levels">
+              <PropertyRef Name="academic_level_id" />
+            </Principal>
+            <Dependent Role="subjects">
+              <PropertyRef Name="academic_level_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_chat_room_id_messages">
+          <End Role="chat_rooms" Type="Self.chat_rooms" Multiplicity="0..1" />
+          <End Role="chat_messages" Type="Self.chat_messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="chat_rooms">
+              <PropertyRef Name="room_id" />
+            </Principal>
+            <Dependent Role="chat_messages">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_user_id_chat_messages">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="chat_messages" Type="Self.chat_messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="chat_messages">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_user_id_chat_rooms">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="chat_rooms" Type="Self.chat_rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="chat_rooms">
+              <PropertyRef Name="creator_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="education_center_id">
+          <End Role="education_centers" Type="Self.education_centers" Multiplicity="1" />
+          <End Role="groups" Type="Self.groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="education_centers">
+              <PropertyRef Name="education_center_id" />
+            </Principal>
+            <Dependent Role="groups">
+              <PropertyRef Name="education_center_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_element_id_comments">
+          <End Role="elements" Type="Self.elements" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="element_comments" Type="Self.element_comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="elements">
+              <PropertyRef Name="element_id" />
+            </Principal>
+            <Dependent Role="element_comments">
+              <PropertyRef Name="element_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_user_id_comments">
+          <End Role="users" Type="Self.users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="element_comments" Type="Self.element_comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="element_comments">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_element_id_likes">
+          <End Role="elements" Type="Self.elements" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="likes" Type="Self.likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="elements">
+              <PropertyRef Name="element_id" />
+            </Principal>
+            <Dependent Role="likes">
+              <PropertyRef Name="element_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_element_id_purchases">
+          <End Role="elements" Type="Self.elements" Multiplicity="1" />
+          <End Role="purchases" Type="Self.purchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="elements">
+              <PropertyRef Name="element_id" />
+            </Principal>
+            <Dependent Role="purchases">
+              <PropertyRef Name="element_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_related_element_id_reports">
+          <End Role="elements" Type="Self.elements" Multiplicity="0..1" />
+          <End Role="reports" Type="Self.reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="elements">
+              <PropertyRef Name="element_id" />
+            </Principal>
+            <Dependent Role="reports">
+              <PropertyRef Name="related_element_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_subject_id">
+          <End Role="subjects" Type="Self.subjects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="elements" Type="Self.elements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subjects">
+              <PropertyRef Name="subject_id" />
+            </Principal>
+            <Dependent Role="elements">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_user_id">
+          <End Role="users" Type="Self.users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="elements" Type="Self.elements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="elements">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="group_id">
+          <End Role="groups" Type="Self.groups" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groups">
+              <PropertyRef Name="group_id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_user_id_likes">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="likes" Type="Self.likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="likes">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_user_id_notifications">
+          <End Role="users" Type="Self.users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="notifications" Type="Self.notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="notifications">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_related_post_id_reports">
+          <End Role="posts" Type="Self.posts" Multiplicity="0..1" />
+          <End Role="reports" Type="Self.reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="posts">
+              <PropertyRef Name="post_id" />
+            </Principal>
+            <Dependent Role="reports">
+              <PropertyRef Name="related_post_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_user_id_posts">
+          <End Role="users" Type="Self.users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="posts" Type="Self.posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="posts">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_user_id_purchases">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="purchases" Type="Self.purchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="purchases">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_reported_id_reports">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="reports" Type="Self.reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="reports">
+              <PropertyRef Name="reported_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_reporter_id_reports">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="reports" Type="Self.reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="reports">
+              <PropertyRef Name="reporter_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="key_user_id_sessions">
+          <End Role="users" Type="Self.users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="sessions" Type="Self.sessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="sessions">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="the_lazyEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="academic_levels" EntityType="Self.academic_levels" />
           <EntitySet Name="chat_messages" EntityType="Self.chat_messages" />
+          <EntitySet Name="chat_rooms" EntityType="Self.chat_rooms" />
+          <EntitySet Name="education_centers" EntityType="Self.education_centers" />
           <EntitySet Name="element_comments" EntityType="Self.element_comments" />
           <EntitySet Name="elements" EntityType="Self.elements" />
+          <EntitySet Name="groups" EntityType="Self.groups" />
           <EntitySet Name="likes" EntityType="Self.likes" />
           <EntitySet Name="notifications" EntityType="Self.notifications" />
           <EntitySet Name="posts" EntityType="Self.posts" />
           <EntitySet Name="purchases" EntityType="Self.purchases" />
           <EntitySet Name="reports" EntityType="Self.reports" />
-          <EntitySet Name="requests" EntityType="Self.requests" />
           <EntitySet Name="sessions" EntityType="Self.sessions" />
           <EntitySet Name="subjects" EntityType="Self.subjects" />
           <EntitySet Name="users" EntityType="Self.users" />
-          <EntitySet Name="chat_rooms" EntityType="Self.chat_rooms" />
-          <FunctionImport Name="CloseAllSessionsForUser">
-          <Parameter Name="p_user_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="CloseSession">
-          <Parameter Name="p_session_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="KeepSessionAlive">
-          <Parameter Name="p_session_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="LoginUser">
-            <Parameter Name="p_username" Mode="In" Type="String" />
-            <Parameter Name="p_password" Mode="In" Type="String" />
-            <Parameter Name="p_ipendpoint" Mode="In" Type="String" />
-            <Parameter Name="p_session_id" Mode="Out" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="RegisterUser">
-            <Parameter Name="d_username" Mode="In" Type="String" />
-            <Parameter Name="pass" Mode="In" Type="String" />
-            <Parameter Name="email" Mode="In" Type="String" />
-            <Parameter Name="result" Mode="Out" Type="Int32" />
-          </FunctionImport>
+          <AssociationSet Name="academic_level_id" Association="Self.academic_level_id">
+            <End Role="academic_levels" EntitySet="academic_levels" />
+            <End Role="groups" EntitySet="groups" />
+          </AssociationSet>
+          <AssociationSet Name="academic_lvl" Association="Self.academic_lvl">
+            <End Role="academic_levels" EntitySet="academic_levels" />
+            <End Role="subjects" EntitySet="subjects" />
+          </AssociationSet>
+          <AssociationSet Name="key_chat_room_id_messages" Association="Self.key_chat_room_id_messages">
+            <End Role="chat_rooms" EntitySet="chat_rooms" />
+            <End Role="chat_messages" EntitySet="chat_messages" />
+          </AssociationSet>
+          <AssociationSet Name="key_user_id_chat_messages" Association="Self.key_user_id_chat_messages">
+            <End Role="users" EntitySet="users" />
+            <End Role="chat_messages" EntitySet="chat_messages" />
+          </AssociationSet>
+          <AssociationSet Name="key_user_id_chat_rooms" Association="Self.key_user_id_chat_rooms">
+            <End Role="users" EntitySet="users" />
+            <End Role="chat_rooms" EntitySet="chat_rooms" />
+          </AssociationSet>
+          <AssociationSet Name="education_center_id" Association="Self.education_center_id">
+            <End Role="education_centers" EntitySet="education_centers" />
+            <End Role="groups" EntitySet="groups" />
+          </AssociationSet>
+          <AssociationSet Name="key_element_id_comments" Association="Self.key_element_id_comments">
+            <End Role="elements" EntitySet="elements" />
+            <End Role="element_comments" EntitySet="element_comments" />
+          </AssociationSet>
+          <AssociationSet Name="key_user_id_comments" Association="Self.key_user_id_comments">
+            <End Role="users" EntitySet="users" />
+            <End Role="element_comments" EntitySet="element_comments" />
+          </AssociationSet>
+          <AssociationSet Name="key_element_id_likes" Association="Self.key_element_id_likes">
+            <End Role="elements" EntitySet="elements" />
+            <End Role="likes" EntitySet="likes" />
+          </AssociationSet>
+          <AssociationSet Name="key_element_id_purchases" Association="Self.key_element_id_purchases">
+            <End Role="elements" EntitySet="elements" />
+            <End Role="purchases" EntitySet="purchases" />
+          </AssociationSet>
+          <AssociationSet Name="key_related_element_id_reports" Association="Self.key_related_element_id_reports">
+            <End Role="elements" EntitySet="elements" />
+            <End Role="reports" EntitySet="reports" />
+          </AssociationSet>
+          <AssociationSet Name="key_subject_id" Association="Self.key_subject_id">
+            <End Role="subjects" EntitySet="subjects" />
+            <End Role="elements" EntitySet="elements" />
+          </AssociationSet>
+          <AssociationSet Name="key_user_id" Association="Self.key_user_id">
+            <End Role="users" EntitySet="users" />
+            <End Role="elements" EntitySet="elements" />
+          </AssociationSet>
+          <AssociationSet Name="group_id" Association="Self.group_id">
+            <End Role="groups" EntitySet="groups" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="key_user_id_likes" Association="Self.key_user_id_likes">
+            <End Role="users" EntitySet="users" />
+            <End Role="likes" EntitySet="likes" />
+          </AssociationSet>
+          <AssociationSet Name="key_user_id_notifications" Association="Self.key_user_id_notifications">
+            <End Role="users" EntitySet="users" />
+            <End Role="notifications" EntitySet="notifications" />
+          </AssociationSet>
+          <AssociationSet Name="key_related_post_id_reports" Association="Self.key_related_post_id_reports">
+            <End Role="posts" EntitySet="posts" />
+            <End Role="reports" EntitySet="reports" />
+          </AssociationSet>
+          <AssociationSet Name="key_user_id_posts" Association="Self.key_user_id_posts">
+            <End Role="users" EntitySet="users" />
+            <End Role="posts" EntitySet="posts" />
+          </AssociationSet>
+          <AssociationSet Name="key_user_id_purchases" Association="Self.key_user_id_purchases">
+            <End Role="users" EntitySet="users" />
+            <End Role="purchases" EntitySet="purchases" />
+          </AssociationSet>
+          <AssociationSet Name="key_reported_id_reports" Association="Self.key_reported_id_reports">
+            <End Role="users" EntitySet="users" />
+            <End Role="reports" EntitySet="reports" />
+          </AssociationSet>
+          <AssociationSet Name="key_reporter_id_reports" Association="Self.key_reporter_id_reports">
+            <End Role="users" EntitySet="users" />
+            <End Role="reports" EntitySet="reports" />
+          </AssociationSet>
+          <AssociationSet Name="key_user_id_sessions" Association="Self.key_user_id_sessions">
+            <End Role="users" EntitySet="users" />
+            <End Role="sessions" EntitySet="sessions" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="the_lazyModelStoreContainer" CdmEntityContainer="the_lazyEntities">
+        <EntityContainerMapping StorageEntityContainer="the_lazyModelStoreContainer" CdmEntityContainer="the_lazyEntities1">
+          <EntitySetMapping Name="academic_levels">
+            <EntityTypeMapping TypeName="the_lazyModel.academic_levels">
+              <MappingFragment StoreEntitySet="academic_levels">
+                <ScalarProperty Name="academic_level_id" ColumnName="academic_level_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="chat_messages">
             <EntityTypeMapping TypeName="the_lazyModel.chat_messages">
               <MappingFragment StoreEntitySet="chat_messages">
@@ -348,6 +1161,25 @@ FROM `chat_rooms` AS `chat_rooms`</DefiningQuery>
                 <ScalarProperty Name="text" ColumnName="text" />
                 <ScalarProperty Name="room_id" ColumnName="room_id" />
                 <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="chat_rooms">
+            <EntityTypeMapping TypeName="the_lazyModel.chat_rooms">
+              <MappingFragment StoreEntitySet="chat_rooms">
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="creator_user_id" ColumnName="creator_user_id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="education_centers">
+            <EntityTypeMapping TypeName="the_lazyModel.education_centers">
+              <MappingFragment StoreEntitySet="education_centers">
+                <ScalarProperty Name="education_center_id" ColumnName="education_center_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="location" ColumnName="location" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -366,9 +1198,21 @@ FROM `chat_rooms` AS `chat_rooms`</DefiningQuery>
             <EntityTypeMapping TypeName="the_lazyModel.elements">
               <MappingFragment StoreEntitySet="elements">
                 <ScalarProperty Name="element_id" ColumnName="element_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="groups">
+            <EntityTypeMapping TypeName="the_lazyModel.groups">
+              <MappingFragment StoreEntitySet="groups">
+                <ScalarProperty Name="group_id" ColumnName="group_id" />
+                <ScalarProperty Name="group_code" ColumnName="group_code" />
+                <ScalarProperty Name="academic_level_id" ColumnName="academic_level_id" />
+                <ScalarProperty Name="education_center_id" ColumnName="education_center_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -386,7 +1230,9 @@ FROM `chat_rooms` AS `chat_rooms`</DefiningQuery>
             <EntityTypeMapping TypeName="the_lazyModel.notifications">
               <MappingFragment StoreEntitySet="notifications">
                 <ScalarProperty Name="notification_id" ColumnName="notification_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="seen" ColumnName="seen" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -395,6 +1241,7 @@ FROM `chat_rooms` AS `chat_rooms`</DefiningQuery>
               <MappingFragment StoreEntitySet="posts">
                 <ScalarProperty Name="post_id" ColumnName="post_id" />
                 <ScalarProperty Name="parent_post_id" ColumnName="parent_post_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="subject" ColumnName="subject" />
                 <ScalarProperty Name="text" ColumnName="text" />
               </MappingFragment>
@@ -416,18 +1263,10 @@ FROM `chat_rooms` AS `chat_rooms`</DefiningQuery>
                 <ScalarProperty Name="report_id" ColumnName="report_id" />
                 <ScalarProperty Name="reporter_id" ColumnName="reporter_id" />
                 <ScalarProperty Name="reported_id" ColumnName="reported_id" />
+                <ScalarProperty Name="related_element_id" ColumnName="related_element_id" />
+                <ScalarProperty Name="related_post_id" ColumnName="related_post_id" />
                 <ScalarProperty Name="reason" ColumnName="reason" />
                 <ScalarProperty Name="level" ColumnName="level" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="requests">
-            <EntityTypeMapping TypeName="the_lazyModel.requests">
-              <MappingFragment StoreEntitySet="requests">
-                <ScalarProperty Name="request_id" ColumnName="request_id" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
-                <ScalarProperty Name="text" ColumnName="text" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -448,6 +1287,7 @@ FROM `chat_rooms` AS `chat_rooms`</DefiningQuery>
               <MappingFragment StoreEntitySet="subjects">
                 <ScalarProperty Name="subject_id" ColumnName="subject_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="academic_level_id" ColumnName="academic_level_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -458,27 +1298,13 @@ FROM `chat_rooms` AS `chat_rooms`</DefiningQuery>
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="real_name" ColumnName="real_name" />
                 <ScalarProperty Name="permission_level" ColumnName="permission_level" />
-                <ScalarProperty Name="create_time" ColumnName="create_time" />
                 <ScalarProperty Name="group_id" ColumnName="group_id" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="chat_rooms">
-            <EntityTypeMapping TypeName="the_lazyModel.chat_rooms">
-              <MappingFragment StoreEntitySet="chat_rooms">
-                <ScalarProperty Name="room_id" ColumnName="room_id" />
-                <ScalarProperty Name="creator_user_id" ColumnName="creator_user_id" />
-                <ScalarProperty Name="type" ColumnName="type" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="CloseAllSessionsForUser" FunctionName="the_lazyModel.Store.CloseAllSessionsForUser" />
-          <FunctionImportMapping FunctionImportName="CloseSession" FunctionName="the_lazyModel.Store.CloseSession" />
-          <FunctionImportMapping FunctionImportName="KeepSessionAlive" FunctionName="the_lazyModel.Store.KeepSessionAlive" />
-          <FunctionImportMapping FunctionImportName="LoginUser" FunctionName="the_lazyModel.Store.LoginUser" />
-          <FunctionImportMapping FunctionImportName="RegisterUser" FunctionName="the_lazyModel.Store.RegisterUser" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

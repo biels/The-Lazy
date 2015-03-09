@@ -14,7 +14,16 @@ namespace TheLazyServer
     
     public partial class subjects
     {
+        public subjects()
+        {
+            this.elements = new HashSet<elements>();
+        }
+    
         public int subject_id { get; set; }
         public string name { get; set; }
+        public int academic_level_id { get; set; }
+    
+        public virtual academic_levels academic_levels { get; set; }
+        public virtual ICollection<elements> elements { get; set; }
     }
 }

@@ -18,5 +18,8 @@ namespace TheLazyServer
         public int user_id { get; set; }
         public int element_id { get; set; }
         public int type { get; set; }
+    
+        public virtual elements elements { get; set; }
+        public virtual users users { get; set; }
     }
 }
