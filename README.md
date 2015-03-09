@@ -6,3 +6,4 @@ L'aplicació que optimitza la feina
   - TheLazyInterfaces -> ClassLibrary, C#
   - TheLazyServer -> ConsoleApplication, WCF Host, C#, MySql Link
   
+  - Base de dades MySQL: [Esquema de la base de dades](https://github.com/biels/The-Lazy/wiki/Base-de-dades-MySQL)
