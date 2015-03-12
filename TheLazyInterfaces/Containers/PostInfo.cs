@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheLazyInterfaces.Containers
 {
-    class PostInfo
+    public class PostInfo
     {
         public int post_id { get; set; }
         public int parent_post_id { get; set; }

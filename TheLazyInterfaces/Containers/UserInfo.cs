@@ -12,6 +12,6 @@ namespace TheLazyInterfaces.Containers
         public string email { get; set; }
         public string real_name { get; set; }
         public PermissionLevel permission_level { get; set; }
-        enum PermissionLevel { Blocked, NormalUser, TrustedUser, Moderator, SuperModerator, Admin }
+        public enum PermissionLevel { Blocked, NormalUser, TrustedUser, Moderator, SuperModerator, Admin }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using TheLazyInterfaces.Containers;
 
 namespace TheLazyInterfaces
 {
@@ -14,6 +15,6 @@ namespace TheLazyInterfaces
         [OperationContract]
         void DoWork();
         [OperationContract]
-        List<String> getPosts();
+        List<PostInfo> getPosts();
     }
 }

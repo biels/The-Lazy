@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheLazyInterfaces", "TheLaz
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TheLazyClient", "TheLazyClient\TheLazyClient.vbproj", "{91234084-B02E-415C-AD0A-AFD1A9E82607}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheLazyClientMVVM", "TheLazyClientMVVM\TheLazyClientMVVM.csproj", "{86C5151C-3A4F-40C3-9C1F-A5888B5714FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{91234084-B02E-415C-AD0A-AFD1A9E82607}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91234084-B02E-415C-AD0A-AFD1A9E82607}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91234084-B02E-415C-AD0A-AFD1A9E82607}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86C5151C-3A4F-40C3-9C1F-A5888B5714FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86C5151C-3A4F-40C3-9C1F-A5888B5714FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86C5151C-3A4F-40C3-9C1F-A5888B5714FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86C5151C-3A4F-40C3-9C1F-A5888B5714FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

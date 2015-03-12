@@ -10,7 +10,9 @@
 
     Private Sub Button_Click_1(sender As Object, e As RoutedEventArgs)
         ' Worker.Work()
-        MsgBox("Funció no implementada")
+        ' MsgBox("Funció no implementada")
+        Dim f As New SelectorConnexions.frmOptions
+        f.ShowDialog()
     End Sub
 
     Private Sub Window_MouseDown(sender As Object, e As MouseButtonEventArgs)

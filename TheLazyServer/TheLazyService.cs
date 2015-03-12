@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using TheLazyInterfaces;
+using TheLazyInterfaces.Containers;
 
 namespace TheLazyServer
 {
@@ -14,6 +15,15 @@ namespace TheLazyServer
         public void DoWork()
         {
             Console.WriteLine("Work done!");
+        }
+        public List<PostInfo> getPosts()
+        {
+            List<PostInfo> result = new List<PostInfo>();
+            PostInfo p = new PostInfo();
+            p.text = "Server_text";
+            p.subject = "Random_things";
+            result.Add(p);
+            return result;
         }
     }
 }
