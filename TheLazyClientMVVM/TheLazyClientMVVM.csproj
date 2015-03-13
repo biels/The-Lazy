@@ -30,8 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SelectorConnexions">
+      <HintPath>..\..\SelectorConnexions\SelectorConnexions\bin\Debug\SelectorConnexions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,7 +44,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="MainClient\LoginManager.cs" />
+    <Compile Include="MainClient\MainClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WCFClient\WCFClient.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TheLazyInterfaces\TheLazyInterfaces.csproj">
+      <Project>{60842efa-961f-4b53-90db-c8aaa5f8bced}</Project>
+      <Name>TheLazyInterfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
