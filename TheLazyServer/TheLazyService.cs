@@ -37,18 +37,40 @@ namespace TheLazyServer
             //}
             return 0;
         }
-        public int login(string username, string password)
+        public int loginUser(string username, string password)
         {
-            try
+            Log.I(String.Format("Intent d'inici de sessió {U: {0}, C: {1}}", username, password));
+            int session_id = DbClients.DbLogin.loginUser(username, password);
+            if (session_id > 0)
             {
-                
+                Log.I(String.Format("Sessió iniciada per {0} correctament!", username));
             }
-            catch
+            else
             {
-                
-                throw;
+                Log.W(String.Format("Ha fallat l'inici de sessió {U: {0}, C: {1}}!", username, password));
             }
-            return -5;
+            return session_id;
+        }
+
+
+        public bool register(string username, string password, string email)
+        {
+            Log.I(String.Format("Intent de registre {U: {0}, C: {1}, E: {2}}", username, password, email));
+            bool registered = DbClients.DbLogin.register(username, password, email);
+            if (registered){
+                Log.I(String.Format("Usuari {0} registrat correctament!", username));
+            }
+            else
+            {
+                Log.I(String.Format("Ha fallat el registre {U: {0}, C: {1}, E: {2}}", username, password, email));
+            }
+            return registered;
+        }
+
+        public void keepAlive(int sessionId)
+        {
+            DbClients.DbLogin.keepAlive(sessionId);
+            Log.I("keepAlive per a la sessió " + sessionId);
         }
     }
 }

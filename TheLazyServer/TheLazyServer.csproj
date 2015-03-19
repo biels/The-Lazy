@@ -75,7 +75,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DbClient\DbClient.cs" />
+    <Compile Include="DbClients\DbClient.cs" />
+    <Compile Include="DbClients\DbLogin.cs" />
     <Compile Include="education_centers.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>

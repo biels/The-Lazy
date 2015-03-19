@@ -48,6 +48,12 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BielUtils">
+      <HintPath>..\..\BielUtils\BielUtils\bin\Debug\BielUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="Owf.Controls.OwfProgressControl">
+      <HintPath>..\..\..\..\Visual Studio 2010\Projects\Alumne\Alumne\bin\Debug\Owf.Controls.OwfProgressControl.dll</HintPath>
+    </Reference>
     <Reference Include="SelectorConnexions">
       <HintPath>..\..\SelectorConnexions\SelectorConnexions\bin\Debug\SelectorConnexions.dll</HintPath>
     </Reference>
@@ -74,6 +80,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="General.vb" />
+    <Compile Include="Login\frmRegister.designer.vb">
+      <DependentUpon>frmRegister.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Login\frmRegister.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\Login.designer.vb">
+      <DependentUpon>Login.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResultWindow\Logger.vb" />
+    <Compile Include="ResultWindow\ResultWindow.xaml.vb">
+      <DependentUpon>ResultWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Worker.vb" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -87,6 +110,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ResultWindow\ResultWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Import Include="System.Threading.Tasks" />
@@ -125,6 +152,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Login\frmRegister.resx">
+      <DependentUpon>frmRegister.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\Login.resx">
+      <DependentUpon>Login.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -140,6 +173,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TheLazyClientMVVM\TheLazyClientMVVM.csproj">
+      <Project>{86c5151c-3a4f-40c3-9c1f-a5888b5714fd}</Project>
+      <Name>TheLazyClientMVVM</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TheLazyInterfaces\TheLazyInterfaces.csproj">
       <Project>{60842efa-961f-4b53-90db-c8aaa5f8bced}</Project>
       <Name>TheLazyInterfaces</Name>

@@ -13,7 +13,7 @@ namespace TheLazyServer
         {
             //Console.ForegroundColor = ConsoleColor.White;
             //testConsole();
-            
+           // AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
             if (DbClient.TestConnection())
             {
                 Log.I("Connexió amb la base de dades realitzada correctament.");
@@ -29,7 +29,7 @@ namespace TheLazyServer
             using (ServiceHost host = new ServiceHost(typeof(TheLazyService)))
             {
                 host.Open();
-                Log.I("Servidor obert, [enter] per tnacar");
+                Log.I("Servidor WCF obert, [enter] per tancar");
                 Console.ReadLine();
             }
         }
@@ -44,6 +44,13 @@ namespace TheLazyServer
             Log.E("Test error.");
             Log.F("Test fatal <click to continue>.");
             Log.D("Test debug.");
+        }
+        static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e)
+        {
+            Log.E(e.ExceptionObject.ToString());
+            Console.WriteLine("Press Enter to continue");
+            Console.ReadLine();
+            Environment.Exit(1);
         }
     }
 }

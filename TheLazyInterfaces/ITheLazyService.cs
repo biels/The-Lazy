@@ -16,5 +16,11 @@ namespace TheLazyInterfaces
         void DoWork();
         [OperationContract]
         List<PostInfo> getPosts();
+        [OperationContract]
+        int loginUser(string username, string password);
+        [OperationContract]
+        bool register(string username, string password, string email);
+        [OperationContract (IsOneWay=true)]
+        void keepAlive(int sessionId);
     }
 }

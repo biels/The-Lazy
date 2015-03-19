@@ -4,20 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TheLazyClientMVVM.MainClient
+namespace TheLazyClientMVVM
 {
-    class LoginManager
+    public class LoginManager
     {
-        string username;
-        bool loggedIn = false;
-        void login(string username, string password)
+        public string username;
+        public int sessionId = -1;
+
+        public bool login(string username, string password)
         {
             this.username = username;
-
+            sessionId = DbClient.DbLoginClient.loginUser(username, password);
+            return loggedIn();
         }
-        void logout()
+        public bool register(string username, string password, string realName, string email)
         {
-            loggedIn = false;
+            return DbClient.DbLoginClient.register(username, password, realName, email);
+        }
+        public void logout()
+        {
+            //Send close session
+            sessionId = -1;
+        }
+        public bool loggedIn()
+        {
+            return (sessionId >= 0);
         }
     }
 }

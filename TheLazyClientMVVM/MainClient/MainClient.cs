@@ -1,16 +1,31 @@
 ﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data;
+using MySql.Data.MySqlClient;
 
-namespace TheLazyClientMVVM.MainClient
+
+namespace TheLazyClientMVVM
 {
-    class MainClient
+   public class MainClient
     {
-        void init()
+       
+        public event LogHandler LogOutput;
+        public delegate void LogHandler(string m);
+       public bool onlineMode = false; 
+        public WCFClient wcfClient = new WCFClient();
+        public LoginManager loginManager = new LoginManager();
+        public void init()
         {
-
+           // wcfClient.init();
+            DbClient.DbClient.TestConnection();
+        }
+        public void connectionParametersRefreshed()
+        {
+            DbClient.DbClient.TestConnection();
         }
     }
 }

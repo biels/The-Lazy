@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 using System.ServiceModel;
 using TheLazyInterfaces;
 
-namespace TheLazyClientMVVM.WCFClient
+namespace TheLazyClientMVVM
 {
-    class WCFClient
+    public class WCFClient
     {
-        ChannelFactory<ITheLazyService> factory;
+        public ChannelFactory<ITheLazyService> factory;
         EndpointAddress address;
         public ITheLazyService channel;
         public void init()
         {
-            factory = new ChannelFactory<ITheLazyService>("ITheLazyServiceEndpoint");
+            factory = new ChannelFactory<ITheLazyService>("TheLazyServiceEndpoint");
             address = getEndpoint();
             channel = factory.CreateChannel(address);
+           //(factory.State.ToString);
         }
         void doWork()
         {
@@ -32,7 +33,7 @@ namespace TheLazyClientMVVM.WCFClient
 
         private static EndpointAddress getEndpoint()
         {
-            EndpointAddress address = new EndpointAddress(String.Format("net.tcp://{0}/ServiceInterface/PartyController.svc", new SelectorConnexions.ConnectionInfo()));
+            EndpointAddress address = new EndpointAddress(String.Format("http://{0}/TheLazyService", "localhost"));
             return address;
         }
     }
