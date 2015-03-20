@@ -22,9 +22,11 @@
     Private Sub MainWindow_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         Dim frm As New Login
         frm.ShowDialog()
+        '
+        UpdateHeading()
     End Sub
 
-    Private Sub MainWindow_ManipulationStarting(sender As Object, e As ManipulationStartingEventArgs) Handles Me.ManipulationStarting
-
+    Public Sub UpdateHeading()
+        lblUsername.Content = c.loginManager.username
     End Sub
 End Class
