@@ -11,6 +11,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TheLazyClient", "TheLazyCli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheLazyClientMVVM", "TheLazyClientMVVM\TheLazyClientMVVM.csproj", "{86C5151C-3A4F-40C3-9C1F-A5888B5714FD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{A6BD9178-CCB8-4E8C-B7CE-2D2BF539E598}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
