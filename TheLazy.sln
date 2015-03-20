@@ -16,6 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencie
 		TextFile1.txt = TextFile1.txt
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EE", "EE", "{50AFE6C2-2A59-4FAC-97CB-0643E2AB4545}"
+	ProjectSection(SolutionItems) = preProject
+		XMLSchema1.xsd = XMLSchema1.xsd
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +47,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{50AFE6C2-2A59-4FAC-97CB-0643E2AB4545} = {A6BD9178-CCB8-4E8C-B7CE-2D2BF539E598}
 	EndGlobalSection
 EndGlobal
