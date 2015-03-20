@@ -30,7 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SelectorConnexions">
       <HintPath>..\..\SelectorConnexions\SelectorConnexions\bin\Debug\SelectorConnexions.dll</HintPath>
     </Reference>
@@ -48,6 +50,12 @@
     <Compile Include="Com.cs" />
     <Compile Include="DbClient\DbClient.cs" />
     <Compile Include="DbClient\DbLoginClient.cs" />
+    <Compile Include="DbClient\DbUserClient.cs" />
+    <Compile Include="Entities\AcademicLevelEntity.cs" />
+    <Compile Include="Entities\EducationCenterEntity.cs" />
+    <Compile Include="Entities\GroupEntity.cs" />
+    <Compile Include="Entities\LocalUserEntity.cs" />
+    <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="MainClient\LoginManager.cs" />
     <Compile Include="MainClient\MainClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

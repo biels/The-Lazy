@@ -22,6 +22,12 @@ namespace TheLazyClientMVVM
         {
            // wcfClient.init();
             DbClient.DbClient.TestConnection();
+
+            //TEST
+            Entities.UserEntity u = DbClient.DbUserClient.getUserInfo("biel");
+
+            connectionParametersRefreshed();
+            
         }
         public void connectionParametersRefreshed()
         {
