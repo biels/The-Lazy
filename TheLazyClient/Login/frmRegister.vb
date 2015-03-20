@@ -11,7 +11,7 @@
         If txtPssw.Text.Length > 16 Then err.Add("La contrasenya pot contenir com a màxim 16 caràcters")
 
         If txtRealName.IsEmpty Then err.Add("Introdueix el teu nom real")
-        If txtRealName.Text.Length < 8 Then err.Add("El nom real ha de contenir com a mínim 8 caràcters")
+        If txtRealName.Text.Length < 8 Then err.Add("El nom real ha de contenir com a mínim 8 caràcters, Nom i Cognoms")
         If txtRealName.Text.Length > 40 Then err.Add("El nom real pot contenir com a màxim 40 caràcters")
 
         If txtEmail.IsEmpty Then err.Add("Introdueix una aderça de correu electrònic")
