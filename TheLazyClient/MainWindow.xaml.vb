@@ -28,5 +28,13 @@
 
     Public Sub UpdateHeading()
         lblUsername.Content = c.loginManager.username
+        lstUsers.Items.Clear()
+        For Each user As String In c.registrats
+            lstUsers.Items.Add(user)
+        Next
+    End Sub
+
+    Private Sub ListBox_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
+
     End Sub
 End Class

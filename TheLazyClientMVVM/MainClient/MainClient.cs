@@ -15,18 +15,21 @@ namespace TheLazyClientMVVM
        
         public event LogHandler LogOutput;
         public delegate void LogHandler(string m);
-       public bool onlineMode = false; 
+        public bool onlineMode = false; 
         public WCFClient wcfClient = new WCFClient();
         public LoginManager loginManager = new LoginManager();
+
+        public List<string> registrats = new List<string>();
         public void init()
         {
            // wcfClient.init();
             DbClient.DbClient.TestConnection();
 
+            registrats = DbClient.DbUserClient.getUserList();
             //TEST
-            Entities.UserEntity u = DbClient.DbUserClient.getUserInfo("biel");
+            //Entities.UserEntity u = DbClient.DbUserClient.getUserInfo("biel");
 
-            connectionParametersRefreshed();
+            //connectionParametersRefreshed();
             
         }
         public void connectionParametersRefreshed()

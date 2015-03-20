@@ -28,7 +28,9 @@
         <TextBox x:Name="txtStatus" HorizontalAlignment="Left" Height="33" Margin="162,50,0,0" TextWrapping="Wrap" Text="Introdueix un estat..." VerticalAlignment="Top" Width="156"/>
         <TabControl HorizontalAlignment="Left" Height="411" Margin="640,96,0,0" VerticalAlignment="Top" Width="176">
             <TabItem Header="Amics">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <ListBox x:Name="lstUsers" HorizontalAlignment="Left" Height="363" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="ListBox_SelectionChanged"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Xats                      " HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="40                                            ">
                 <Grid Background="#FFE5E5E5"/>

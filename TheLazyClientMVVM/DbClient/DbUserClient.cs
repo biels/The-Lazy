@@ -11,6 +11,29 @@ namespace TheLazyClientMVVM.DbClient
 {
     class DbUserClient
     {
+        public static List<string> getUserList()
+        {
+            if (!DbClient.isOnline()) { return null; }
+            List<string> e = new List<string>();
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format("SELECT username FROM users");
+
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                e.Add(rdr.GetString("username"));
+            }
+            //FILL
+           
+            rdr.Close();
+            c.Close();
+            return e;
+        }
         public static UserEntity getUserInfo(string username)
         {
             if (!DbClient.isOnline()) { return null; }
