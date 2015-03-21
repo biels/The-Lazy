@@ -54,9 +54,71 @@ Public Class Login
         End With
         'l.initConnection()
         ' lblAddr.Text = Client.LocalInfo.Address
+        'USER/PASS SAVING >--<
+        RetrieveSavedLoginInfo()
     End Sub
+    Function pLoginInfo() As BielUtils.GestorPropietats
+        Return New BielUtils.GestorPropietats(My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData & "\logininfo.lck")
+    End Function
+    Sub RetrieveSavedLoginInfo()
+        If pLoginInfo.P("SaveUser") = "true" Then
+            chkRemeberName.Checked = True
+            txtUsuari.Text = pLoginInfo.P("User")
+        End If
+        If pLoginInfo.P("SavePass") = "true" Then
+            chkRememberPassword.Checked = True
+            txtContrasenya.UseSystemPasswordChar = True
+            txtContrasenya.Text = pLoginInfo.P("Pass")
+        End If
+    End Sub
+    Sub SaveLoginInfo()
+        pLoginInfo.P("SaveUser") = If(chkRemeberName.Checked, "true", "false")
+        pLoginInfo.P("SavePass") = If(chkRemeberName.Checked, "true", "false")
+        If pLoginInfo.P("SaveUser") = "true" Then           
+            pLoginInfo.P("User") = txtUsuari.Text
+        End If
+        If pLoginInfo.P("SavePass") = "true" Then
+            pLoginInfo.P("Pass") = txtContrasenya.Text
+        End If
+    End Sub
+    
+    Public Function AES_Encrypt(ByVal input As String, ByVal pass As String) As String
+        Dim AES As New System.Security.Cryptography.RijndaelManaged
+        Dim Hash_AES As New System.Security.Cryptography.MD5CryptoServiceProvider
+        Dim encrypted As String = ""
+        Try
+            Dim hash(31) As Byte
+            Dim temp As Byte() = Hash_AES.ComputeHash(System.Text.ASCIIEncoding.ASCII.GetBytes(pass))
+            Array.Copy(temp, 0, hash, 0, 16)
+            Array.Copy(temp, 0, hash, 15, 16)
+            AES.Key = hash
+            AES.Mode = Security.Cryptography.CipherMode.ECB
+            Dim DESEncrypter As System.Security.Cryptography.ICryptoTransform = AES.CreateEncryptor
+            Dim Buffer As Byte() = System.Text.ASCIIEncoding.ASCII.GetBytes(input)
+            encrypted = Convert.ToBase64String(DESEncrypter.TransformFinalBlock(Buffer, 0, Buffer.Length))
+            Return encrypted
+        Catch ex As Exception
+        End Try
+    End Function
 
-
+    Public Function AES_Decrypt(ByVal input As String, ByVal pass As String) As String
+        Dim AES As New System.Security.Cryptography.RijndaelManaged
+        Dim Hash_AES As New System.Security.Cryptography.MD5CryptoServiceProvider
+        Dim decrypted As String = ""
+        Try
+            Dim hash(31) As Byte
+            Dim temp As Byte() = Hash_AES.ComputeHash(System.Text.ASCIIEncoding.ASCII.GetBytes(pass))
+            Array.Copy(temp, 0, hash, 0, 16)
+            Array.Copy(temp, 0, hash, 15, 16)
+            AES.Key = hash
+            AES.Mode = Security.Cryptography.CipherMode.ECB
+            Dim DESDecrypter As System.Security.Cryptography.ICryptoTransform = AES.CreateDecryptor
+            Dim Buffer As Byte() = Convert.FromBase64String(input)
+            decrypted = System.Text.ASCIIEncoding.ASCII.GetString(DESDecrypter.TransformFinalBlock(Buffer, 0, Buffer.Length))
+            Return decrypted
+        Catch ex As Exception
+        End Try
+    End Function
     Sub AbansDeLogin()
 
         'pnlDescarregant.Visible = True
@@ -154,7 +216,7 @@ Public Class Login
 
             CircleColor = System.Drawing.Color.Green
             progComprovant.NoOfCircles = 15
-
+            SaveLoginInfo()
             backIntroduirUsuari.RunWorkerAsync(txtUsuari.Text)
         End If
     End Sub
@@ -170,6 +232,7 @@ Public Class Login
     End Sub
     'Introduir
     Private Sub backIntroduirUsuari_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backIntroduirUsuari.DoWork
+
         ' IntroduirUsuari(e.Argument)
 
     End Sub

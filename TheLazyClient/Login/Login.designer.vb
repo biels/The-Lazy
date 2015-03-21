@@ -33,12 +33,12 @@ Partial Class Login
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.backVerificarUsuari = New System.ComponentModel.BackgroundWorker()
         Me.backIntroduirUsuari = New System.ComponentModel.BackgroundWorker()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.chkRemeberName = New System.Windows.Forms.CheckBox()
+        Me.chkRememberPassword = New System.Windows.Forms.CheckBox()
         Me.lblAddr = New System.Windows.Forms.Label()
-        Me.Minibotó1 = New Minibotó()
-        Me.txtUsuari = New TextboxDinàmic()
-        Me.txtContrasenya = New TextboxDinàmic()
+        Me.Minibotó1 = New BielUtils.Minibotó()
+        Me.txtUsuari = New BielUtils.TextboxDinàmic()
+        Me.txtContrasenya = New BielUtils.TextboxDinàmic()
         CType(Me.Minibotó1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -91,27 +91,27 @@ Partial Class Login
         'backIntroduirUsuari
         '
         '
-        'CheckBox1
+        'chkRemeberName
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.25!)
-        Me.CheckBox1.Location = New System.Drawing.Point(82, 264)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(127, 21)
-        Me.CheckBox1.TabIndex = 10
-        Me.CheckBox1.Text = "Recorda el nom"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.chkRemeberName.AutoSize = True
+        Me.chkRemeberName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.25!)
+        Me.chkRemeberName.Location = New System.Drawing.Point(82, 264)
+        Me.chkRemeberName.Name = "chkRemeberName"
+        Me.chkRemeberName.Size = New System.Drawing.Size(127, 21)
+        Me.chkRemeberName.TabIndex = 10
+        Me.chkRemeberName.Text = "Recorda el nom"
+        Me.chkRemeberName.UseVisualStyleBackColor = True
         '
-        'CheckBox2
+        'chkRememberPassword
         '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.25!)
-        Me.CheckBox2.Location = New System.Drawing.Point(82, 285)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(185, 21)
-        Me.CheckBox2.TabIndex = 12
-        Me.CheckBox2.Text = "Recorda la contrassenya"
-        Me.CheckBox2.UseVisualStyleBackColor = True
+        Me.chkRememberPassword.AutoSize = True
+        Me.chkRememberPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.25!)
+        Me.chkRememberPassword.Location = New System.Drawing.Point(82, 285)
+        Me.chkRememberPassword.Name = "chkRememberPassword"
+        Me.chkRememberPassword.Size = New System.Drawing.Size(185, 21)
+        Me.chkRememberPassword.TabIndex = 12
+        Me.chkRememberPassword.Text = "Recorda la contrassenya"
+        Me.chkRememberPassword.UseVisualStyleBackColor = True
         '
         'lblAddr
         '
@@ -174,9 +174,9 @@ Partial Class Login
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(394, 394)
         Me.Controls.Add(Me.lblAddr)
-        Me.Controls.Add(Me.CheckBox2)
+        Me.Controls.Add(Me.chkRememberPassword)
         Me.Controls.Add(Me.Minibotó1)
-        Me.Controls.Add(Me.CheckBox1)
+        Me.Controls.Add(Me.chkRemeberName)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.progComprovant)
@@ -203,9 +203,9 @@ Partial Class Login
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents backVerificarUsuari As System.ComponentModel.BackgroundWorker
     Friend WithEvents backIntroduirUsuari As System.ComponentModel.BackgroundWorker
-    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
+    Friend WithEvents chkRemeberName As System.Windows.Forms.CheckBox
     Friend WithEvents Minibotó1 As Minibotó
-    Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
+    Friend WithEvents chkRememberPassword As System.Windows.Forms.CheckBox
     Friend WithEvents lblAddr As System.Windows.Forms.Label
 
 End Class
