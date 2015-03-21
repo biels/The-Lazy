@@ -32,6 +32,10 @@ namespace TheLazyClientMVVM
             //connectionParametersRefreshed();
             
         }
+        public Entities.UserEntity getUserInfo(string name)
+        {
+            return DbClient.DbUserClient.getUserInfo(name);
+        }
         public void connectionParametersRefreshed()
         {
             DbClient.DbClient.TestConnection();

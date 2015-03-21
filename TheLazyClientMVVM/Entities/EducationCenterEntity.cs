@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheLazyClientMVVM.Entities
 {
-    class EducationCenterEntity
+    public class EducationCenterEntity
     {
         public int id { get; set; }
         public string name { get; set; }

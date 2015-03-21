@@ -37,4 +37,11 @@
     Private Sub ListBox_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
 
     End Sub
+
+    Private Sub lstUsers_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles lstUsers.MouseDoubleClick
+        Dim f As New UserProfileViewer
+        f.User = c.getUserInfo(lstUsers.SelectedItem)
+        f.Show()
+    End Sub
+
 End Class
