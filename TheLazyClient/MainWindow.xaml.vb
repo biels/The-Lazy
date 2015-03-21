@@ -23,12 +23,16 @@
         Dim frm As New Login
         frm.ShowDialog()
         '
+        c.getHeadingInfo()
         UpdateHeading()
     End Sub
 
     Public Sub UpdateHeading()
         lblUsername.Content = c.loginManager.username
         lstUsers.Items.Clear()
+        Dim status As String = c.localStatus
+        txtStatus.Text = If(status <> "", status, "Introdueix un estat...")
+
         For Each user As String In c.registrats
             lstUsers.Items.Add(user)
         Next
@@ -44,4 +48,13 @@
         f.Show()
     End Sub
 
+    Private Sub txtStatus_KeyDown(sender As Object, e As KeyEventArgs) Handles txtStatus.KeyDown
+        If e.Key = Key.Enter Then
+            c.localStatus = txtStatus.Text
+        End If
+    End Sub
+
+    Private Sub txtStatus_TextChanged(sender As Object, e As TextChangedEventArgs) Handles txtStatus.TextChanged
+
+    End Sub
 End Class

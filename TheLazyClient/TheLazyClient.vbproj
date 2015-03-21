@@ -96,6 +96,9 @@
     <Compile Include="Login\Login.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ProfileEditor.xaml.vb">
+      <DependentUpon>ProfileEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ResultWindow\Logger.vb" />
     <Compile Include="ResultWindow\ResultWindow.xaml.vb">
       <DependentUpon>ResultWindow.xaml</DependentUpon>
@@ -116,6 +119,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ProfileEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ResultWindow\ResultWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

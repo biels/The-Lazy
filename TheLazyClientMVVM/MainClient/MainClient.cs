@@ -18,19 +18,35 @@ namespace TheLazyClientMVVM
         public bool onlineMode = false; 
         public WCFClient wcfClient = new WCFClient();
         public LoginManager loginManager = new LoginManager();
-
+        public Entities.UserEntity localUser;
         public List<string> registrats = new List<string>();
         public void init()
         {
            // wcfClient.init();
             DbClient.DbClient.TestConnection();
 
-            registrats = DbClient.DbUserClient.getUserList();
-            //TEST
+            
             //Entities.UserEntity u = DbClient.DbUserClient.getUserInfo("biel");
 
             //connectionParametersRefreshed();
             
+        }
+        public void getHeadingInfo()
+        {
+            registrats = DbClient.DbUserClient.getUserList();
+            //TEST
+            localUser = DbClient.DbUserClient.getUserInfo(loginManager.username);
+        }
+        public string localStatus
+        {
+            get
+            {
+                return DbClient.DbUserClient.getUserStatus(localUser.id);
+            }
+            set
+            {
+                DbClient.DbUserClient.updateUserStatus(localUser.id, value);
+            }
         }
         public Entities.UserEntity getUserInfo(string name)
         {

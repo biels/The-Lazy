@@ -29,33 +29,36 @@ namespace TheLazyClientMVVM.DbClient
                 e.Add(rdr.GetString("username"));
             }
             //FILL
-           
+
             rdr.Close();
             c.Close();
             return e;
         }
         public static UserEntity getUserInfo(string username)
         {
+            if (username == null) { return null; }
             if (!DbClient.isOnline()) { return null; }
             UserEntity e = new UserEntity();
             MySqlConnection c = DbClient.getConnection();
             c.Open();
-            
+
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = c;
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = String.Format("SELECT * FROM users WHERE username=\"{0}\"", username);
 
             MySqlDataReader rdr = cmd.ExecuteReader();
-            rdr.Read();
-            //FILL
-            e.id = rdr.GetInt32("user_id");
-            e.username = rdr.GetString("username");
-            e.real_name = rdr.GetString("real_name");
-            e.email = rdr.GetString("email");
-            if (rdr["group_id"] != DBNull.Value)
+            if (rdr.Read())
             {
-                e.group = getGroupInfo(rdr.GetInt32("group_id"));
+                //FILL
+                e.id = rdr.GetInt32("user_id");
+                e.username = rdr.GetString("username");
+                e.real_name = rdr.GetString("real_name");
+                e.email = rdr.GetString("email");
+                if (rdr["group_id"] != DBNull.Value)
+                {
+                    e.group = getGroupInfo(rdr.GetInt32("group_id"));
+                }
             }           
             rdr.Close();
             c.Close();
@@ -68,7 +71,7 @@ namespace TheLazyClientMVVM.DbClient
             GroupEntity e = new GroupEntity();
 
             MySqlConnection c = DbClient.getConnection();
-            c.Open();          
+            c.Open();
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = c;
             cmd.CommandType = CommandType.Text;
@@ -124,6 +127,59 @@ namespace TheLazyClientMVVM.DbClient
             rdr.Close();
             c.Close();
             return e;
+        }
+        public static string getUserStatus(int userid)
+        {
+            if (!DbClient.isOnline()) { return null; }
+            string e = "";
+
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format(
+                "SELECT text FROM status WHERE user_id=\"{0}\" ORDER BY create_time DESC LIMIT 1", 
+                userid);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            if (rdr.Read())
+            {
+                e = rdr.GetString("text");
+            }
+            //FILL          
+            rdr.Close();
+            c.Close();
+            return e;
+        }
+        public static bool updateUserStatus(int userid, string status)
+        {
+            if (!DbClient.isOnline()) { return false; }
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format(
+                "INSERT INTO status VALUES(null, {0}, \"{1}\", NOW())",
+                userid, status);
+            cmd.ExecuteNonQuery();
+            c.Close();
+            return true;
+        }
+        public static bool updateUser(string username, string email, string real_name, int group_id)
+        {
+            if (!DbClient.isOnline()) { return false; }
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format(
+                "UPDATE users SET email=\"{1}\", real_name=\"{2}\", group_id={3} WHERE username={0}", 
+                username, email, real_name, group_id);
+            cmd.ExecuteNonQuery();
+            c.Close();
+            return true;
         }
     }
 
