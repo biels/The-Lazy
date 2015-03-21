@@ -54,8 +54,9 @@
     <Reference Include="MySql.Data, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="Owf.Controls.OwfProgressControl">
-      <HintPath>..\..\..\..\Visual Studio 2010\Projects\Alumne\Alumne\bin\Debug\Owf.Controls.OwfProgressControl.dll</HintPath>
+    <Reference Include="Owf.Controls.OwfProgressControl, Version=1.0.4445.1004, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\Owf.Controls.OwfProgressControl.dll</HintPath>
     </Reference>
     <Reference Include="SelectorConnexions">
       <HintPath>..\..\SelectorConnexions\SelectorConnexions\bin\Debug\SelectorConnexions.dll</HintPath>
@@ -333,6 +334,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="media\Imatges\newlogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Libraries\BielUtils.dll" />
+    <Content Include="Libraries\MySql.Data.dll" />
+    <Content Include="Libraries\Owf.Controls.OwfProgressControl.dll" />
+    <Content Include="Libraries\SelectorConnexions.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
