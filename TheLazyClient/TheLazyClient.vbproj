@@ -100,6 +100,9 @@
     <Compile Include="ResultWindow\ResultWindow.xaml.vb">
       <DependentUpon>ResultWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserProfileViewer.xaml.vb">
+      <DependentUpon>UserProfileViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Worker.vb" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -114,6 +117,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ResultWindow\ResultWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserProfileViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

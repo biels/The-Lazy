@@ -1,0 +1,13 @@
+﻿<Window x:Class="UserProfileViewer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="UserProfileViewer" Height="300" Width="300">
+    <Grid>
+        <Label Content="Nom d'usuari (username)" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="18" FontWeight="Bold"/>
+        <Label Content="email@exemple.cat" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="18"/>
+        <Label Content="Centre" HorizontalAlignment="Left" Margin="18,77,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="18" Foreground="#FFEC7A1B"/>
+        <Label Content="Nivell" HorizontalAlignment="Left" Margin="82,77,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="18" Foreground="#FF3AADBF"/>
+        <Label Content="A" HorizontalAlignment="Left" Margin="136,77,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="18" Foreground="#FF3AB22E"/>
+
+    </Grid>
+</Window>
