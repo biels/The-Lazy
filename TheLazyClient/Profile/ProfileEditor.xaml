@@ -2,17 +2,17 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="ProfileEditor"
-    Title="ProfileEditor" Height="300" Width="300">
+    Title="ProfileEditor" Height="300" Width="337.218">
     <Grid>
         <TextBox x:Name="txtFullName" HorizontalAlignment="Left" Height="23" Margin="10,33,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <Label HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Content="Nom complet: "/>
         <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="10,87,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <Label HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top" Content="E-mail:" RenderTransformOrigin="0.73,-1.377"/>
-        <Label HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top" Content="Grup:" RenderTransformOrigin="0.73,-1.377"/>
-        <Button Content="Selecciona el grup..." HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label HorizontalAlignment="Left" Margin="144,7,0,0" VerticalAlignment="Top" Content="Grup:" RenderTransformOrigin="0.73,-1.377"/>
+        <Button x:Name="btnSelectGroup" Content="Selecciona el grup..." HorizontalAlignment="Left" Margin="144,33,0,0" VerticalAlignment="Top" Width="141"/>
         <Button Content="Desa" Margin="0,0,10,10" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" RenderTransformOrigin="1.034,1.724"/>
-        <TextBox x:Name="lblStatus" HorizontalAlignment="Left" Height="77" Margin="150,33,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Label HorizontalAlignment="Left" Margin="150,7,0,0" VerticalAlignment="Top" Content="Status: "/>
+        <Label HorizontalAlignment="Left" Margin="144,61,0,0" VerticalAlignment="Top" Content="Pervisualització del grup:" RenderTransformOrigin="0.73,-1.377"/>
+        <Label x:Name="lblGroupPreview" Content="IES d'Auro, 1n BTX A" HorizontalAlignment="Left" Margin="145,83,0,0" VerticalAlignment="Top" Width="140"/>
 
     </Grid>
 </Window>

@@ -69,4 +69,10 @@
     Private Sub txtStatus_TextChanged(sender As Object, e As TextChangedEventArgs) Handles txtStatus.TextChanged
         UpdateStatusLabel()
     End Sub
+
+    Private Sub btnPerfil_Click(sender As Object, e As RoutedEventArgs) Handles btnPerfil.Click
+        Dim frm As New ProfileEditor
+        frm.ShowDialog()
+
+    End Sub
 End Class
