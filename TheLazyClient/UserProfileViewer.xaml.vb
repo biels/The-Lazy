@@ -18,6 +18,7 @@
         Title = User.real_name
         lblUsername.Content = String.Format("{0} ({1})", User.real_name, User.username)
         lblEmail.Content = User.email
+        lblStatus.Content = User.status
         If User.group IsNot Nothing Then
             lblEduactionCenter.Content = User.group.education_center.name
             lblGroupCode.Content = User.group.group_code

@@ -97,9 +97,9 @@ Partial Class Login
         Me.chkRemeberName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.25!)
         Me.chkRemeberName.Location = New System.Drawing.Point(82, 264)
         Me.chkRemeberName.Name = "chkRemeberName"
-        Me.chkRemeberName.Size = New System.Drawing.Size(127, 21)
+        Me.chkRemeberName.Size = New System.Drawing.Size(181, 21)
         Me.chkRemeberName.TabIndex = 10
-        Me.chkRemeberName.Text = "Recorda el nom"
+        Me.chkRemeberName.Text = "Recorda el nom d'usuari"
         Me.chkRemeberName.UseVisualStyleBackColor = True
         '
         'chkRememberPassword
@@ -108,9 +108,9 @@ Partial Class Login
         Me.chkRememberPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.25!)
         Me.chkRememberPassword.Location = New System.Drawing.Point(82, 285)
         Me.chkRememberPassword.Name = "chkRememberPassword"
-        Me.chkRememberPassword.Size = New System.Drawing.Size(185, 21)
+        Me.chkRememberPassword.Size = New System.Drawing.Size(178, 21)
         Me.chkRememberPassword.TabIndex = 12
-        Me.chkRememberPassword.Text = "Recorda la contrassenya"
+        Me.chkRememberPassword.Text = "Recorda la contrasenya"
         Me.chkRememberPassword.UseVisualStyleBackColor = True
         '
         'lblAddr

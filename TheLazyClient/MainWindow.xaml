@@ -24,7 +24,7 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Label Content="Estat" HorizontalAlignment="Left" Margin="155,26,0,0" VerticalAlignment="Top" Width="170" Height="24" FontSize="11"/>
+        <Label x:Name="lblStatus" Content="Estat" HorizontalAlignment="Left" Margin="155,26,0,0" VerticalAlignment="Top" Width="170" Height="24" FontSize="11"/>
         <TextBox x:Name="txtStatus" HorizontalAlignment="Left" Height="33" Margin="162,50,0,0" TextWrapping="Wrap" Text="Introdueix un estat..." VerticalAlignment="Top" Width="156"/>
         <TabControl HorizontalAlignment="Left" Height="411" Margin="640,96,0,0" VerticalAlignment="Top" Width="176">
             <TabItem Header="Amics">

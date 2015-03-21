@@ -26,12 +26,13 @@
         c.getHeadingInfo()
         UpdateHeading()
     End Sub
-
+    Const NO_STATUS_TEXT As String = "Introdueix un estat..."
     Public Sub UpdateHeading()
-        lblUsername.Content = c.loginManager.username
+        lblUsername.Content = String.Format("{0} ({1})", c.localUser.real_name, c.localUser.username)
+        lblCredits.Content = c.localUser.balance
         lstUsers.Items.Clear()
         Dim status As String = c.localStatus
-        txtStatus.Text = If(status <> "", status, "Introdueix un estat...")
+        txtStatus.Text = If(status <> "", status, NO_STATUS_TEXT)
 
         For Each user As String In c.registrats
             lstUsers.Items.Add(user)
@@ -47,14 +48,25 @@
         f.User = c.getUserInfo(lstUsers.SelectedItem)
         f.Show()
     End Sub
+    Function ShouldSubmitStatus() As Boolean
+        Try
+            Return Not (txtStatus.Text = NO_STATUS_TEXT Or txtStatus.Text = "" Or txtStatus.Text = c.localUser.status)
 
+        Catch ex As Exception
+            Return False
+        End Try
+         End Function
     Private Sub txtStatus_KeyDown(sender As Object, e As KeyEventArgs) Handles txtStatus.KeyDown
-        If e.Key = Key.Enter Then
+        If e.Key = Key.Enter And ShouldSubmitStatus() Then
             c.localStatus = txtStatus.Text
+            c.updateLocalUser()
+            UpdateStatusLabel()
         End If
     End Sub
-
+    Sub UpdateStatusLabel()
+        lblStatus.Content = If(ShouldSubmitStatus(), "[ENTER] per establir el nou estat", "Estat")
+    End Sub
     Private Sub txtStatus_TextChanged(sender As Object, e As TextChangedEventArgs) Handles txtStatus.TextChanged
-
+        UpdateStatusLabel()
     End Sub
 End Class

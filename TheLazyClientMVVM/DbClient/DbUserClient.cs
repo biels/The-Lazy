@@ -55,6 +55,8 @@ namespace TheLazyClientMVVM.DbClient
                 e.username = rdr.GetString("username");
                 e.real_name = rdr.GetString("real_name");
                 e.email = rdr.GetString("email");
+                e.status = getUserStatus(e.id); //Cascade status
+                e.balance = rdr.GetInt32("balance");
                 if (rdr["group_id"] != DBNull.Value)
                 {
                     e.group = getGroupInfo(rdr.GetInt32("group_id"));

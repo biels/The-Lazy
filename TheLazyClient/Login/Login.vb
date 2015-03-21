@@ -73,7 +73,7 @@ Public Class Login
     End Sub
     Sub SaveLoginInfo()
         pLoginInfo.P("SaveUser") = If(chkRemeberName.Checked, "true", "false")
-        pLoginInfo.P("SavePass") = If(chkRemeberName.Checked, "true", "false")
+        pLoginInfo.P("SavePass") = If(chkRememberPassword.Checked, "true", "false")
         If pLoginInfo.P("SaveUser") = "true" Then           
             pLoginInfo.P("User") = txtUsuari.Text
         End If

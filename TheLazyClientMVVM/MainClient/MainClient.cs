@@ -31,11 +31,15 @@ namespace TheLazyClientMVVM
             //connectionParametersRefreshed();
             
         }
+        public void updateLocalUser()
+        {
+            localUser = DbClient.DbUserClient.getUserInfo(loginManager.username);
+        }
         public void getHeadingInfo()
         {
             registrats = DbClient.DbUserClient.getUserList();
             //TEST
-            localUser = DbClient.DbUserClient.getUserInfo(loginManager.username);
+            updateLocalUser();
         }
         public string localStatus
         {
