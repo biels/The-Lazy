@@ -84,6 +84,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Elements\ElementEditor.xaml.vb">
+      <DependentUpon>ElementEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Elements\ElementThumbnaiItem.xaml.vb">
+      <DependentUpon>ElementThumbnaiItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Elements\ElementViewer.xaml.vb">
+      <DependentUpon>ElementViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="General.vb" />
     <Compile Include="Login\frmRegister.designer.vb">
       <DependentUpon>frmRegister.vb</DependentUpon>
@@ -112,6 +121,18 @@
       <DependentUpon>UserProfileViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Worker.vb" />
+    <Page Include="Elements\ElementEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Elements\ElementThumbnaiItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Elements\ElementViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

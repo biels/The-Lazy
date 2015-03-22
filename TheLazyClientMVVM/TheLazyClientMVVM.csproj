@@ -57,6 +57,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Com.cs" />
     <Compile Include="DbClient\DbClient.cs" />
+    <Compile Include="DbClient\DbElementClient.cs" />
     <Compile Include="DbClient\DbGroupEditor.cs" />
     <Compile Include="DbClient\DbLoginClient.cs" />
     <Compile Include="DbClient\DbUserClient.cs" />

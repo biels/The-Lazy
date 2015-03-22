@@ -8,7 +8,7 @@
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="65" Margin="505,26,0,0" Stroke="Black" VerticalAlignment="Top" Width="311"/>
         <Label x:Name="lblUsername" Content="Usuari Actual" HorizontalAlignment="Left" Margin="510,26,0,0" VerticalAlignment="Top" FontSize="18"/>
         <Image HorizontalAlignment="Left" Height="31" Margin="776,29,0,0" VerticalAlignment="Top" Width="29" RenderTransformOrigin="5,0.125" Source="media/Icones/Card-Money.png"/>
-        <Label x:Name="lblCredits" Content="3000" HorizontalAlignment="Left" Margin="727,26,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Label x:Name="lblCredits" Content="3000" HorizontalAlignment="Left" Margin="690,26,0,0" VerticalAlignment="Top" FontSize="18" HorizontalContentAlignment="Right" Width="86"/>
         <Button x:Name="btnPerfil" Content="Perfil" HorizontalAlignment="Left" Margin="510,60,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Foreground="#FFB00800"/>
         <Button Content="Els meus elements" HorizontalAlignment="Left" Margin="591,60,0,0" VerticalAlignment="Top" Width="128" FontSize="14" Foreground="#FF0058B0"/>
         <Image x:Name="btnTheLazy" HorizontalAlignment="Left" Height="65" Margin="10,26,0,0" VerticalAlignment="Top" Width="140" Source="media/Imatges/biglogo.png" Stretch="Fill" Cursor="Hand"/>
@@ -44,6 +44,9 @@
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
             <TabItem Header="Elements">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="TabItem" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="55" HorizontalContentAlignment="Stretch" Margin="445,0,-445,0">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>

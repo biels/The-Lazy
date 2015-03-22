@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="ElementThumbnaiItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="122.932" d:DesignWidth="478.195">
+    <Grid Background="#FFFFF6CD">
+        <Image x:Name="imgImage" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label Content="[Títol]" HorizontalAlignment="Left" Margin="115,10,0,0" VerticalAlignment="Top" Width="250"/>
+        <Button x:Name="btnEdit" Content="Editar" HorizontalAlignment="Left" Margin="381,10,0,0" VerticalAlignment="Top" Width="46">
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}" Opacity="0"/>
+            </Button.Background>
+        </Button>
+
+    </Grid>
+</UserControl>

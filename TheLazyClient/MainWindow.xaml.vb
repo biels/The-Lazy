@@ -76,4 +76,8 @@
         c.getHeadingInfo()
         UpdateHeading()
     End Sub
+
+    Private Sub btnExit_Click(sender As Object, e As RoutedEventArgs) Handles btnExit.Click
+        End
+    End Sub
 End Class
