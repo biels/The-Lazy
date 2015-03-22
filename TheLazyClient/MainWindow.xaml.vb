@@ -37,6 +37,12 @@
         For Each user As String In c.registrats
             lstUsers.Items.Add(user)
         Next
+        'PROVA
+        pnlElements.Children.Clear()
+        For i As Integer = 0 To 10
+            pnlElements.Children.Add(New ElementThumbnaiItem())
+        Next
+
     End Sub
 
     Private Sub ListBox_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)

@@ -44,7 +44,14 @@
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
             <TabItem Header="Elements">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <StackPanel x:Name="pnlElements" Margin="10,38,10,10" Background="#FFE0F3F7" RenderTransformOrigin="-1,0" ScrollViewer.HorizontalScrollBarVisibility="Visible" CanVerticallyScroll="True" CanHorizontallyScroll="True" ScrollViewer.CanContentScroll="True">
+                        <StackPanel.ScrollOwner>
+                            <ScrollViewer HorizontalScrollBarVisibility="Visible"/>
+                        </StackPanel.ScrollOwner>
+                    </StackPanel>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="163"/>
+                </Grid>
             </TabItem>
             <TabItem Header="TabItem" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="55" HorizontalContentAlignment="Stretch" Margin="445,0,-445,0">
                 <Grid Background="#FFE5E5E5"/>
