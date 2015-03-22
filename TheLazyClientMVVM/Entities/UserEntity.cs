@@ -12,6 +12,7 @@ namespace TheLazyClientMVVM.Entities
         public string username { get; set; }
         public string real_name { get; set; }
         public string email { get; set; }
+        public int permission_level { get; set; }   
         public string status { get; set; }
         public GroupEntity group { get; set; }
         public int balance { get; set; }        

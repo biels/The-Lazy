@@ -97,6 +97,7 @@
     <Compile Include="Login\Login.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Permissions\PermissionManager.vb" />
     <Compile Include="Profile\GroupEditor.xaml.vb">
       <DependentUpon>GroupEditor.xaml</DependentUpon>
     </Compile>

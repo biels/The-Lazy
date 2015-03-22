@@ -5,13 +5,13 @@
     <Grid>
         <ListBox x:Name="lstEduactrionCenters" HorizontalAlignment="Left" Margin="11,36,0,66" Width="156"/>
         <Label Content="Centres educatius:" HorizontalAlignment="Left" Margin="11,10,0,0" VerticalAlignment="Top"/>
-        <Button Content="Afegeix centre educatiu..." HorizontalAlignment="Left" Margin="10,363,0,0" VerticalAlignment="Top" Width="156"/>
+        <Button x:Name="btnAddEducationCenter" Content="Afegeix centre educatiu..." HorizontalAlignment="Left" Margin="10,363,0,0" VerticalAlignment="Top" Width="156" Click="Button_Click_1"/>
         <ListBox x:Name="lstAcademicLevels" HorizontalAlignment="Left" Margin="172,36,0,66" Width="156"/>
         <Label Content="Nivells acadèmics:" HorizontalAlignment="Left" Margin="172,10,0,0" VerticalAlignment="Top"/>
-        <Button Content="Afegeix nivell acadèmic..." HorizontalAlignment="Left" Margin="172,363,0,0" VerticalAlignment="Top" Width="156"/>
+        <Button x:Name="btnAddAcademicLevel" Content="Afegeix nivell acadèmic..." HorizontalAlignment="Left" Margin="172,363,0,0" VerticalAlignment="Top" Width="156"/>
         <ListBox x:Name="lstGoupCodes" HorizontalAlignment="Left" Margin="333,36,0,66" Width="156"/>
         <Label Content="Grups:" HorizontalAlignment="Left" Margin="333,10,0,0" VerticalAlignment="Top"/>
-        <Button Content="Afegeix grup..." HorizontalAlignment="Left" Margin="333,363,0,0" VerticalAlignment="Top" Width="156"/>
+        <Button x:Name="btnAddGroup" Content="Afegeix grup..." HorizontalAlignment="Left" Margin="333,363,0,0" VerticalAlignment="Top" Width="156"/>
         <Button x:Name="btnSelect" Content="Selecciona" Margin="414,391,0,0" HorizontalAlignment="Left" Width="75" RenderTransformOrigin="0.827,0.6" Click="Button_Click" IsEnabled="False" Height="20" VerticalAlignment="Top"/>
         <Label x:Name="lblSelectionString" Content="[Cap selecció]" HorizontalAlignment="Left" Margin="11,388,0,0" VerticalAlignment="Top" Width="378" Background="#FFFFF1B2"/>
     </Grid>
