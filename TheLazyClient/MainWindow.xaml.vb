@@ -73,6 +73,7 @@
     Private Sub btnPerfil_Click(sender As Object, e As RoutedEventArgs) Handles btnPerfil.Click
         Dim frm As New ProfileEditor
         frm.ShowDialog()
-
+        c.getHeadingInfo()
+        UpdateHeading()
     End Sub
 End Class

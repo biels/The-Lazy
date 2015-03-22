@@ -12,5 +12,9 @@ namespace TheLazyClientMVVM.Entities
         public string group_code { get; set; }
         public AcademicLevelEntity academic_level { get; set; }
         public EducationCenterEntity education_center { get; set; }
+        public override string ToString()
+        {
+            return String.Format("{1} {2}, {0} ({3})", education_center.name, academic_level.name, group_code, education_center.location);
+        }
     }
 }

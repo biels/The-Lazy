@@ -9,7 +9,7 @@ using TheLazyClientMVVM.Entities;
 
 namespace TheLazyClientMVVM.DbClient
 {
-    class DbUserClient
+    public class DbUserClient
     {
         public static List<string> getUserList()
         {
@@ -177,7 +177,7 @@ namespace TheLazyClientMVVM.DbClient
             cmd.Connection = c;
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = String.Format(
-                "UPDATE users SET email=\"{1}\", real_name=\"{2}\", group_id={3} WHERE username={0}", 
+                "UPDATE users SET email=\"{1}\", real_name=\"{2}\", group_id={3} WHERE username=\"{0}\"", 
                 username, email, real_name, group_id);
             cmd.ExecuteNonQuery();
             c.Close();

@@ -14,6 +14,7 @@ namespace TheLazyClientMVVM.Entities
         public string email { get; set; }
         public string status { get; set; }
         public GroupEntity group { get; set; }
-        public int balance { get; set; }
+        public int balance { get; set; }        
+
     }
 }
