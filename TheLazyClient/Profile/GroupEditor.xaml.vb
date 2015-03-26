@@ -18,13 +18,13 @@ Public Class GroupEditor
         _EducationCenters = TheLazyClientMVVM.DbClient.DbGroupEditor.getEducationCenterList()
         _AcademicLevels = TheLazyClientMVVM.DbClient.DbGroupEditor.getAcademicLevelList()
     End Sub
-    Private _Groups As List(Of GroupEntity)
-    Public ReadOnly Property Groups As List(Of GroupEntity)
-        Get
-            _Groups = TheLazyClientMVVM.DbClient.DbGroupEditor.getGroupList(SelectedEducationCenter, SelectedAcademicLevel)
-            Return _Groups
-        End Get
-    End Property
+    'Private _Groups As List(Of GroupEntity)
+    'Public ReadOnly Property Groups As List(Of GroupEntity)
+    '    Get
+    '        _Groups = TheLazyClientMVVM.DbClient.DbGroupEditor.getGroupList(SelectedEducationCenter, SelectedAcademicLevel)
+    '        Return _Groups
+    '    End Get
+    'End Property
     Public ReadOnly Property SelectedEducationCenter() As EducationCenterEntity
         Get
             If lstEduactrionCenters.SelectedIndex < 0 Then Return Nothing
@@ -37,15 +37,15 @@ Public Class GroupEditor
             Return AcademicLevels(lstAcademicLevels.SelectedIndex)
         End Get
     End Property
-    Private _SelectedGroup As GroupEntity
-    Public ReadOnly Property SelectedGroup() As GroupEntity
-        Get
-            If lstGoupCodes.SelectedIndex < 0 Then Return Nothing
-            _SelectedGroup = _Groups(lstGoupCodes.SelectedIndex) 'En funció dels altres 2
-            'UpdateSelectionDesc()
-            Return _SelectedGroup
-        End Get
-    End Property
+    'Private _SelectedGroup As GroupEntity
+    'Public ReadOnly Property SelectedGroup() As GroupEntity
+    '    Get
+    '        If lstGoupCodes.SelectedIndex < 0 Then Return Nothing
+    '        _SelectedGroup = _Groups(lstGoupCodes.SelectedIndex) 'En funció dels altres 2
+    '        'UpdateSelectionDesc()
+    '        Return _SelectedGroup
+    '    End Get
+    'End Property
     Public Sub UpdateUI()
         'EducationCenters
         lstEduactrionCenters.Items.Clear()
@@ -60,35 +60,35 @@ Public Class GroupEditor
        
 
     End Sub
-    Sub UpdateGroups()
-        'Groups
-        lstGoupCodes.Items.Clear()
-        If SelectedAcademicLevel IsNot Nothing And SelectedEducationCenter IsNot Nothing Then
-            For Each e As GroupEntity In Groups
-                lstGoupCodes.Items.Add(e.group_code)
-            Next
-        End If
+    'Sub UpdateGroups()
+    '    'Groups
+    '    lstGoupCodes.Items.Clear()
+    '    If SelectedAcademicLevel IsNot Nothing And SelectedEducationCenter IsNot Nothing Then
+    '        For Each e As GroupEntity In Groups
+    '            lstGoupCodes.Items.Add(e.group_code)
+    '        Next
+    '    End If
 
-    End Sub
-    Sub UpdateSelectionDesc()
+    'End Sub
+    'Sub UpdateSelectionDesc()
 
-        lblSelectionString.Content = If(SelectedGroup() Is Nothing, "[Selecciona un grup]", _SelectedGroup)
-        btnSelect.IsEnabled = SelectedGroup() IsNot Nothing
-    End Sub
+    '    lblSelectionString.Content = If(SelectedGroup() Is Nothing, "[Selecciona un grup]", _SelectedGroup)
+    '    btnSelect.IsEnabled = SelectedGroup() IsNot Nothing
+    'End Sub
     Private Sub lstEduactrionCenters_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles lstEduactrionCenters.SelectionChanged
         'UpdateUI()
-        UpdateGroups()
+        'UpdateGroups()
     End Sub
 
     Private Sub lstAcademicLevels_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles lstAcademicLevels.SelectionChanged
         'UpdateUI()
-        UpdateGroups()
+        'UpdateGroups()
     End Sub
 
   
 
     Private Sub lstGoupCodes_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles lstGoupCodes.SelectionChanged
-        UpdateSelectionDesc()
+        ' UpdateSelectionDesc()
     End Sub
 
     Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
@@ -118,23 +118,23 @@ Public Class GroupEditor
         End If
         UpdateUI()
     End Sub
-    Sub AfegirGrup()
-        If Not PermissionManager.IsAbleTo(PermissionManager.PermissionLevels.Trusted) Then Exit Sub
-        Dim name As String
-        Dim commoncodes() As String = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "X", "Y", "Z"}
-        Dim r1 As String = InputBox("Introdueix el codi del grup. Aquest ha de ser un sol caràcter Ex: A", "Afegeix un grup...", commoncodes(_Groups.Count))
-        If r1 <> "" And r1.Length = 1 Then
-            name = r1.ToUpper
-            For Each g As GroupEntity In _Groups
-                If g.group_code = name Then
-                    MsgBox("Ja existeix un grup amb aquest codi de grup")
-                    Exit Sub
-                End If
-            Next
-            TheLazyClientMVVM.DbClient.DbGroupEditor.insertGroup(name, SelectedAcademicLevel, SelectedEducationCenter)
-        End If
-        UpdateUI()
-    End Sub
+    'Sub AfegirGrup()
+    '    If Not PermissionManager.IsAbleTo(PermissionManager.PermissionLevels.Trusted) Then Exit Sub
+    '    Dim name As String
+    '    Dim commoncodes() As String = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "X", "Y", "Z"}
+    '    Dim r1 As String = InputBox("Introdueix el codi del grup. Aquest ha de ser un sol caràcter Ex: A", "Afegeix un grup...", commoncodes(_Groups.Count))
+    '    If r1 <> "" And r1.Length = 1 Then
+    '        name = r1.ToUpper
+    '        For Each g As GroupEntity In _Groups
+    '            If g.group_code = name Then
+    '                MsgBox("Ja existeix un grup amb aquest codi de grup")
+    '                Exit Sub
+    '            End If
+    '        Next
+    '        TheLazyClientMVVM.DbClient.DbGroupEditor.insertGroup(name, SelectedAcademicLevel, SelectedEducationCenter)
+    '    End If
+    '    UpdateUI()
+    'End Sub
     Private Sub Button_Click_1(sender As Object, e As RoutedEventArgs)
         AfegirCentre()
     End Sub
@@ -144,6 +144,8 @@ Public Class GroupEditor
     End Sub
 
     Private Sub btnAddGroup_Click(sender As Object, e As RoutedEventArgs) Handles btnAddGroup.Click
-        AfegirGrup()
+        'AfegirGrup()
     End Sub
+
+    
 End Class

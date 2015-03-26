@@ -1,0 +1,13 @@
+﻿<Window x:Class="AdministrationMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Administració de la plataforma" Height="387.97" Width="516.541">
+    <Grid>
+        <Rectangle x:Name="rectPermissionLevelRectangle" Fill="#FFF4F4F5" Height="90" Margin="0,17,19,0" Stroke="Black" VerticalAlignment="Top" HorizontalAlignment="Right" Width="114" RadiusY="5.124" RadiusX="5.124"/>
+
+        <Label Content="Nivell de permís:" Margin="0,16,19,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="114" FontSize="14"/>
+        <Label x:Name="lblPermissionLevel" Content="10" Margin="0,37,19,0" VerticalAlignment="Top" FontSize="36" HorizontalContentAlignment="Center" Height="62" Padding="5,0,5,5" HorizontalAlignment="Right" Width="114"/>
+        <Label x:Name="lblPermissionLevelRank" Content="Usuari Normal" Margin="0,81,19,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="114" HorizontalContentAlignment="Center" FontWeight="Bold"/>
+
+    </Grid>
+</Window>

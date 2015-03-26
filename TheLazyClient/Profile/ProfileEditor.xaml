@@ -2,17 +2,21 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="ProfileEditor"
-    Title="Edita el teu perfil" Height="300" Width="355.218">
+    Title="Edita el teu perfil" Height="191" Width="397.218">
     <Grid>
-        <TextBox x:Name="txtFullName" Height="23" Margin="10,33,175,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtFullName" Height="23" Margin="10,33,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="142"/>
         <Label HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Content="Nom complet: "/>
-        <TextBox x:Name="txtEmail" Height="23" Margin="10,87,175,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtEmail" Height="23" Margin="10,87,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="193"/>
         <Label HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top" Content="E-mail:" RenderTransformOrigin="0.73,-1.377"/>
-        <Label HorizontalAlignment="Left" Margin="188,7,0,0" VerticalAlignment="Top" Content="Grup:" RenderTransformOrigin="0.73,-1.377"/>
-        <Button x:Name="btnSelectGroup" Content="Selecciona el grup..." HorizontalAlignment="Left" Margin="188,33,0,0" VerticalAlignment="Top" Width="141"/>
         <Button x:Name="btnSaveChanges" Content="Desa" Margin="0,0,10,10" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" RenderTransformOrigin="1.034,1.724"/>
-        <Label HorizontalAlignment="Left" Margin="188,61,0,0" VerticalAlignment="Top" Content="Pervisualització del grup:" RenderTransformOrigin="0.73,-1.377"/>
-        <TextBlock x:Name="lblGroupPreview" Text="[Selecciona un grup]" HorizontalAlignment="Left" Margin="189,87,0,0" VerticalAlignment="Top" Width="140" Height="48" TextWrapping="Wrap"/>
+        <Label Content="Nivell:" HorizontalAlignment="Left" Margin="208,8,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmbAcademicLevel" HorizontalAlignment="Left" Margin="208,34,0,0" VerticalAlignment="Top" Width="89"/>
+        <Label Content="Grup:" HorizontalAlignment="Left" Margin="302,10,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmbGroupCode" HorizontalAlignment="Left" Margin="302,34,0,0" VerticalAlignment="Top" Width="68"/>
+        <Label Content="Centre educatiu:" HorizontalAlignment="Left" Margin="208,62,0,0" VerticalAlignment="Top" Width="162"/>
+        <ComboBox x:Name="cmbEducationCenter" HorizontalAlignment="Left" Margin="208,88,0,0" VerticalAlignment="Top" Width="162"/>
+        <Label Content="Gènere:" HorizontalAlignment="Left" Margin="152,7,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmbGender" HorizontalAlignment="Left" Margin="157,34,0,0" VerticalAlignment="Top" Width="46"/>
 
     </Grid>
 </Window>
