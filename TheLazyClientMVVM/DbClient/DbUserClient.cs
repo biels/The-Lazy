@@ -55,37 +55,26 @@ namespace TheLazyClientMVVM.DbClient
                 e.username = rdr.GetString("username");
                 e.real_name = rdr.GetString("real_name");
                 e.email = rdr.GetString("email");
-                e.status = getUserStatus(e.id); //Cascade status
+                e.status = getUserStatus(e.id); //Estat recursiu
                 e.balance = rdr.GetInt32("balance");
                 e.permission_level = rdr.GetInt32("permission_level");
-                if (rdr["group_id"] != DBNull.Value)
+                if (rdr["gender"] != DBNull.Value)
                 {
-                    e.group = getGroupInfo(rdr.GetInt32("group_id"));
+                    e.gender = (UserEntity.GenderEnum) Enum.Parse(typeof(UserEntity.GenderEnum), rdr.GetString("gender"), true);
+                }
+                if (rdr["group_code"] != DBNull.Value)
+                {
+                    e.group_code = rdr.GetString("group_code");
+                }
+                if (rdr["academic_level_id"] != DBNull.Value)
+                {
+                    e.academic_level = getAcademicLevelInfo(rdr.GetInt32("academic_level_id"));
+                }
+                if (rdr["education_center_id"] != DBNull.Value)
+                {
+                    e.education_center = getEduactionCenterInfo(rdr.GetInt32("education_center_id"));
                 }
             }           
-            rdr.Close();
-            c.Close();
-            return e;
-        }
-        public static GroupEntity getGroupInfo(int id)
-        {
-            if (id == null) { return null; }
-            if (!DbClient.isOnline()) { return null; }
-            GroupEntity e = new GroupEntity();
-
-            MySqlConnection c = DbClient.getConnection();
-            c.Open();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = c;
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = String.Format("SELECT * FROM groups WHERE group_id={0}", id);
-            MySqlDataReader rdr = cmd.ExecuteReader();
-            rdr.Read();
-            //FILL
-            e.id = rdr.GetInt32("group_id");
-            e.group_code = rdr.GetString("group_code");
-            e.education_center = getEduactionCenterInfo(rdr.GetInt32("education_center_id"));
-            e.academic_level = getAcademicLevelInfo(rdr.GetInt32("academic_level_id"));
             rdr.Close();
             c.Close();
             return e;
@@ -102,11 +91,13 @@ namespace TheLazyClientMVVM.DbClient
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = String.Format("SELECT * FROM education_centers WHERE education_center_id={0}", id);
             MySqlDataReader rdr = cmd.ExecuteReader();
-            rdr.Read();
-            //FILL
-            e.id = rdr.GetInt32("education_center_id");
-            e.name = rdr.GetString("name");
-            e.location = rdr.GetString("location");
+            if (rdr.Read())
+            {
+                //FILL
+                e.id = rdr.GetInt32("education_center_id");
+                e.name = rdr.GetString("name");
+                e.location = rdr.GetString("location");
+            }
             rdr.Close();
             c.Close();
             return e;
@@ -123,10 +114,12 @@ namespace TheLazyClientMVVM.DbClient
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = String.Format("SELECT * FROM academic_levels WHERE academic_level_id={0}", id);
             MySqlDataReader rdr = cmd.ExecuteReader();
-            rdr.Read();
-            //FILL
-            e.id = rdr.GetInt32("academic_level_id");
-            e.name = rdr.GetString("name");
+            if (rdr.Read())
+            {
+                //FILL
+                e.id = rdr.GetInt32("academic_level_id");
+                e.name = rdr.GetString("name");
+            }           
             rdr.Close();
             c.Close();
             return e;
@@ -169,7 +162,7 @@ namespace TheLazyClientMVVM.DbClient
             c.Close();
             return true;
         }
-        public static bool updateUser(string username, string email, string real_name, int group_id)
+        public static bool updateUser(string username, string email, string real_name, string gender, string group_code, int academic_level_id, int education_center_id)
         {
             if (!DbClient.isOnline()) { return false; }
             MySqlConnection c = DbClient.getConnection();
@@ -178,8 +171,8 @@ namespace TheLazyClientMVVM.DbClient
             cmd.Connection = c;
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = String.Format(
-                "UPDATE users SET email=\"{1}\", real_name=\"{2}\", group_id={3} WHERE username=\"{0}\"", 
-                username, email, real_name, group_id);
+                "UPDATE users SET email=\"{1}\", real_name=\"{2}\", gender=\"{3}\", group_code=\"{4}\", academic_level_id={5}, education_center_id={6} WHERE username=\"{0}\"", 
+                username, email, real_name, gender, group_code, academic_level_id, education_center_id);
             cmd.ExecuteNonQuery();
             c.Close();
             return true;
