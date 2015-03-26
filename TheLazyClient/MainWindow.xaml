@@ -10,11 +10,15 @@
         <Image HorizontalAlignment="Left" Height="31" Margin="776,29,0,0" VerticalAlignment="Top" Width="29" RenderTransformOrigin="5,0.125" Source="media/Icones/Card-Money.png"/>
         <Label x:Name="lblCredits" Content="3000" HorizontalAlignment="Left" Margin="690,26,0,0" VerticalAlignment="Top" FontSize="18" HorizontalContentAlignment="Right" Width="86"/>
         <Button x:Name="btnPerfil" Content="Perfil" HorizontalAlignment="Left" Margin="510,60,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Foreground="#FFB00800"/>
-        <Button Content="Els meus elements" HorizontalAlignment="Left" Margin="591,60,0,0" VerticalAlignment="Top" Width="128" FontSize="14" Foreground="#FF0058B0"/>
+        <Button Content="Administració" HorizontalAlignment="Left" Margin="591,60,0,0" VerticalAlignment="Top" Width="128" FontSize="14" Click="Button_Click">
+            <Button.Foreground>
+                <SolidColorBrush Color="#FF14A014"/>
+            </Button.Foreground>
+        </Button>
         <Image x:Name="btnTheLazy" HorizontalAlignment="Left" Height="65" Margin="10,26,0,0" VerticalAlignment="Top" Width="140" Source="media/Imatges/biglogo.png" Stretch="Fill" Cursor="Hand"/>
         <Image x:Name="btnClose" HorizontalAlignment="Left" Height="16" Margin="804,5,0,0" VerticalAlignment="Top" Width="16" Source="media/Icones/Cross.png"/>
         <Image x:Name="btnMinimize" HorizontalAlignment="Left" Height="32" Margin="773,-3,0,0" VerticalAlignment="Top" Width="32" Source="media/Icones/Bullet-Toggle-Minus.png"/>
-        <Button x:Name="btnExit" Content="Surt" HorizontalAlignment="Left" Margin="724,60,0,0" VerticalAlignment="Top" Width="81" FontSize="14" Foreground="#F0000000" Background="#FFDDDDDD"/>
+        <Button x:Name="btnExit" Content="Surt" HorizontalAlignment="Left" Margin="724,60,0,0" VerticalAlignment="Top" Width="81" FontSize="14" Foreground="#FF0058B0" Background="#FFDDDDDD"/>
         <Rectangle HorizontalAlignment="Left" Height="65" Margin="155,26,0,0" Stroke="Black" VerticalAlignment="Top" Width="170">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

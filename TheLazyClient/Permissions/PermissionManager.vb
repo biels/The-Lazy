@@ -1,11 +1,11 @@
 ﻿Public Class PermissionManager
     Public Enum PermissionLevels As Integer
-        Banned = -20
+        Banned = -25
         Restricted = -5
-        Normal = 1
-        Trusted = 10
-        Moderator = 30
-        SuperModerator = 40
+        Normal = 10
+        Trusted = 20
+        Moderator = 35
+        SuperModerator = 50
         Admin = 100
     End Enum
     Public Shared Function IsAbleTo(requested As PermissionLevels) As Boolean
@@ -18,6 +18,16 @@
     Public Shared Sub ShowDenyActionMessage(requested As PermissionLevels)
         MsgBox(String.Format("És necessari ser {0} o superior per fer això", GetLevelDisplayName(requested).ToLower))
     End Sub
+    Public Shared Function GetLevel(level As Integer) As PermissionLevels
+        Dim highest As PermissionLevels = PermissionLevels.Banned
+        For Each v As PermissionLevels In [Enum].GetValues(GetType(PermissionLevels))
+            If level >= v And v >= highest Then
+                highest = v
+            End If
+        Next
+        Return highest
+    End Function
+
     Public Shared Function GetLevelDisplayName(l As PermissionLevels) As String
         Select Case l
             Case Is = PermissionLevels.Banned

@@ -63,7 +63,6 @@
     <Compile Include="DbClient\DbUserClient.cs" />
     <Compile Include="Entities\AcademicLevelEntity.cs" />
     <Compile Include="Entities\EducationCenterEntity.cs" />
-    <Compile Include="Entities\GroupEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="MainClient\LoginManager.cs" />
     <Compile Include="MainClient\MainClient.cs" />

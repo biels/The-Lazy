@@ -29,7 +29,7 @@
         End If
         If c.loginManager.register(txtUser.Text, txtPssw.Text, txtRealName.Text, txtEmail.Text) Then
             Me.DialogResult = Windows.Forms.DialogResult.OK
-            MsgBox("Benvingut/da " & txtUser.Text & "! " & " T'has registrat correctament!")
+            MsgBox("Benvingut/da " & txtUser.Text & "! " & " T'has registrat correctament!" & vbCrLf & "Completa la informació del teu perfil a la pestanya perfil per disposar de totes les funcions.")
             Me.Close()
         Else
             MsgBox("Ja existeix un compte amb aquest nom d'usuari. Has de triar-ne un altre :/")

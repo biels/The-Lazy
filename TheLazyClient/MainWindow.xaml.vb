@@ -86,4 +86,9 @@
     Private Sub btnExit_Click(sender As Object, e As RoutedEventArgs) Handles btnExit.Click
         End
     End Sub
+
+    Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
+        Dim frm As New AdministrationMenu
+        frm.Show()
+    End Sub
 End Class

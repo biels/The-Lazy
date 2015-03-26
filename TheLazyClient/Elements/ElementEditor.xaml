@@ -1,8 +1,8 @@
 ﻿<Window x:Class="ElementEditor"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="ElementEditor" Height="300" Width="300">
+    Title="ElementEditor" Height="270.677" Width="403.759">
     <Grid>
-        
+
     </Grid>
 </Window>
