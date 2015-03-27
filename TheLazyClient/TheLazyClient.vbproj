@@ -78,12 +78,23 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="Xceed.Wpf.DataGrid, Version=2.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=2.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="Application.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Admin\SubjectEditor.xaml.vb">
+      <DependentUpon>SubjectEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Elements\ElementEditor.xaml.vb">
       <DependentUpon>ElementEditor.xaml</DependentUpon>
     </Compile>
@@ -107,7 +118,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Permissions\PermissionManager.vb" />
-    <Compile Include="Profile\AdministrationMenu.xaml.vb">
+    <Compile Include="Admin\AdministrationMenu.xaml.vb">
       <DependentUpon>AdministrationMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Profile\GroupEditor.xaml.vb">
@@ -123,7 +134,13 @@
     <Compile Include="Profile\UserProfileViewer.xaml.vb">
       <DependentUpon>UserProfileViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\ColorExtensions.vb" />
+    <Compile Include="Utils\Utils.vb" />
     <Compile Include="Worker.vb" />
+    <Page Include="Admin\SubjectEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Elements\ElementEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -148,7 +165,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Profile\AdministrationMenu.xaml">
+    <Page Include="Admin\AdministrationMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -376,6 +393,8 @@
     <Content Include="Libraries\MySql.Data.dll" />
     <Content Include="Libraries\Owf.Controls.OwfProgressControl.dll" />
     <Content Include="Libraries\SelectorConnexions.dll" />
+    <Content Include="Libraries\Xceed.Wpf.DataGrid.dll" />
+    <Content Include="Libraries\Xceed.Wpf.Toolkit.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

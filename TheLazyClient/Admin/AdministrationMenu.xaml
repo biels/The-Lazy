@@ -8,6 +8,7 @@
         <Label Content="Nivell de permís:" Margin="0,16,19,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="114" FontSize="14"/>
         <Label x:Name="lblPermissionLevel" Content="10" Margin="0,37,19,0" VerticalAlignment="Top" FontSize="36" HorizontalContentAlignment="Center" Height="62" Padding="5,0,5,5" HorizontalAlignment="Right" Width="114"/>
         <Label x:Name="lblPermissionLevelRank" Content="Usuari Normal" Margin="0,81,19,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="114" HorizontalContentAlignment="Center" FontWeight="Bold"/>
+        <Button Content="Edita les assignatures..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="157" Click="Button_Click"/>
 
     </Grid>
 </Window>

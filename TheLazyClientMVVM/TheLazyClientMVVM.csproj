@@ -56,13 +56,16 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Com.cs" />
+    <Compile Include="DbClient\DbAcademicLevelClient.cs" />
     <Compile Include="DbClient\DbClient.cs" />
     <Compile Include="DbClient\DbElementClient.cs" />
     <Compile Include="DbClient\DbGroupEditor.cs" />
     <Compile Include="DbClient\DbLoginClient.cs" />
+    <Compile Include="DbClient\DbSubjectEditorClient.cs" />
     <Compile Include="DbClient\DbUserClient.cs" />
     <Compile Include="Entities\AcademicLevelEntity.cs" />
     <Compile Include="Entities\EducationCenterEntity.cs" />
+    <Compile Include="Entities\SubjectEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="MainClient\LoginManager.cs" />
     <Compile Include="MainClient\MainClient.cs" />

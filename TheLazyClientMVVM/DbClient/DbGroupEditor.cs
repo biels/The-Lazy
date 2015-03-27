@@ -65,6 +65,29 @@ namespace TheLazyClientMVVM.DbClient
             c.Close();
             return e;
         }
+        public static AcademicLevelEntity getAcademicLevelInfo(int id)
+        {
+            if (!DbClient.isOnline()) { return null; }
+            AcademicLevelEntity e = new AcademicLevelEntity();
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format("SELECT * FROM academic_levels WHERE academic_level_id=\"{0}\"", id);
+
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            if (rdr.Read())
+            {
+                //FILL
+                e.id = rdr.GetInt32("academic_level_id");
+                e.name = rdr.GetString("name");
+            }           
+            rdr.Close();
+            c.Close();
+            return e;
+        }
         //public static List<GroupEntity> getGroupList(EducationCenterEntity education_center, AcademicLevelEntity academic_level)
         //{
         //    if (education_center == null || academic_level == null) { return null; }
@@ -109,21 +132,7 @@ namespace TheLazyClientMVVM.DbClient
             c.Close();
             return true;
         }
-        public static bool insertAcademicLevel(string name)
-        {
-            if (!DbClient.isOnline()) { return false; }
-            MySqlConnection c = DbClient.getConnection();
-            c.Open();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = c;
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = String.Format(
-                "INSERT INTO academic_levels VALUES(null, \"{0}\")",
-                name);
-            cmd.ExecuteNonQuery();
-            c.Close();
-            return true;
-        }
+       
         //public static bool insertGroup(string group_code, AcademicLevelEntity academic_level, EducationCenterEntity eduaction_center)
         //{
         //    try
@@ -146,5 +155,20 @@ namespace TheLazyClientMVVM.DbClient
         //        return false;
         //    }
         //}
+        public static bool insertAcademicLevel(string name)
+        {
+            if (!DbClient.isOnline()) { return false; }
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format(
+                "INSERT INTO academic_levels VALUES(null, \"{0}\")",
+                name);
+            cmd.ExecuteNonQuery();
+            c.Close();
+            return true;
+        }
     }
 }

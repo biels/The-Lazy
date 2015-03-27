@@ -8,4 +8,9 @@
         lblPermissionLevelRank.Content = PermissionManager.GetLevelDisplayName(PermissionManager.GetLevel(c.localUser.permission_level))
     End Sub
 
+    Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
+        If Not PermissionManager.IsAbleTo(PermissionManager.PermissionLevels.Moderator) Then Exit Sub
+        Dim frm As New SubjectEditor
+        frm.Show()
+    End Sub
 End Class

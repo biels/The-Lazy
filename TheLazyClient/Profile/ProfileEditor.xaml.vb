@@ -65,17 +65,7 @@ Public Class ProfileEditor
         
         'SelectedGroup = c.localUser.group
     End Sub
-    Private Function FindItemContaining(items As IEnumerable, target As Object) As Object
-        If items Is Nothing Then Return Nothing
-        If target Is Nothing Then Return Nothing
-        For Each item As Object In items
-            If item.ToString().Contains(target.ToString) Then
-                Return item
-            End If
-        Next
-        ' Return null;
-        Return Nothing
-    End Function
+   
 
     Sub SaveChanges()
         Dim academic_level As Entities.AcademicLevelEntity = cmbAcademicLevel.SelectedItem
