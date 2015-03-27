@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheLazyClientMVVM.Entities
 {
-    class ElementEntity
+    public class ElementEntity
     {
         public int id { get; set; }
         public UserEntity user { get; set; } //Semi buit*

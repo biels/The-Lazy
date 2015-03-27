@@ -4,7 +4,7 @@
     Title="ElementViewer" Height="454.083" Width="624.023">
     <Grid>
         <Label x:Name="lblTitle" Content="Títol" Margin="10,10,500,0" VerticalAlignment="Top"/>
-        <Image HorizontalAlignment="Left" Height="206" Margin="364,60,0,0" VerticalAlignment="Top" Width="218"/>
+        <Image HorizontalAlignment="Left" Height="206" Margin="365,20,0,0" VerticalAlignment="Top" Width="218"/>
 
     </Grid>
 </Window>

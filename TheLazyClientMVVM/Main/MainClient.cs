@@ -20,12 +20,13 @@ namespace TheLazyClientMVVM
         public LoginManager loginManager = new LoginManager();
         public Entities.UserEntity localUser;
         public List<string> registrats = new List<string>();
+        public ElementFilter filter = new ElementFilter();
         public void init()
         {
             // wcfClient.init();
             DbClient.DbClient.TestConnection();
 
-
+            filter.init();
             //Entities.UserEntity u = DbClient.DbUserClient.getUserInfo("biel");
 
             //connectionParametersRefreshed();

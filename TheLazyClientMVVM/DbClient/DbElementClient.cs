@@ -23,7 +23,7 @@ namespace TheLazyClientMVVM.DbClient
             cmd.Connection = c;
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = String.Format(
-                "SELECT * FROM subjects WHERE {0} ORDER BY create_time DESC LIMIT 50",
+                "SELECT * FROM elements {0} ORDER BY create_time DESC LIMIT 50",
                 where_clause);
 
             MySqlDataReader rdr = cmd.ExecuteReader();
@@ -32,7 +32,7 @@ namespace TheLazyClientMVVM.DbClient
                 ElementEntity ent = new ElementEntity();
                 //FILL
                 ent.id = rdr.GetInt32("subject_id");
-                //ent.user = DbUserClient.getUserInfo
+                //ent.user = DbUserClient.getUserInfo FALTA!!!!
                 ent.subject = DbSubjectEditorClient.getSubjectInfo(rdr.GetInt32("subject_id"));
                 ent.name = rdr.GetString("name");
                 if (rdr["description"] != DBNull.Value)
@@ -45,6 +45,44 @@ namespace TheLazyClientMVVM.DbClient
             rdr.Close();
             c.Close();
             return e;
+        }
+        public static ElementEntity getElementInfo(int element_id)
+        {
+            List<ElementEntity> l = getFilteredElementList(String.Format("WHERE element_id={0}", element_id));
+            if (l.Count > 0){
+                return l[0];
+            }            
+            return null;
+        }
+        public static bool insertElement(int user_id, int subject_id, string name, string description, int price)
+        {
+            if (!DbClient.isOnline()) { return false; }
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format(
+                "INSERT INTO elements VALUES(null, {0}, {1}, \"{2}\", \"{3}\", {4}, null, null)",
+                user_id, subject_id, name, description, price);
+            cmd.ExecuteNonQuery();
+            c.Close();
+            return true;
+        }
+        public static bool updateElement(int element_id, int user_id, int subject_id, string name, string description, int price)
+        {
+            if (!DbClient.isOnline()) { return false; }
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format(
+                "UPDATE elements SET user_id={1}, subject_id={2}, name=\"{3}\", description=\"{4}\", price={5} WHERE element_id={0}",
+                element_id, user_id, subject_id, name, description, price);
+            cmd.ExecuteNonQuery();
+            c.Close();
+            return true;
         }
     }
 }
