@@ -43,7 +43,7 @@
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
-        <TabControl HorizontalAlignment="Left" Height="411" Margin="10,96,0,0" VerticalAlignment="Top" Width="625">
+        <TabControl x:Name="tabMain" HorizontalAlignment="Left" Height="411" Margin="10,96,0,0" VerticalAlignment="Top" Width="625">
             <TabItem Header="Notícies">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
@@ -54,7 +54,8 @@
                             <ScrollViewer HorizontalScrollBarVisibility="Visible"/>
                         </StackPanel.ScrollOwner>
                     </StackPanel>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="163"/>
+                    <TextBox x:Name="txtSearchText" HorizontalAlignment="Left" Height="23" Margin="13,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="163"/>
+                    <ComboBox x:Name="cmbAcademicLevels" HorizontalAlignment="Left" Margin="182,10,0,0" VerticalAlignment="Top" Width="120"/>
                 </Grid>
             </TabItem>
             <TabItem Header="TabItem" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="55" HorizontalContentAlignment="Stretch" Margin="445,0,-445,0">

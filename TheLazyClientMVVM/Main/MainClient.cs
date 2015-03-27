@@ -10,26 +10,26 @@ using MySql.Data.MySqlClient;
 
 namespace TheLazyClientMVVM
 {
-   public class MainClient
+    public class MainClient
     {
-       
+
         public event LogHandler LogOutput;
         public delegate void LogHandler(string m);
-        public bool onlineMode = false; 
+        public bool onlineMode = false;
         public WCFClient wcfClient = new WCFClient();
         public LoginManager loginManager = new LoginManager();
         public Entities.UserEntity localUser;
         public List<string> registrats = new List<string>();
         public void init()
         {
-           // wcfClient.init();
+            // wcfClient.init();
             DbClient.DbClient.TestConnection();
 
-            
+
             //Entities.UserEntity u = DbClient.DbUserClient.getUserInfo("biel");
 
             //connectionParametersRefreshed();
-            
+
         }
         public void updateLocalUser()
         {

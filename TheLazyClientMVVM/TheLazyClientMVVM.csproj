@@ -65,12 +65,14 @@
     <Compile Include="DbClient\DbUserClient.cs" />
     <Compile Include="Entities\AcademicLevelEntity.cs" />
     <Compile Include="Entities\EducationCenterEntity.cs" />
+    <Compile Include="Entities\ElementEntity.cs" />
     <Compile Include="Entities\SubjectEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
-    <Compile Include="MainClient\LoginManager.cs" />
-    <Compile Include="MainClient\MainClient.cs" />
+    <Compile Include="Main\ElementFilter.cs" />
+    <Compile Include="Main\LoginManager.cs" />
+    <Compile Include="Main\MainClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MainClient\WCFClient.cs" />
+    <Compile Include="Main\WCFClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TheLazyInterfaces\TheLazyInterfaces.csproj">

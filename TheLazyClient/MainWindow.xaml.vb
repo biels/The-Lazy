@@ -42,13 +42,12 @@
         For i As Integer = 0 To 10
             pnlElements.Children.Add(New ElementThumbnaiItem())
         Next
+        FillElementTabComboboxes()
+    End Sub
+    Sub FillElementTabComboboxes()
 
     End Sub
-
-    Private Sub ListBox_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
-
-    End Sub
-
+   
     Private Sub lstUsers_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles lstUsers.MouseDoubleClick
         Dim f As New UserProfileViewer
         f.User = c.getUserInfo(lstUsers.SelectedItem)
@@ -90,5 +89,9 @@
     Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
         Dim frm As New AdministrationMenu
         frm.Show()
+    End Sub
+
+    Private Sub ListBox_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
+
     End Sub
 End Class
