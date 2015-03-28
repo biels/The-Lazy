@@ -39,13 +39,17 @@ Class MainWindow
             lstUsers.Items.Add(user)
         Next
         'PROVA
-        pnlElements.Children.Clear()
-        For i As Integer = 0 To 10
-            pnlElements.Children.Add(New ElementThumbnaiItem())
-        Next
+        FillElementsTab()
         FillElementTabComboboxes()
     End Sub
-
+    Sub FillElementsTab()
+        pnlElements.Children.Clear()
+        For Each e As Entities.ElementEntity In c.filter.getFilteredElements()
+            Dim control As New ElementThumbnaiItem
+            control.Element = e
+            pnlElements.Children.Add(control)
+        Next
+    End Sub
 
     Private Sub lstUsers_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles lstUsers.MouseDoubleClick
         Dim f As New UserProfileViewer
@@ -119,5 +123,9 @@ Class MainWindow
     Private Sub cmbAcademicLevels_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbAcademicLevels.SelectionChanged
         c.filter.updateSubjectList(cmbAcademicLevels.SelectedItem)
         UpdateSubjectsCombobox()
+    End Sub
+
+    Private Sub cmbSubjectFilter_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbSubjectFilter.SelectionChanged
+        FillElementsTab()
     End Sub
 End Class

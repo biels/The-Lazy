@@ -104,6 +104,9 @@
     <Compile Include="Elements\ElementViewer.xaml.vb">
       <DependentUpon>ElementViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Elements\RatingControl.xaml.vb">
+      <DependentUpon>RatingControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="General.vb" />
     <Compile Include="Login\frmRegister.designer.vb">
       <DependentUpon>frmRegister.vb</DependentUpon>
@@ -150,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Elements\ElementViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Elements\RatingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -7,8 +7,8 @@
              d:DesignHeight="122.932" d:DesignWidth="478.195">
     <Grid Background="#FFFFF6CD">
         <Image x:Name="imgImage" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100"/>
-        <Label Content="[Títol]" HorizontalAlignment="Left" Margin="115,10,0,0" VerticalAlignment="Top" Width="250"/>
-        <Button x:Name="btnEdit" Content="Editar" HorizontalAlignment="Left" Margin="381,10,0,0" VerticalAlignment="Top" Width="46">
+        <Label x:Name="txtTitle" Content="[Títol]" HorizontalAlignment="Left" Margin="115,10,0,0" VerticalAlignment="Top" Width="250"/>
+        <Button x:Name="btnEdit" Content="Editar" HorizontalAlignment="Left" Margin="370,8,0,0" VerticalAlignment="Top" Width="46">
             <Button.Background>
                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}" Opacity="0"/>
             </Button.Background>

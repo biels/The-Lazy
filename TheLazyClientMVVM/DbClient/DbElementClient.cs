@@ -31,7 +31,7 @@ namespace TheLazyClientMVVM.DbClient
             {
                 ElementEntity ent = new ElementEntity();
                 //FILL
-                ent.id = rdr.GetInt32("subject_id");
+                ent.id = rdr.GetInt32("element_id");
                 //ent.user = DbUserClient.getUserInfo FALTA!!!!
                 ent.subject = DbSubjectEditorClient.getSubjectInfo(rdr.GetInt32("subject_id"));
                 ent.name = rdr.GetString("name");
