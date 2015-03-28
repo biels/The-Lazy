@@ -3,8 +3,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="ElementViewer" Height="454.083" Width="624.023">
     <Grid>
-        <Label x:Name="lblTitle" Content="Títol" Margin="10,10,500,0" VerticalAlignment="Top"/>
-        <Image HorizontalAlignment="Left" Height="206" Margin="365,20,0,0" VerticalAlignment="Top" Width="218"/>
+        <Label x:Name="Títol" Content="Títol" Margin="10,10,572,0" VerticalAlignment="Top" RenderTransformOrigin="-1.441,-7.846"/>
+        <Image x:Name="imgElement" HorizontalAlignment="Left" Height="201" Margin="370,46,0,0" VerticalAlignment="Top" Width="218"/>
+        <Label x:Name="Descripció" Content="Descripció" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Height="25" Width="70"/>
+        <Label x:Name="Preu" Content="Preu" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="429,10,0,0" Width="33"/>
+        <Image HorizontalAlignment="Left" Height="31" Margin="511,10,0,0" VerticalAlignment="Top" Width="29" RenderTransformOrigin="5,0.125" Source="/TheLazyClient;component/media/Icones/Card-Money.png"/>
+        <Label x:Name="lblTitle" Content="" Margin="44,10,396,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="lblPrice" Content="" HorizontalAlignment="Left" Margin="462,14,0,0" VerticalAlignment="Top" Width="49" FontWeight="Bold" FontFamily="Terminator Two"/>
+        <Label x:Name="lblDescription" Content="" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Height="181" Width="355" FontFamily="Consolas"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="210" Margin="10,10,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="20" Margin="429,14,0,0" VerticalAlignment="Top" Width="111"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="201" Margin="10,46,0,0" VerticalAlignment="Top" Width="355"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="201" Margin="370,46,0,0" VerticalAlignment="Top" Width="218"/>
 
     </Grid>
 </Window>
