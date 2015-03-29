@@ -34,9 +34,17 @@ namespace TheLazyClientMVVM.DbClient
             c.Close();
             return e;
         }
+        public static UserEntity getUserInfo(int id)
+        {
+            return getUserSQLInfo(String.Format("WHERE user_id=\"{0}\"", id));
+        }
         public static UserEntity getUserInfo(string username)
         {
-            if (username == null) { return null; }
+            return getUserSQLInfo(String.Format("WHERE username=\"{0}\"", username));
+        }
+        static UserEntity getUserSQLInfo(string where_clause)
+        {
+            if (where_clause == null) { return null; }
             if (!DbClient.isOnline()) { return null; }
             UserEntity e = new UserEntity();
             MySqlConnection c = DbClient.getConnection();
@@ -45,7 +53,7 @@ namespace TheLazyClientMVVM.DbClient
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = c;
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = String.Format("SELECT * FROM users WHERE username=\"{0}\"", username);
+            cmd.CommandText = String.Format("SELECT * FROM users {0} LIMIT 1", where_clause);
 
             MySqlDataReader rdr = cmd.ExecuteReader();
             if (rdr.Read())
