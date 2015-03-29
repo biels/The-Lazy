@@ -263,8 +263,6 @@
   <ItemGroup>
     <Resource Include="media\Icones\Action-Log.png" />
     <Resource Include="media\Icones\Add.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="media\Icones\Bullet-Add.png" />
     <Resource Include="media\Icones\Bullet-Arrow-Bottom.png" />
     <Resource Include="media\Icones\Bullet-Arrow-Down.png" />
@@ -382,11 +380,10 @@
     <Resource Include="media\Icones\Note-Error.png" />
     <Resource Include="media\Icones\Note-Go.png" />
     <Resource Include="media\Icones\Note.png" />
+    <Resource Include="media\Icones\Star.png" />
     <Resource Include="media\Icones\Winrar-Add.png" />
     <Resource Include="media\Icones\Winrar-Extract.png" />
     <Resource Include="media\Icones\Winrar-View.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="media\Imatges\logo.png" />
   </ItemGroup>
   <ItemGroup>
@@ -402,6 +399,7 @@
     <Content Include="Libraries\SelectorConnexions.dll" />
     <Content Include="Libraries\Xceed.Wpf.DataGrid.dll" />
     <Content Include="Libraries\Xceed.Wpf.Toolkit.dll" />
+    <Resource Include="media\Icones\Draw-Star.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

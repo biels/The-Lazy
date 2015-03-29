@@ -2,22 +2,55 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:TheLazyClient" x:Class="ElementViewer"
-    Title="ElementViewer" Height="454.083" Width="624.023">
+    Title="ElementViewer" Height="541.083" Width="802.523">
     <Grid>
-        <Label x:Name="Títol" Content="Títol" Margin="10,10,572,0" VerticalAlignment="Top" RenderTransformOrigin="-1.441,-7.846"/>
-        <Image x:Name="imgElement" HorizontalAlignment="Left" Height="201" Margin="370,46,0,0" VerticalAlignment="Top" Width="218"/>
-        <Label x:Name="Descripció" Content="Descripció" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Height="25" Width="70"/>
-        <Label x:Name="Preu" Content="Preu" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="429,10,0,0" Width="33"/>
-        <Image HorizontalAlignment="Left" Height="31" Margin="511,10,0,0" VerticalAlignment="Top" Width="29" RenderTransformOrigin="5,0.125" Source="/TheLazyClient;component/media/Icones/Card-Money.png"/>
-        <Label x:Name="lblTitle" Content="" Margin="44,10,396,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Label x:Name="lblPrice" Content="" HorizontalAlignment="Left" Margin="462,14,0,0" VerticalAlignment="Top" Width="49" FontWeight="Bold" FontFamily="Terminator Two"/>
-        <Label x:Name="lblDescription" Content="" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Height="181" Width="355" FontFamily="Consolas"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="210" Margin="10,10,0,0"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="20" Margin="429,14,0,0" VerticalAlignment="Top" Width="111"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="201" Margin="12,65,0,0" VerticalAlignment="Top" Width="355"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="201" Margin="370,46,0,0" VerticalAlignment="Top" Width="218"/>
+        <Label x:Name="Descripció" Content="Descripció" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" Height="27" Width="70" Background="#FFFFFFA7"/>
+        <Label x:Name="lblTitle" Content="Resum: Tema 10 i 11" Margin="6,6,401,0" VerticalAlignment="Top" FontFamily="Showcard Gothic" FontSize="22" Height="36" Foreground="#FFD31919"/>
+        <Label x:Name="lblDescription" Content="Aquest treball es jajajajajaja" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Height="181" Width="376" FontFamily="Consolas" Foreground="#FF000068" Background="#FFFFFFDC"/>
+        <Grid Margin="0,8,12,0" HorizontalAlignment="Right" Width="144" Height="36" VerticalAlignment="Top">
+            <Label x:Name="Preu" Content="Preu" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,0" Width="36" FontSize="13" Background="#FFE6FFE6"/>
+            <Image HorizontalAlignment="Left" Height="31" Margin="102,3,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="5,0.125" Source="/TheLazyClient;component/media/Icones/Card-Money.png" Stretch="None"/>
+            <Label x:Name="lblPrice" Content="900" HorizontalAlignment="Left" Margin="36,6,0,0" VerticalAlignment="Top" Width="66" FontWeight="Medium" FontFamily="Terminator Two" Height="26" FontSize="18" Background="#FFE6FFE6" HorizontalContentAlignment="Right"/>
+            <Border BorderBrush="Black" BorderThickness="1" Height="26" Margin="-1,7,8,0" VerticalAlignment="Top"/>
+        </Grid>
 
-        <local:RatingControl HorizontalAlignment="Left" Margin="153,282,0,0" VerticalAlignment="Top" Height="80" Width="300"/>
+        <local:RatingControl Margin="0,77,131,0" VerticalAlignment="Top" Height="62" HorizontalAlignment="Right" Width="265"/>
+        <Label x:Name="Creator" Content="Creat per" HorizontalAlignment="Left" Margin="483,229,0,0" VerticalAlignment="Top" FontSize="11"/>
+        <Label x:Name="lblCreatorName" Content="Pilota" HorizontalAlignment="Left" Margin="538,225,0,0" VerticalAlignment="Top" Width="157" Foreground="#FF23FF00" FontWeight="Bold" Padding="5,7,5,5" FontSize="13"/>
+        <Button Content="Compra" Margin="0,44,20,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="137">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF52020" Offset="0"/>
+                    <GradientStop Color="#FF00B220" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Canvas Margin="91,53,379,431">
+            <Label x:Name="lblSubject" Content="Català" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFFFDE86" Foreground="#FF0FA600" Width="140" FontWeight="Bold" HorizontalContentAlignment="Center" Canvas.Left="155"/>
+            <Label x:Name="lblAcademicLevel" Content="1r BATX" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFFFDE86" Foreground="Red" Width="53"/>
+            <Label x:Name="lblAcademicCenter" Content="IES d'Auro" HorizontalAlignment="Left" VerticalAlignment="Top" Width="102" Background="#FFFFDE86" FontWeight="Bold" Foreground="#FF005DFF" HorizontalContentAlignment="Center" Canvas.Left="53"/>
+
+        </Canvas>
+        <Canvas Margin="668,70,17,372">
+            <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="66" Stroke="Black" VerticalAlignment="Top" Width="107" RadiusY="6.5" RadiusX="6.5" Canvas.Left="1" Canvas.Top="2"/>
+            <Label Content="Valoració mitjana" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="8,8" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" Width="104" HorizontalContentAlignment="Center" Canvas.Left="2" Canvas.Top="10"/>
+        </Canvas>
+        <Canvas Margin="0,12,161,0" HorizontalAlignment="Right" Width="61" Height="56" VerticalAlignment="Top">
+            <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="51" Stroke="Black" VerticalAlignment="Top" Width="60" RadiusY="6.5" RadiusX="6.5" Canvas.Left="1" Canvas.Top="2"/>
+            <Label Content="Compres" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Width="61"/>
+            <Label Content="28" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Width="57" HorizontalContentAlignment="Center" Canvas.Left="1" Canvas.Top="14"/>
+
+        </Canvas>
+        <Canvas Margin="395,12,299,442">
+            <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="51" Stroke="Black" VerticalAlignment="Top" Width="97" RadiusY="6.5" RadiusX="6.5" Canvas.Left="1" Canvas.Top="2"/>
+            <Label Content="Preferits" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Width="61" Canvas.Left="38"/>
+            <Label Content="5" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Width="57" HorizontalContentAlignment="Center" Canvas.Left="39" Canvas.Top="14"/>
+            <Image x:Name="imgFavorites" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Width="35" Source="/TheLazyClient;component/media/Icones/Draw-Star.png" Canvas.Left="7" Canvas.Top="10" Stretch="None" ToolTip="Clic per afegir als preferits"/>
+
+        </Canvas>
+        <Label x:Name="Descripció_Copy" Content="Autor" HorizontalAlignment="Left" Margin="14,269,0,0" VerticalAlignment="Top" Height="24" Width="70" Background="#FFFFFFA7"/>
+        <Label x:Name="lblDescription_Copy" Content="Aquest treball es jajajajajaja" HorizontalAlignment="Left" Margin="83,269,0,0" VerticalAlignment="Top" Height="24" Width="302" FontFamily="Consolas" Foreground="#FF000068" Background="#FFFFFFDC"/>
 
     </Grid>
 </Window>
