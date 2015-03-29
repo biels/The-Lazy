@@ -4,20 +4,22 @@
     xmlns:local="clr-namespace:TheLazyClient" x:Class="ElementViewer"
     Title="ElementViewer" Height="454.083" Width="624.023">
     <Grid>
-        <Label x:Name="Títol" Content="Títol" Margin="10,10,572,0" VerticalAlignment="Top" RenderTransformOrigin="-1.441,-7.846"/>
-        <Image x:Name="imgElement" HorizontalAlignment="Left" Height="201" Margin="370,46,0,0" VerticalAlignment="Top" Width="218"/>
-        <Label x:Name="Descripció" Content="Descripció" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Height="25" Width="70"/>
-        <Label x:Name="Preu" Content="Preu" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="429,10,0,0" Width="33"/>
-        <Image HorizontalAlignment="Left" Height="31" Margin="511,10,0,0" VerticalAlignment="Top" Width="29" RenderTransformOrigin="5,0.125" Source="/TheLazyClient;component/media/Icones/Card-Money.png"/>
-        <Label x:Name="lblTitle" Content="" Margin="44,10,396,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Label x:Name="lblPrice" Content="" HorizontalAlignment="Left" Margin="462,14,0,0" VerticalAlignment="Top" Width="49" FontWeight="Bold" FontFamily="Terminator Two"/>
-        <Label x:Name="lblDescription" Content="" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Height="181" Width="355" FontFamily="Consolas"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="210" Margin="10,10,0,0"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="20" Margin="429,14,0,0" VerticalAlignment="Top" Width="111"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="201" Margin="12,65,0,0" VerticalAlignment="Top" Width="355"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="201" Margin="370,46,0,0" VerticalAlignment="Top" Width="218"/>
+        <Image x:Name="imgElement" HorizontalAlignment="Left" Height="182" Margin="388,65,0,0" VerticalAlignment="Top" Width="218"/>
+        <Label x:Name="Descripció" Content="Descripció" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top" Height="25" Width="70" Background="#FFFFFFA7"/>
+        <Label x:Name="Preu" Content="Preu" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="448,18,0,0" Width="36" FontSize="13" Background="#FFE6FFE6"/>
+        <Image HorizontalAlignment="Left" Height="50" Margin="550,12,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="5,0.125" Source="/TheLazyClient;component/media/Icones/Card-Money.png"/>
+        <Label x:Name="lblTitle" Content="Resum" Margin="6,6,178,0" VerticalAlignment="Top" FontFamily="Showcard Gothic" FontSize="20" Height="31" Foreground="#FFD31919"/>
+        <Label x:Name="lblPrice" Content="900" HorizontalAlignment="Left" Margin="484,18,0,0" VerticalAlignment="Top" Width="66" FontWeight="Medium" FontFamily="Terminator Two" Height="26" FontSize="18" Background="#FFE6FFE6"/>
+        <Label x:Name="lblDescription" Content="Aquest treball es jajajajajaja" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top" Height="181" Width="355" FontFamily="Consolas" Foreground="#FF000068" Background="#FFFFFFDC"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="26" Margin="448,18,0,0" VerticalAlignment="Top" Width="142"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="182" Margin="388,78,0,0" VerticalAlignment="Top" Width="218"/>
 
-        <local:RatingControl HorizontalAlignment="Left" Margin="153,282,0,0" VerticalAlignment="Top" Height="80" Width="300"/>
+        <local:RatingControl HorizontalAlignment="Left" Margin="138,333,0,0" VerticalAlignment="Top" Height="80" Width="300"/>
+        <Label x:Name="lblAcademicCenter" Content="IES d'Auro" HorizontalAlignment="Left" Margin="130,37,0,0" VerticalAlignment="Top" Width="91" Background="#FFFFDE86" FontWeight="Bold" Foreground="#FF005DFF"/>
+        <Label x:Name="lblAcademicLevel" Content="1r BATX" HorizontalAlignment="Left" Margin="221,37,0,0" VerticalAlignment="Top" Background="#FFFFDE86" Foreground="Red" Width="53"/>
+        <Label x:Name="Creator" Content="Creat per" HorizontalAlignment="Left" Margin="10,265,0,0" VerticalAlignment="Top" FontSize="11"/>
+        <Label x:Name="lblCreatorName" Content="Pilota" HorizontalAlignment="Left" Margin="65,261,0,0" VerticalAlignment="Top" Width="157" Foreground="#FF23FF00" FontWeight="Bold" Padding="5,7,5,5" FontSize="13"/>
+        <Label x:Name="lblSubject" Content="Català" HorizontalAlignment="Left" Margin="274,37,0,0" VerticalAlignment="Top" Background="#FFFFDE86" Foreground="#FF0FA600" Width="114" FontWeight="Bold"/>
 
     </Grid>
 </Window>

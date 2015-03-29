@@ -20,6 +20,11 @@ Public Class ElementViewer
             lblTitle.Content = Element.name
             lblDescription.Content = Element.description
             lblPrice.Content = Element.price
+            lblAcademicCenter.Content = Element.user.education_center.name
+            lblAcademicLevel.Content = Element.subject.academic_level.name
+            lblSubject.Content = Element.subject
+            lblCreatorName.Content = Element.user.username
+
         End If
     End Sub
 End Class
