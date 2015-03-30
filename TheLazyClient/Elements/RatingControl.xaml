@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="76.692" d:DesignWidth="412.782">
     <Grid x:Name="MainGrid">
-        <Slider x:Name="sldrSlider" Margin="6,9,11,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Minimum="1" ValueChanged="Slider_ValueChanged">
+        <Slider x:Name="sldrSlider" Margin="6,9,15,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Minimum="100" ValueChanged="Slider_ValueChanged" Maximum="1000" LargeChange="50">
             <Slider.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="1.5"/>

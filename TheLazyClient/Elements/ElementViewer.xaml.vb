@@ -14,7 +14,35 @@ Public Class ElementViewer
     Public Sub LoadElement(id As Integer)
         Element = DbClient.DbElementClient.getElementInfo(id)
     End Sub
-
+    Private _Rating As Integer = -1
+    Public Property Rating() As Integer
+        Get
+            Return _Rating
+        End Get
+        Set(ByVal value As Integer)
+            _Rating = value
+            rtnRatingControl.Rating = value
+            UpdateUIRatingArea()
+        End Set
+    End Property
+    Sub ClearRating()
+        Rating = -1
+        Rating = -1
+    End Sub
+    Function IsRated()
+        Return Rating <> -1
+    End Function
+    Sub UpdateUIRatingArea()
+        lblCurrentRating.Content = If(IsRated, (Rating / 100), "[-,--]")
+        lblCurrentRating.Foreground = If(IsRated, ColorForRating(Rating / 100), Brushes.Gray)
+        imgClearRating.Visibility = If(IsRated, Windows.Visibility.Visible, Windows.Visibility.Collapsed)
+    End Sub
+    Private Sub rtnRatingControl_ValueChanged(value As Double) Handles rtnRatingControl.ValueChanged
+        Rating = value
+    End Sub
+    Private Sub imgClearRating_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles imgClearRating.MouseDown
+        ClearRating()
+    End Sub
     Private Sub UpdateUI()
         If Element IsNot Nothing Then
             lblTitle.Content = Element.name
@@ -24,7 +52,7 @@ Public Class ElementViewer
             lblAcademicLevel.Content = Element.subject.academic_level.name
             lblSubject.Content = Element.subject
             lblCreatorName.Content = Element.user.username
-
+            UpdateUIRatingArea()
         End If
     End Sub
     Dim s As Boolean
@@ -42,4 +70,15 @@ Public Class ElementViewer
         image.EndInit()
         imgFavorites.Source = image
     End Sub
+
+
+   
+
+    Private Sub ElementViewer_SizeChanged(sender As Object, e As SizeChangedEventArgs) Handles Me.SizeChanged
+        If Not Me.IsLoaded Then Return
+        Dim m As Double = e.NewSize.Width - e.PreviousSize.Width
+            rtnRatingControl.Width += m
+    End Sub
+
+    
 End Class

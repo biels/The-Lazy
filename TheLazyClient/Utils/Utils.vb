@@ -16,4 +16,23 @@
         ' Return null;
         Return Nothing
     End Function
+    Public Function ColorForRating(r As Integer)
+        Select Case r
+            'Case Is <= 2
+            '    Return  Brushes.Red
+            Case Is <= 3
+                Return Brushes.DarkRed
+            Case Is <= 4
+                Return Brushes.OrangeRed
+            Case Is <= 5
+                Return Brushes.DarkOrange
+            Case Is <= 7
+                Return Brushes.Orange
+            Case Is <= 9
+                Return Brushes.Green
+            Case Is <= 10
+                Return Brushes.DarkGreen
+        End Select
+        Return Brushes.Blue
+    End Function
 End Module
