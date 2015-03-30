@@ -114,5 +114,6 @@ Public Class ElementEditor
 
     Private Sub btnPublish_Click(sender As Object, e As RoutedEventArgs) Handles btnPublish.Click
         SaveAction()
+        Me.Close()
     End Sub
 End Class

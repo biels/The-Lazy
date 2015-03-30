@@ -28,5 +28,9 @@ namespace TheLazyClientMVVM.Entities
         {
             return id == Com.main.localUser.id;
         }
+        public bool isUnlockedForLocalUser()
+        {
+            return false;
+        }
     }
 }

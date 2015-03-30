@@ -14,9 +14,11 @@ Public Class ElementThumbnaiItem
         txtTitle.Content = Element.name
         lblDescription.Content = Element.description
         lblPrice.Content = Element.price
+        imgPriceIcon.Visibility = If(Element.price = 0, Windows.Visibility.Collapsed, Windows.Visibility.Visible)
+        lblPrice.Visibility = imgPriceIcon.Visibility
         imgFavourite.Visibility = If(Element.local_data.favourite, Windows.Visibility.Visible, Windows.Visibility.Collapsed)
-        imgEditGo.Visibility = If(Element.isFromLocalUser(), Windows.Visibility.Visible, Windows.Visibility.Collapsed)
-
+        imgEditGo.Visibility = If(Element.isFromLocalUser, Windows.Visibility.Visible, Windows.Visibility.Collapsed)
+        grdGrid.Background = If(Element.isFromLocalUser, New SolidColorBrush(Windows.Media.Color.FromRgb(90, 200, 255)), New SolidColorBrush(Windows.Media.Color.FromRgb(255, 246, 205)))
     End Sub
 
     Sub OpenElementView()
