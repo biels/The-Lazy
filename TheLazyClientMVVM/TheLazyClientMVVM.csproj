@@ -66,6 +66,8 @@
     <Compile Include="Entities\AcademicLevelEntity.cs" />
     <Compile Include="Entities\EducationCenterEntity.cs" />
     <Compile Include="Entities\ElementEntity.cs" />
+    <Compile Include="Entities\ElementPurchaseEntity.cs" />
+    <Compile Include="Entities\LocalElementDataEntity.cs" />
     <Compile Include="Entities\SubjectEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="Main\ElementFilter.cs" />

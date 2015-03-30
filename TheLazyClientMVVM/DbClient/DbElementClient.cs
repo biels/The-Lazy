@@ -40,6 +40,11 @@ namespace TheLazyClientMVVM.DbClient
                     ent.description = rdr.GetString("description");
                 }               
                 ent.price = rdr.GetInt32("price");
+
+                ent.favourite_amount = getFavouriteCount(ent.id);
+
+                ent.local_data = getLocalElementData(Com.main.localUser.id, ent.id);
+
                 e.Add(ent);
             }
             rdr.Close();
@@ -80,6 +85,146 @@ namespace TheLazyClientMVVM.DbClient
             cmd.CommandText = String.Format(
                 "UPDATE elements SET user_id={1}, subject_id={2}, name=\"{3}\", description=\"{4}\", price={5} WHERE element_id={0}",
                 element_id, user_id, subject_id, name, description, price);
+            cmd.ExecuteNonQuery();
+            c.Close();
+            return true;
+        }
+        //LOCAL DATA
+        public static LocalElementDataEntity getLocalElementData(int user_id, int element_id)
+        {
+            if (!DbClient.isOnline()) { return null; }
+            LocalElementDataEntity e = new LocalElementDataEntity();
+            e.favourite = getFavourite(user_id, element_id);
+            e.rating = getElementRating(user_id, element_id);
+            return e;
+        }
+        public static int getFavouriteCount(int element_id)
+        {
+            if (!DbClient.isOnline()) { return -1; }
+            bool e = false;
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format(
+                "SELECT COUNT(*) FROM favourites WHERE element_id={0}",
+                element_id);
+            int s = 200;
+            try
+            {
+                s = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+            } catch { }
+            c.Close();
+            return s;
+        }
+        public static bool getFavourite(int user_id, int element_id)
+        {
+            if (!DbClient.isOnline()) { return false; }
+            bool e = false;
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format(
+                "SELECT favourite_id FROM favourites WHERE user_id={0} AND element_id={1} LIMIT 1",
+                user_id, element_id);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            e = rdr.Read();
+            rdr.Close();
+            c.Close();
+            return e;
+        }
+        public static bool setFavourite(int user_id, int element_id, bool value)
+        {
+            if (!DbClient.isOnline()) { return false; }
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            if (value)
+            {
+                cmd.CommandText = String.Format(
+               "INSERT IGNORE INTO favourites VALUES(null, {0}, {1}, null)",
+               user_id, element_id);
+            }
+            else
+            {
+                cmd.CommandText = String.Format(
+              "DELETE FROM favourites WHERE user_id={0} AND element_id={1} LIMIT 1",
+              user_id, element_id);
+            }         
+            cmd.ExecuteNonQuery();
+            c.Close();
+            return true;
+        }
+        public static int getElementRatingCount(int element_id)
+        {
+            if (!DbClient.isOnline()) { return -1; }
+            bool e = false;
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format(
+                "SELECT COUNT(*) FROM element_ratings WHERE element_id={0}",
+                element_id);
+            int s = 200;
+            try
+            {
+                s = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+            } catch { }
+            c.Close();
+            return s;
+        }
+        public static int getElementRating(int user_id, int element_id) //Pot retornar -1
+        {
+            if (!DbClient.isOnline()) { return -1; }
+            int r = -1;
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format(
+                "SELECT value FROM element_ratings WHERE user_id={0} AND element_id={1} LIMIT 1",
+                user_id, element_id);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            if (rdr.Read())
+            {
+                r = rdr.GetInt32("value");
+            }
+            rdr.Close();
+            c.Close();
+            return r;
+        }
+        public static bool setElementRating(int user_id, int element_id, int value)
+        {
+            if (!DbClient.isOnline()) { return false; }
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            if (value != -1)
+            {
+                cmd.CommandText = String.Format(
+               "INSERT INTO element_ratings VALUES(null, {0}, {1}, {2}, null) ON DUPLICATE KEY UPDATE value={2}",
+               user_id, element_id, value);
+            }
+            else
+            {
+                cmd.CommandText = String.Format(
+              "DELETE FROM element_ratings WHERE user_id={0} AND element_id={1} LIMIT 1",
+              user_id, element_id);
+            }
             cmd.ExecuteNonQuery();
             c.Close();
             return true;

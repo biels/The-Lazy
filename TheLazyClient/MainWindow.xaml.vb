@@ -17,7 +17,10 @@ Class MainWindow
     End Sub
 
     Private Sub Window_MouseDown(sender As Object, e As MouseButtonEventArgs)
-        DragMove()
+        Try
+            DragMove()
+        Catch ex As Exception
+        End Try
     End Sub
 
     Private Sub MainWindow_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
@@ -126,6 +129,10 @@ Class MainWindow
     End Sub
 
     Private Sub cmbSubjectFilter_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbSubjectFilter.SelectionChanged
+        FillElementsTab()
+    End Sub
+
+    Private Sub Button_Click_2(sender As Object, e As RoutedEventArgs)
         FillElementsTab()
     End Sub
 End Class

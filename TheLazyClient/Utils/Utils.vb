@@ -35,4 +35,8 @@
         End Select
         Return Brushes.Blue
     End Function
+    Public Sub UpdateMainWindow()
+        Dim w As MainWindow = Application.Current.MainWindow
+        w.UpdateHeading()
+    End Sub
 End Module

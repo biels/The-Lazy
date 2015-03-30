@@ -57,6 +57,7 @@
                     <TextBox x:Name="txtSearchText" HorizontalAlignment="Left" Height="23" Margin="13,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="163"/>
                     <ComboBox x:Name="cmbAcademicLevels" HorizontalAlignment="Left" Margin="182,10,0,0" VerticalAlignment="Top" Width="120"/>
                     <ComboBox x:Name="cmbSubjectFilter" HorizontalAlignment="Left" Margin="312,10,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Button Content="Actualitza" Margin="0,11,11,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Click="Button_Click_2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="TabItem" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="55" HorizontalContentAlignment="Stretch" Margin="445,0,-445,0">

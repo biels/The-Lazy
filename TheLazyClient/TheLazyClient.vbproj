@@ -399,6 +399,8 @@
     <Content Include="Libraries\SelectorConnexions.dll" />
     <Content Include="Libraries\Xceed.Wpf.DataGrid.dll" />
     <Content Include="Libraries\Xceed.Wpf.Toolkit.dll" />
+    <Resource Include="media\Icones\Pencil-Go.png" />
+    <Resource Include="media\Icones\Pencil.png" />
     <Resource Include="media\Icones\Draw-Star.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

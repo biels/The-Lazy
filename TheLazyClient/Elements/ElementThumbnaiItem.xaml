@@ -4,19 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="61.932" d:DesignWidth="478.195">
+             d:DesignHeight="38.432" d:DesignWidth="478.195">
     <Grid Background="#FFFFF6CD">
-        <Image x:Name="imgImage" HorizontalAlignment="Left" Height="53" Margin="2,5,0,0" VerticalAlignment="Top" Width="52" Source="/TheLazyClient;component/media/Icones/Document-Image.png" StretchDirection="UpOnly"/>
-        <Label x:Name="txtTitle" Content="[Títol complet]" HorizontalAlignment="Left" Margin="50,-3,0,0" VerticalAlignment="Top" Width="250" FontWeight="Bold"/>
-        <Button x:Name="btnEdit" Content="Editar" Margin="400,36,32,0" VerticalAlignment="Top" RenderTransformOrigin="-0.13,0.6">
-            <Button.Background>
-                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}" Opacity="0"/>
-            </Button.Background>
-        </Button>
-        <Label x:Name="lblDescription" Content="[Títol complet]" Margin="50,12,127,0" VerticalAlignment="Top" Height="44"/>
-        <Image Margin="0,-2,-1,0" Source="/TheLazyClient;component/media/Icones/Bullet-Delete.png" Stretch="None" Height="32" VerticalAlignment="Top" HorizontalAlignment="Right" Width="32"/>
-        <Image Margin="0,-3,20,0" VerticalAlignment="Top" Source="/TheLazyClient;component/media/Icones/Bullet-Star.png" Stretch="None" HorizontalAlignment="Right" Width="32"/>
-        <Image Margin="0,0,-3,-4" Source="/TheLazyClient;component/media/Icones/Bullet-Go.png" Stretch="None" RenderTransformOrigin="-0.688,0.781" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto" MinWidth="27"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="imgImage" HorizontalAlignment="Left" Height="33" Margin="2,3,0,0" VerticalAlignment="Top" Width="32" Source="/TheLazyClient;component/media/Icones/Document-Image.png" StretchDirection="UpOnly" Stretch="None"/>
+        <Label x:Name="txtTitle" Content="[Títol complet]" HorizontalAlignment="Left" Margin="34,-3,0,0" VerticalAlignment="Top" Width="250" FontWeight="Bold" Height="26"/>
+        <Label x:Name="lblDescription" Content="[Descripció]" Margin="34,12,21,-2" VerticalAlignment="Top" Height="28" Foreground="#FF424242"/>
+        <Image Source="/TheLazyClient;component/media/Icones/Card-Money.png" Stretch="Fill" RenderTransformOrigin="-0.688,0.781" Height="32" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="2" Width="32" Margin="0,3"/>
+        <Label x:Name="lblPrice" Content="99" Margin="0,4" VerticalAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" FontSize="16" Grid.Column="1" Height="30" Width="27"/>
+        <Image x:Name="imgFavourite" Margin="11,12,0,-6" VerticalAlignment="Top" Source="/TheLazyClient;component/media/Icones/Bullet-Star.png" Stretch="None" HorizontalAlignment="Left" Width="32" Height="32"/>
+        <Image x:Name="imgEditGo" Source="/TheLazyClient;component/media/Icones/Pencil-Go.png" RenderTransformOrigin="-0.688,0.781" Height="32" VerticalAlignment="Center" HorizontalAlignment="Right" Width="32" Stretch="None" Grid.Column="3" Margin="0,3"/>
 
     </Grid>
 </UserControl>
