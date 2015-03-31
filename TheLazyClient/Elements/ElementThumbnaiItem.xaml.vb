@@ -25,15 +25,25 @@ Public Class ElementThumbnaiItem
         Dim frm As New ElementViewer
         frm.LoadElement(Element.id)
         frm.WindowStartupLocation = WindowStartupLocation.CenterScreen
-        frm.ShowDialog()
+        frm.Show()
         UpdateMainWindow()
     End Sub
     Private Sub ElementThumbnaiItem_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles Me.MouseDown
+        e.Handled = True
         OpenElementView()
 
     End Sub
 
     Private Sub ElementThumbnaiItem_MouseUp(sender As Object, e As MouseButtonEventArgs) Handles Me.MouseUp
         'MsgBox("s")
+    End Sub
+
+    Private Sub imgEditGo_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles imgEditGo.MouseDown
+        e.Handled = True
+        Dim frm As New ElementEditor
+        frm.WindowStartupLocation = WindowStartupLocation.CenterScreen
+        frm.Element = Element
+        frm.IsNew = False
+        frm.Show()
     End Sub
 End Class
