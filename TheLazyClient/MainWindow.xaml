@@ -60,8 +60,23 @@
                     <Button Content="Actualitza" Margin="0,11,11,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Click="Button_Click_2"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="TabItem" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="55" HorizontalContentAlignment="Stretch" Margin="445,0,-445,0">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header="Xat" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="55">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox x:Name="txtChatLog" TextWrapping="Wrap" Text="Connectant al sistema de xat... (sistema provisional)" Margin="6,7,121,34" FontFamily="Consolas" FontSize="14" SelectionBrush="#FF931B00" Foreground="#FF494949"/>
+                    <TextBox x:Name="txtSendMessage" HorizontalAlignment="Left" Height="23" Margin="6,353,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="492" FontFamily="Consolas" FontSize="14"/>
+                    <ListBox x:Name="lstUsers1" HorizontalAlignment="Left" Height="317" Margin="506,9,0,0" VerticalAlignment="Top" Width="107" FontFamily="Consolas" FontSize="14">
+                        <ListBox.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                <GradientStop Color="White" Offset="1"/>
+                                <GradientStop Color="#FFFBEB49"/>
+                                <GradientStop Color="#FFFEFAD3" Offset="0.763"/>
+                                <GradientStop Color="#FFFEFAD3" Offset="0.108"/>
+                            </LinearGradientBrush>
+                        </ListBox.Background>
+                    </ListBox>
+                    <Button x:Name="btnSendMessage" Content="Envia" HorizontalAlignment="Left" Margin="507,354,0,0" VerticalAlignment="Top" Width="106" Foreground="#FF001597"/>
+                    <Button x:Name="btnUpdate" Content="Actualitza" HorizontalAlignment="Left" Margin="507,330,0,0" VerticalAlignment="Top" Width="106"/>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

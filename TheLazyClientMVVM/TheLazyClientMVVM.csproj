@@ -34,6 +34,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\BielUtils.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Meebey.SmartIrc4net, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\Meebey.SmartIrc4net.dll</HintPath>
@@ -48,6 +52,10 @@
     <Reference Include="SelectorConnexions">
       <HintPath>..\..\SelectorConnexions\SelectorConnexions\bin\Debug\SelectorConnexions.dll</HintPath>
     </Reference>
+    <Reference Include="Starksoft.Net.Proxy, Version=1.0.130.0, Culture=neutral, PublicKeyToken=713346c1ba754591, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\Starksoft.Net.Proxy.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
@@ -58,6 +66,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Chat\ChatManager.cs" />
+    <Compile Include="Chat\ChatRoom.cs" />
+    <Compile Include="Chat\ChatWindowHandler.cs" />
+    <Compile Include="Chat\IrcHandler.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Com.cs" />
     <Compile Include="DbClient\DbAcademicLevelClient.cs" />
@@ -91,14 +103,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Libraries\BielUtils.dll" />
+    <Content Include="Libraries\log4net.dll" />
     <Content Include="Libraries\Meebey.SmartIrc4net.dll" />
     <Content Include="Libraries\MySql.Data.dll" />
     <Content Include="Libraries\Owf.Controls.OwfProgressControl.dll" />
     <Content Include="Libraries\SelectorConnexions.dll" />
+    <Content Include="Libraries\Starksoft.Net.Proxy.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Chat\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

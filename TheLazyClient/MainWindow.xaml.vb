@@ -3,6 +3,7 @@ Class MainWindow
 
     Private Sub btnClose_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles btnClose.MouseDown
         Me.Close()
+        End
     End Sub
 
     Private Sub btnMinimize_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles btnMinimize.MouseDown
@@ -29,6 +30,8 @@ Class MainWindow
         '
         c.getHeadingInfo()
         UpdateHeading()
+        c.initChatService()
+        SetChatHandlers()
     End Sub
     Const NO_STATUS_TEXT As String = "Introdueix un estat..."
     Public Sub UpdateHeading()
@@ -134,5 +137,64 @@ Class MainWindow
 
     Private Sub Button_Click_2(sender As Object, e As RoutedEventArgs)
         FillElementsTab()
+    End Sub
+    'Messaging
+    Sub SetChatHandlers()
+        AddHandler c.chatManager.rooms(0).MessageRecieved, AddressOf MessageRecieved
+        AddHandler c.chatManager.rooms(0).Joined, AddressOf Joined
+        AddHandler c.chatManager.rooms(0).UserListUpdated, AddressOf UserListUpdated
+    End Sub
+    Sub MessageRecieved()
+        ' DO YOUR If... ELSE STATEMNT HERE
+        txtChatLog.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, New Action(
+        Sub()
+            txtChatLog.Clear()
+            For Each l As String In c.chatManager.rooms(0).messages
+                txtChatLog.AppendText(l & vbCrLf)
+            Next
+        End Sub))
+
+    End Sub
+    Sub Joined()
+        txtChatLog.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, New Action(
+       Sub()
+           txtChatLog.Clear()
+           UserListUpdated()
+       End Sub))
+    End Sub
+    Sub UserListUpdated()
+        lstUsers.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, New Action(
+      Sub()
+          With lstUsers1.Items
+              .Clear()
+              For Each u As String In c.chatManager.rooms(0).getUserList()
+                  .Add(u)
+              Next
+          End With
+      End Sub))
+    End Sub
+    Private Sub btnSendMessage_Click(sender As Object, e As RoutedEventArgs) Handles btnSendMessage.Click
+        SendChatMessage()
+    End Sub
+    Sub SendChatMessage()
+        If txtSendMessage.Text = "" Then Exit Sub
+        c.chatManager.rooms(0).sendMessage(txtSendMessage.Text)
+        txtSendMessage.Clear()
+    End Sub
+    Private Sub btnUpdate_Click(sender As Object, e As RoutedEventArgs) Handles btnUpdate.Click
+        UserListUpdated()
+    End Sub
+
+    Private Sub txtSendMessage_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSendMessage.KeyDown
+        If e.Key = Key.Enter Then
+            SendChatMessage()
+        End If
+    End Sub
+
+    Private Sub txtSendMessage_TextChanged(sender As Object, e As TextChangedEventArgs) Handles txtSendMessage.TextChanged
+        If IsLoaded Then
+
+        End If
+
     End Sub
 End Class

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using TheLazyClientMVVM.Chat;
 
 
 namespace TheLazyClientMVVM
@@ -18,6 +19,7 @@ namespace TheLazyClientMVVM
         public bool onlineMode = false;
         public WCFClient wcfClient = new WCFClient();
         public LoginManager loginManager = new LoginManager();
+        public ChatManager chatManager = new ChatManager();
         public Entities.UserEntity localUser;
         public List<string> registrats = new List<string>();
         public ElementFilter filter = new ElementFilter();
@@ -27,10 +29,16 @@ namespace TheLazyClientMVVM
             DbClient.DbClient.TestConnection();
 
             filter.init();
+
+            
             //Entities.UserEntity u = DbClient.DbUserClient.getUserInfo("biel");
 
             //connectionParametersRefreshed();
 
+        }
+        public void initChatService()
+        {
+            chatManager.init();
         }
         public void updateLocalUser()
         {
