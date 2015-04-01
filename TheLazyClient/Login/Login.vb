@@ -213,7 +213,6 @@ Public Class Login
         If LoginCorrecte = False Then
             CircleColor = System.Drawing.Color.Red
         Else
-
             CircleColor = System.Drawing.Color.Green
             progComprovant.NoOfCircles = 15
             SaveLoginInfo()

@@ -49,11 +49,13 @@
             </TabItem>
             <TabItem Header="Elements">
                 <Grid Background="#FFE5E5E5">
-                    <StackPanel x:Name="pnlElements" Margin="10,38,10,10" Background="#FFE0F3F7" RenderTransformOrigin="-1,0" ScrollViewer.HorizontalScrollBarVisibility="Visible" CanVerticallyScroll="True" CanHorizontallyScroll="True" ScrollViewer.CanContentScroll="True">
-                        <StackPanel.ScrollOwner>
-                            <ScrollViewer HorizontalScrollBarVisibility="Visible"/>
-                        </StackPanel.ScrollOwner>
-                    </StackPanel>
+                    <ScrollViewer Margin="10,38,10,10" >
+                        <StackPanel x:Name="pnlElements" Background="#FFE0F3F7" RenderTransformOrigin="-1,0" ScrollViewer.HorizontalScrollBarVisibility="Visible" CanVerticallyScroll="True" CanHorizontallyScroll="True" ScrollViewer.CanContentScroll="True" Height="335">
+                            <StackPanel.ScrollOwner>
+                                <ScrollViewer HorizontalScrollBarVisibility="Visible"/>
+                            </StackPanel.ScrollOwner>
+                        </StackPanel>
+                    </ScrollViewer>
                     <TextBox x:Name="txtSearchText" HorizontalAlignment="Left" Height="23" Margin="13,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="163"/>
                     <ComboBox x:Name="cmbAcademicLevels" HorizontalAlignment="Left" Margin="182,10,0,0" VerticalAlignment="Top" Width="120"/>
                     <ComboBox x:Name="cmbSubjectFilter" HorizontalAlignment="Left" Margin="312,10,0,0" VerticalAlignment="Top" Width="120"/>
