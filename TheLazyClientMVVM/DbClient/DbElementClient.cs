@@ -40,6 +40,8 @@ namespace TheLazyClientMVVM.DbClient
                     ent.description = rdr.GetString("description");
                 }               
                 ent.price = rdr.GetInt32("price");
+                ent.create_time = DateTime.Parse(rdr.GetString("create_time"));
+                ent.update_time = DateTime.Parse(rdr.GetString("update_time")); 
 
                 ent.favourite_amount = getFavouriteCount(ent.id);
 

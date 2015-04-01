@@ -15,6 +15,8 @@ namespace TheLazyClientMVVM.Entities
         public string name { get; set; }
         public string description { get; set; }
         public int price { get; set; }
+        public DateTime create_time { get; set; }
+        public DateTime update_time { get; set; }
 
         //CONSULTES EXTERNES
         public int favourite_amount { get; set; }
@@ -31,6 +33,10 @@ namespace TheLazyClientMVVM.Entities
         public bool isUnlockedForLocalUser()
         {
             return false;
+        }
+        public bool hasBeenModified()
+        {
+            return create_time != update_time;
         }
     }
 }

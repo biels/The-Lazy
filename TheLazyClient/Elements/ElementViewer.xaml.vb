@@ -63,13 +63,14 @@ Public Class ElementViewer
     End Sub
     Private Sub UpdateUI()
         If Element IsNot Nothing Then
+            Title = Element.name
             lblTitle.Content = Element.name
             lblDescription.Content = Element.description
             lblPrice.Content = Element.price
             lblAcademicCenter.Content = Element.user.education_center.name
             lblAcademicLevel.Content = Element.subject.academic_level.name
             lblSubject.Content = Element.subject
-            lblCreatorName.Content = Element.user.username
+            lblCreatorName.Content = String.Format("{0} ({1}) @ {2} ({3}){4}", Element.user.real_name, Element.user.username, Element.create_time, TimeAgo(Element.create_time), If(Element.hasBeenModified, String.Format(", modificat el {0} ({1})", Element.update_time, TimeAgo(Element.update_time)), "")) 'Biel Simon (biel) @ 22/02/2015 - fa 5 dies
             setStarred(ModifiedLocalData.favourite)
             lblFavouriteAmount.Content = Element.favourite_amount + FavouriteIncrement()
             Rating = ModifiedLocalData.rating
@@ -113,6 +114,9 @@ Public Class ElementViewer
     Private Sub ElementViewer_SizeChanged(sender As Object, e As SizeChangedEventArgs) Handles Me.SizeChanged
         If Not Me.IsLoaded Then Return
         Dim m As Double = e.NewSize.Width - e.PreviousSize.Width
+        If e.NewSize.Width < 600 Then
+            e.Handled = True
+        End If
         rtnRatingControl.Width += m
     End Sub
     Sub SaveLocalInfo()

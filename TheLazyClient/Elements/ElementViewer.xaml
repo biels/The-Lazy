@@ -5,10 +5,9 @@
     Title="ElementViewer" Height="597.583" Width="821.523">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="399*"/>
-            <ColumnDefinition Width="415*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid Margin="4.333,72,25,0" Height="91" VerticalAlignment="Top" Grid.Column="1">
+        <Grid Margin="395,72,25,0" Height="91" VerticalAlignment="Top">
             <Grid Background="#FFDFFFDC" Margin="0,27,0,0">
                 <Image x:Name="imgClearRating" Height="29" Margin="0,9,17,0" VerticalAlignment="Top" Source="/TheLazyClient;component/media/Icones/Cross.png" HorizontalAlignment="Right" Width="27" ToolTip="Neteja la qualificació"/>
                 <local:RatingControl x:Name="rtnRatingControl" VerticalAlignment="Top" Height="62" Margin="0,1,104,0" HorizontalAlignment="Right" Width="282"/>
@@ -17,20 +16,20 @@
             </Grid>
             <Label x:Name="Descripció2" Content="Qualifica" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="70" Background="#FFA7FFA7"/>
         </Grid>
-        <Label x:Name="lblTitle" Content="Resum: Tema 10 i 11" Margin="6,6,6.667,0" VerticalAlignment="Top" FontFamily="Showcard Gothic" FontSize="22" Height="36" Foreground="#FFD31919"/>
-        <Grid Margin="10,53,4,298">
+        <Label x:Name="lblTitle" Content="Resum: Tema 10 i 11" Margin="6,6,430,0" VerticalAlignment="Top" FontFamily="Showcard Gothic" FontSize="22" Height="36" Foreground="#FFD31919"/>
+        <Grid Margin="10,53,427,298">
             <Canvas HorizontalAlignment="Left" Width="377">
                 <Label x:Name="Descripció" Content="Descripció" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="70" Background="#FFFFFF78"/>
                 <Label x:Name="lblDescription" Content="Aquest treball es jajajajajaja" HorizontalAlignment="Left" VerticalAlignment="Top" Height="181" Width="376" FontFamily="Consolas" Foreground="#FF000068" Background="#FFFFFFA7" Canvas.Top="27"/>
             </Canvas>
         </Grid>
-        <Grid Margin="0,8,12,0" HorizontalAlignment="Right" Width="144" Height="36" VerticalAlignment="Top" Grid.Column="1">
+        <Grid Margin="0,8,12,0" HorizontalAlignment="Right" Width="144" Height="36" VerticalAlignment="Top">
             <Label x:Name="Preu" Content="Preu" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,0" Width="36" FontSize="13" Background="#FFE6FFE6"/>
             <Image HorizontalAlignment="Left" Height="31" Margin="102,3,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="5,0.125" Source="/TheLazyClient;component/media/Icones/Card-Money.png" Stretch="None"/>
             <Label x:Name="lblPrice" Content="900" HorizontalAlignment="Left" Margin="36,6,0,0" VerticalAlignment="Top" Width="66" FontWeight="Medium" FontFamily="Terminator Two" Height="26" FontSize="18" Background="#FFE6FFE6" HorizontalContentAlignment="Right"/>
             <Border BorderBrush="Black" BorderThickness="1" Height="26" Margin="-1,7,8,0" VerticalAlignment="Top"/>
         </Grid>
-        <Button x:Name="btnBuy" Content="Compra" Margin="0,44,20,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="137" FontWeight="Bold" Grid.Column="1">
+        <Button x:Name="btnBuy" Content="Compra" Margin="0,44,20,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="137" FontWeight="Bold">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFF52020" Offset="0"/>
@@ -44,17 +43,17 @@
             <Label x:Name="lblAcademicCenter" Content="IES d'Auro" HorizontalAlignment="Left" VerticalAlignment="Top" Width="102" Background="#FFFFDE86" FontWeight="Bold" Foreground="#FF005DFF" HorizontalContentAlignment="Center" Canvas.Left="53"/>
 
         </Canvas>
-        <Grid Margin="0,12,161,0" HorizontalAlignment="Right" Width="61" Height="56" VerticalAlignment="Top" Grid.Column="1">
+        <Grid Margin="0,12,161,0" HorizontalAlignment="Right" Width="61" Height="56" VerticalAlignment="Top">
             <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="51" Stroke="Black" VerticalAlignment="Top" Width="60" RadiusY="6.5" RadiusX="6.5" Margin="1,2,0,0"/>
             <Label Content="Compres" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Width="61"/>
             <Label x:Name="lblTotalPurchases" Content="28" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Width="57" HorizontalContentAlignment="Center" Height="42" ToolTip="Nombre de compres totals de l'element" Margin="1,13,0,0"/>
 
         </Grid>
-        <Grid Margin="10,0,0,9" Height="56" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="395" Grid.ColumnSpan="2">
+        <Grid Margin="10,0,0,9" Height="56" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="395">
             <Label x:Name="Descripció_Copy" Content="Autor" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="70" Background="#FFFFFF78"/>
             <Label x:Name="lblCreatorName" Content="Biel Simon (biel) @ 22/02/2015 - fa 5 dies" HorizontalAlignment="Left" Margin="0,24,0,0" VerticalAlignment="Top" Height="24" Width="376" FontFamily="Consolas" Foreground="#FF000068" Background="#FFFFFFA7"/>
         </Grid>
-        <Grid Margin="5.333,170,24,143" Grid.Column="1">
+        <Grid Margin="396,170,24,143">
             <ScrollViewer Margin="0,27,0,0">
                 <StackPanel x:Name="pnlComments" Background="#FFDCF7FF"/>
             </ScrollViewer>
@@ -64,7 +63,7 @@
             <Label x:Name="Descripció3" Content="Imatge" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="70" Background="#FFFFFF78"/>
             <Label x:Name="lblDescription1" Content="[Imatge]" FontFamily="Consolas" Foreground="#FF000068" Background="#FFFFFFA7" Margin="0,27,0,1"/>
         </Grid>
-        <Grid Margin="5.333,0,24,17" Height="119" VerticalAlignment="Bottom" Grid.Column="1">
+        <Grid Margin="396,0,24,17" Height="119" VerticalAlignment="Bottom">
             <Grid Background="#FFDCE7FF" Margin="0,27,0,0">
                 <TextBox x:Name="txtIntroduceComment" TextWrapping="Wrap" Text="Introdueix un comentari..." Margin="5,7,8,30"/>
                 <Button x:Name="btnSendComment" Content="Envia" Margin="0,0,8,6" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="Button_Click"/>
@@ -72,14 +71,14 @@
             </Grid>
             <Label x:Name="Descripció4" Content="Comenta" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="70" Background="#FFA7C7FF"/>
         </Grid>
-        <Grid Margin="0,12,304,0" HorizontalAlignment="Right" Width="98" Height="54" VerticalAlignment="Top" Grid.Column="1">
+        <Grid Margin="0,12,304,0" HorizontalAlignment="Right" Width="98" Height="54" VerticalAlignment="Top">
             <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="51" Stroke="Black" VerticalAlignment="Top" Width="97" RadiusY="6.5" RadiusX="6.5" Margin="1,2,0,0"/>
             <Label Content="Preferits" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Width="61" Margin="38,0,0,0"/>
             <Label x:Name="lblFavouriteAmount" Content="5" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Width="57" HorizontalContentAlignment="Center" Margin="39,13,0,0"/>
             <Image x:Name="imgFavorites" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Width="35" Source="/TheLazyClient;component/media/Icones/Draw-Star.png" Stretch="None" ToolTip="Clic per afegir als preferits" Margin="7,10,0,0"/>
 
         </Grid>
-        <Grid Margin="0,12,226,0" HorizontalAlignment="Right" Width="75" Height="56" VerticalAlignment="Top" Grid.Column="1">
+        <Grid Margin="0,12,226,0" HorizontalAlignment="Right" Width="75" Height="56" VerticalAlignment="Top">
             <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="51" Stroke="Black" VerticalAlignment="Top" Width="75" RadiusY="6.5" RadiusX="6.5" Margin="1,2,-1,0"/>
             <Label Content="Qualificació" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,-1,0"/>
             <Label x:Name="lblAvgRating" Content="8,8" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Width="73" HorizontalContentAlignment="Center" Height="44" Margin="2,13,0,-1" ToolTip="Mitjana ponderada intel·ligent basada en les qualificacions dels usuaris"/>
