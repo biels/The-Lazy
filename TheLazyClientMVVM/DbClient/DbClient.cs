@@ -40,6 +40,10 @@ namespace TheLazyClientMVVM.DbClient
         {
             return Com.main.onlineMode;
         }
+        public static string formatDateTime(DateTime dateValue)
+        {
+            return dateValue.ToString("yyyy-MM-dd HH:mm");
+        }
         
     }
 }

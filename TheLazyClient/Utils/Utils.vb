@@ -39,4 +39,38 @@
         Dim w As MainWindow = Application.Current.MainWindow
         w.UpdateHeading()
     End Sub
+    Public Function TimeAgo(dt As DateTime) As String
+        Dim span As TimeSpan = DateTime.Now - dt
+        If span.Days > 365 Then
+            Dim years As Integer = (span.Days / 365)
+            If span.Days Mod 365 <> 0 Then
+                years += 1
+            End If
+            Return [String].Format("fa {0} {1}", years, If(years = 1, "any", "anys"))
+        End If
+        If span.Days > 30 Then
+            Dim months As Integer = (span.Days / 30)
+            If span.Days Mod 31 <> 0 Then
+                months += 1
+            End If
+            Return [String].Format("fa {0} {1}", months, If(months = 1, "mes", "mesos"))
+        End If
+        If span.Days > 0 Then
+            Return [String].Format("fa {0} {1}", span.Days, If(span.Days = 1, "dia", "dies"))
+        End If
+        If span.Hours > 0 Then
+            Return [String].Format("fa {0} {1}", span.Hours, If(span.Hours = 1, "hora", "hores"))
+        End If
+        If span.Minutes > 0 Then
+            Return [String].Format("fa {0} {1}", span.Minutes, If(span.Minutes = 1, "minut", "minuts"))
+        End If
+        If span.Seconds > 5 Then
+            Return [String].Format("fa {0} segons", span.Seconds)
+        End If
+        If span.Seconds <= 5 Then
+            Return "ara mateix"
+        End If
+        Return String.Empty
+    End Function
+
 End Module

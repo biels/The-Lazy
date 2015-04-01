@@ -74,6 +74,7 @@ Public Class ElementViewer
             lblFavouriteAmount.Content = Element.favourite_amount + FavouriteIncrement()
             Rating = ModifiedLocalData.rating
             UpdateUIRatingArea()
+            UpdateCommentList()
         End If
     End Sub
     Private Sub imgFavorites_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles imgFavorites.MouseDown
@@ -123,5 +124,98 @@ Public Class ElementViewer
 
     Private Sub dispatcherTimer_Tick(sender As Object, e As EventArgs) Handles dispatcherTimer.Tick
         SaveLocalInfo()
+        UpdateCommentList()
+    End Sub
+    'COMMENTS
+    Dim editing_comment As Entities.ElementCommentEntity = Nothing
+    Sub UpdateCommentList()
+        With pnlComments.Children
+            .Clear()
+            For Each c As Entities.ElementCommentEntity In DbClient.DbElementClient.getElementCommentList(Element.id)
+                Dim control As New CommentDisplayControl With {.Comment = c}
+                AddHandler control.EditCommentClick, AddressOf EditCommentClick
+                AddHandler control.DeleteCommentClick, AddressOf DeleteCommentClick
+                If control.txtText.Text.Length > 50 Then
+                    control.Height += 14
+                End If
+                If control.txtText.Text.Length > 120 Then
+                    control.Height += 16
+                End If
+                .Add(control)
+            Next
+        End With
+    End Sub
+    Function IsEditing() As Boolean
+        Return editing_comment IsNot Nothing
+    End Function
+    Sub EditCommentClick(Comment As Entities.ElementCommentEntity)
+        editing_comment = Comment
+        UpdateCommentEnteringUI()
+    End Sub
+    Sub DeleteCommentClick(Comment As Entities.ElementCommentEntity)
+        If MsgBox("Estas segur que vols esborrar el teu comentari?" & vbCrLf & Comment.text, MsgBoxStyle.YesNo, "Esborra el comentari") = MsgBoxResult.Yes Then
+            DbClient.DbElementClient.deleteElementComment(Comment.id)
+        End If
+        UpdateCommentList()
+    End Sub
+    Sub UpdateCommentEnteringUI()
+        txtIntroduceComment.Text = If(Not IsEditing(), "", editing_comment.text)
+        btnCancelComment.Content = If(Not IsEditing(), "Neteja", "Cancel·la")
+        btnSendComment.Content = If(Not IsEditing(), "Envia", "Edita")
+    End Sub
+    Function VerifyComment() As Boolean
+        'Comprova errors
+        Dim err As New List(Of String)
+        If txtIntroduceComment.Text.Trim.Length < 5 Then err.Add("El comentari ha de contenir com a mínim 5 caràcters.")
+        If txtIntroduceComment.Text.Length > 195 Then err.Add("El comentari pot contenir com a màxim 200 caràcters.")
+        If err.Count > 0 Then
+            Dim s As String = "No es pot completar l'operació, detalls: "
+            For Each err_m As String In err
+                s = s & vbCrLf & "  + " & err_m
+            Next
+            MsgBox(s)
+            Return False
+            Exit Function
+        End If
+        Return True
+    End Function
+    Sub PostComment()
+        If VerifyComment() Then
+            If IsEditing() Then
+                DbClient.DbElementClient.updateElementComment(editing_comment.id, txtIntroduceComment.Text)
+                editing_comment = Nothing
+            Else
+                DbClient.DbElementClient.insertElementComment(c.localUser.id, Element.id, txtIntroduceComment.Text)
+            End If
+        End If
+        UpdateCommentEnteringUI()
+        UpdateCommentList()
+    End Sub
+
+    Private Sub btnCancelComment_Click(sender As Object, e As RoutedEventArgs) Handles btnCancelComment.Click
+        editing_comment = Nothing
+        UpdateCommentEnteringUI()
+    End Sub
+    Sub Button_click(sender As Object, e As RoutedEventArgs)
+
+    End Sub
+    Private Sub btnSendComment_Click(sender As Object, e As RoutedEventArgs) Handles btnSendComment.Click
+        PostComment()
+    End Sub
+
+    Private Sub txtIntroduceComment_GotFocus(sender As Object, e As RoutedEventArgs) Handles txtIntroduceComment.GotFocus
+        If txtIntroduceComment.Text = "Introdueix un comentari..." Then
+            txtIntroduceComment.Clear()
+        End If
+    End Sub
+
+    Private Sub txtIntroduceComment_KeyDown(sender As Object, e As KeyEventArgs) Handles txtIntroduceComment.KeyDown
+        If e.Key = Key.Enter Then
+            PostComment()
+        End If
+    End Sub
+
+    Private Sub txtIntroduceComment_TextChanged(sender As Object, e As TextChangedEventArgs) Handles txtIntroduceComment.TextChanged
+
     End Sub
 End Class

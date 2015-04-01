@@ -95,6 +95,9 @@
     <Compile Include="Admin\SubjectEditor.xaml.vb">
       <DependentUpon>SubjectEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Elements\CommentDisplayControl.xaml.vb">
+      <DependentUpon>CommentDisplayControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Elements\ElementEditor.xaml.vb">
       <DependentUpon>ElementEditor.xaml</DependentUpon>
     </Compile>
@@ -141,6 +144,10 @@
     <Compile Include="Utils\Utils.vb" />
     <Compile Include="Worker.vb" />
     <Page Include="Admin\SubjectEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Elements\CommentDisplayControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -342,7 +349,6 @@
     <Resource Include="media\Icones\Document-Prepare.png" />
     <Resource Include="media\Icones\Document-Properties.png" />
     <Resource Include="media\Icones\Document-Quote.png" />
-    <Resource Include="media\Icones\Document-Redirect.png" />
     <Resource Include="media\Icones\Document-Rename.png" />
     <Resource Include="media\Icones\Document-Shapes.png" />
     <Resource Include="media\Icones\Document-Shred.png" />
@@ -399,6 +405,14 @@
     <Content Include="Libraries\SelectorConnexions.dll" />
     <Content Include="Libraries\Xceed.Wpf.DataGrid.dll" />
     <Content Include="Libraries\Xceed.Wpf.Toolkit.dll" />
+    <Resource Include="media\Icones\Comment-Add.png" />
+    <Resource Include="media\Icones\Comment-Delete.png" />
+    <Resource Include="media\Icones\Comment-Edit.png" />
+    <Resource Include="media\Icones\Comment.png" />
+    <Resource Include="media\Icones\Comments-Add.png" />
+    <Resource Include="media\Icones\Comments-Delete.png" />
+    <Resource Include="media\Icones\Comments.png" />
+    <Resource Include="media\Icones\User-Comment.png" />
     <Resource Include="media\Icones\Pencil-Go.png" />
     <Resource Include="media\Icones\Pencil.png" />
     <Resource Include="media\Icones\Draw-Star.png" />

@@ -229,5 +229,91 @@ namespace TheLazyClientMVVM.DbClient
             c.Close();
             return true;
         }
+        //Comments
+        public static List<ElementCommentEntity> getFilteredCommentList(string where_clause)
+        {
+            if (!DbClient.isOnline()) { return null; }
+            List<ElementCommentEntity> e = new List<ElementCommentEntity>();
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format(
+                "SELECT * FROM element_comments {0} ORDER BY create_time DESC LIMIT 50",
+                where_clause);
+
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                ElementCommentEntity ent = new ElementCommentEntity();
+                //FILL
+                ent.id = rdr.GetInt32("comment_id");
+                ent.user = DbUserClient.getUserInfo(rdr.GetInt32("user_id"));
+                if (rdr["text"] != DBNull.Value)
+                {
+                    ent.text = rdr.GetString("text");
+                }
+                ent.create_time = DateTime.Parse(rdr.GetString("create_time"));
+                ent.update_time = DateTime.Parse(rdr.GetString("update_time")); 
+
+
+                e.Add(ent);
+            }
+            rdr.Close();
+            c.Close();
+            return e;
+        }
+        public static List<ElementCommentEntity> getElementCommentList(int element_id)
+        {
+            return getFilteredCommentList(String.Format("WHERE element_id={0}", element_id));
+        }
+        //--INSERT, UPDATE & DELETE COMMENTS
+        public static bool insertElementComment(int user_id, int element_id, string text)
+        {
+            if (!DbClient.isOnline()) { return false; }
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format(
+                "INSERT INTO element_comments VALUES(null, {0}, {1}, \"{2}\", NOW(), null)",
+                user_id, element_id, text);
+            cmd.ExecuteNonQuery();
+            c.Close();
+            return true;
+        }
+        public static bool updateElementComment(int comment_id, string text)
+        {
+            if (!DbClient.isOnline()) { return false; }
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format(
+                "UPDATE element_comments SET text=\"{1}\", update_time=NOW() WHERE comment_id={0}",
+                comment_id, text);
+            cmd.ExecuteNonQuery();
+            c.Close();
+            return true;
+        }
+        public static bool deleteElementComment(int comment_id)
+        {
+            if (!DbClient.isOnline()) { return false; }
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format(
+                "DELETE FROM element_comments WHERE comment_id={0} LIMIT 1",
+                comment_id);
+            cmd.ExecuteNonQuery();
+            c.Close();
+            return true;
+        }
     }
 }

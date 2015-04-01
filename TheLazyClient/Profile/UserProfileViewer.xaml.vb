@@ -19,11 +19,11 @@
         lblUsername.Content = String.Format("{0} ({1})", User.real_name, User.username)
         lblEmail.Content = User.email
         lblStatus.Content = User.status
-        If User IsNot Nothing Then
-            lblEduactionCenter.Content = User.education_center.name
-            lblGroupCode.Content = User.group_code
-            lblLevel.Content = User.academic_level.name
-            lblLocation.Content = User.education_center.location
+        If User IsNot Nothing And User.education_center IsNot Nothing And User.academic_level IsNot Nothing Then
+            lblEduactionCenter.Content = If(User.education_center.name, "<No especificat>")
+            lblGroupCode.Content = If(User.group_code, "<No especificat>")
+            lblLevel.Content = If(User.academic_level.name, "<No especificat>")
+            lblLocation.Content = If(User.education_center.location, "<No especificat>")
         Else
             lblEduactionCenter.Content = "[Desconegut]"
             lblGroupCode.Content = "[-]"

@@ -81,6 +81,7 @@
     <Compile Include="DbClient\DbUserClient.cs" />
     <Compile Include="Entities\AcademicLevelEntity.cs" />
     <Compile Include="Entities\EducationCenterEntity.cs" />
+    <Compile Include="Entities\ElementCommentEntity.cs" />
     <Compile Include="Entities\ElementEntity.cs" />
     <Compile Include="Entities\ElementPurchaseEntity.cs" />
     <Compile Include="Entities\LocalElementDataEntity.cs" />
