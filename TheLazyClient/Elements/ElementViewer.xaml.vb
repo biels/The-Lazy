@@ -94,11 +94,36 @@ Public Class ElementViewer
         End If
         Return 0
     End Function
+    'EII'
+    'EII'
+    'EII'
     Sub BuyCheck()
+        Dim balance As Integer = c.localUser.balance
+        Dim require As Integer
+        If IsBought() = True Then
+            btnBuy.IsEnabled = True
+            btnBuy.Background = Brushes.Orange
+            btnBuy.Content = "Obrir"
+            Exit Sub
+        End If
+        If Element.isFromLocalUser Then
+            btnBuy.IsEnabled = True
+            btnBuy.Background = Brushes.Orange
+            btnBuy.Content = "Veure"
+            Exit Sub
+        End If
         If Element.price > c.localUser.balance Then
             btnBuy.IsEnabled = False
+            require = Element.price - balance
+            btnBuy.Content = "Et falten " + require.ToString + " monedes"
         End If
     End Sub
+    Function IsBought() As Boolean
+        If ModifiedLocalData.purchase Is Nothing Then
+            Return False
+        End If
+        Return True
+    End Function
     Sub setStarred(starred As Boolean)
         Dim n As String = If(starred, "Star", "Draw-Star")
         Dim image As BitmapImage = New BitmapImage()
@@ -231,6 +256,16 @@ Public Class ElementViewer
     End Sub
 
     Private Sub btnBuy_Click(sender As Object, e As RoutedEventArgs) Handles btnBuy.Click
+        If IsBought() = True Or Element.user.id = c.localUser.id Then
+            Dim frm = New ElementExplorer()
+            frm.Show()
+            Exit Sub
+        End If
+        If IsBought() = False Then
+            'fer compra
+            MsgBox("Compra completa")
+            BuyCheck()
 
+        End If
     End Sub
 End Class

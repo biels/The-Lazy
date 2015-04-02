@@ -101,6 +101,9 @@
     <Compile Include="Elements\ElementEditor.xaml.vb">
       <DependentUpon>ElementEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Elements\ElementExplorer.xaml.vb">
+      <DependentUpon>ElementExplorer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Elements\ElementThumbnaiItem.xaml.vb">
       <DependentUpon>ElementThumbnaiItem.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Elements\ElementEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Elements\ElementExplorer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
