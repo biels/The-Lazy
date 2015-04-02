@@ -317,5 +317,46 @@ namespace TheLazyClientMVVM.DbClient
             c.Close();
             return true;
         }
+       
+        public static List<ElementPurchaseEntity> getFilteredElementPurchaseList(string where_clause)
+        {
+            if (!DbClient.isOnline()) { return null; }
+            List<ElementPurchaseEntity> e = new List<ElementPurchaseEntity>();
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format(
+                "SELECT * FROM element_purchases {0} ORDER BY create_time DESC",
+                where_clause);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                ElementPurchaseEntity ent = new ElementPurchaseEntity();
+                ent.id = rdr.GetInt32("purchase_id");
+                ent.price = rdr.GetInt32("price");
+                ent.create_time = DateTime.Parse(rdr.GetString("create_time"));
+                e.Add(ent);
+            }
+            rdr.Close();
+            c.Close();
+            return e;
+        }
+        public static List<ElementPurchaseEntity> getUserElementsPurchaseList(int user_id)
+        {
+            List<ElementPurchaseEntity> l = getFilteredElementPurchaseList(String.Format("WHERE user_id={0}", user_id));
+            return l;
+        }
+        public static ElementPurchaseEntity getElementPurchaseInfoForUser(int user_id, int element_id)
+        {
+            List<ElementPurchaseEntity> l = getFilteredElementPurchaseList(String.Format("WHERE user_id={0} AND element_id={1}", user_id, element_id));
+            if (l.Count > 0)
+            {
+                return l[0];
+            }
+            return null;
+        }
     }
 }

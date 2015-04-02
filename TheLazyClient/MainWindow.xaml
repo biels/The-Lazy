@@ -80,6 +80,11 @@
                     <Button x:Name="btnUpdate" Content="Actualitza" HorizontalAlignment="Left" Margin="507,330,0,0" VerticalAlignment="Top" Width="106"/>
                 </Grid>
             </TabItem>
+            <TabItem Header="Compres">
+                <Grid RenderTransformOrigin="0.005,-0.063" Margin="0,-1,0,0" Background="#FFE5E5E5">
+                    <StackPanel x:Name="pnlPurchaseElements" HorizontalAlignment="Left" Height="364" Margin="10,10,0,0" VerticalAlignment="Top" Width="599" Background="#FFE0F3F7"/>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
