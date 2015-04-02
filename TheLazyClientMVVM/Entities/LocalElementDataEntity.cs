@@ -10,6 +10,7 @@ namespace TheLazyClientMVVM.Entities
     {
         public bool favourite { get; set; }
         public int rating { get; set; }
+        public ElementPurchaseEntity purchase { get; set; }
 
         public override int GetHashCode()
         {

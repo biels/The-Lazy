@@ -46,6 +46,7 @@ Class MainWindow
         Next
         'PROVA
         FillElementsTab()
+        'FillPurchaseElementsTab()
         FillElementTabComboboxes()
     End Sub
     Sub FillElementsTab()
@@ -56,6 +57,11 @@ Class MainWindow
             pnlElements.Children.Add(control)
         Next
     End Sub
+    'prova
+   ' Sub FillPurchaseElementsTab()
+        'pnlPurchaseElements.Children.Clear()
+        'For Each e As Entities.ElementPurchaseEntity In c.
+    'End Sub
 
     Private Sub lstUsers_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles lstUsers.MouseDoubleClick
         Dim f As New UserProfileViewer
