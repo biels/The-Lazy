@@ -91,6 +91,8 @@
     <Compile Include="Entities\LocalElementDataEntity.cs" />
     <Compile Include="Entities\SubjectEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
+    <Compile Include="FileExplorer\FileExploreHandler.cs" />
+    <Compile Include="FileExplorer\RemoteFileInfo.cs" />
     <Compile Include="Main\ElementFilter.cs" />
     <Compile Include="Main\LoginManager.cs" />
     <Compile Include="Main\MainClient.cs" />
