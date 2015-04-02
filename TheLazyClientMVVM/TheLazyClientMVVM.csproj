@@ -58,6 +58,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.FtpClient, Version=1.0.5281.14405, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\System.Net.FtpClient.dll</HintPath>
+    </Reference>
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -110,6 +114,7 @@
     <Content Include="Libraries\Owf.Controls.OwfProgressControl.dll" />
     <Content Include="Libraries\SelectorConnexions.dll" />
     <Content Include="Libraries\Starksoft.Net.Proxy.dll" />
+    <Content Include="Libraries\System.Net.FtpClient.dll" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
