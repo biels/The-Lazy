@@ -65,7 +65,7 @@ Public Class ElementViewer
         If Element IsNot Nothing Then
             Title = Element.name
             lblTitle.Content = Element.name
-            lblDescription.Content = Element.description
+            lblDescription.Text = Element.description
             lblPrice.Content = Element.price
             lblAcademicCenter.Content = Element.user.education_center.name
             lblAcademicLevel.Content = Element.subject.academic_level.name
