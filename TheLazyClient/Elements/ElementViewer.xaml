@@ -17,11 +17,9 @@
             <Label x:Name="Descripció2" Content="Qualifica" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="70" Background="#FFA7FFA7"/>
         </Grid>
         <Label x:Name="lblTitle" Content="Resum: Tema 10 i 11" Margin="6,6,430,0" VerticalAlignment="Top" FontFamily="Showcard Gothic" FontSize="22" Height="36" Foreground="#FFD31919"/>
-        <Grid Margin="10,53,427,298">
-            <Canvas HorizontalAlignment="Left" Width="377">
-                <Label x:Name="Descripció" Content="Descripció" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="70" Background="#FFFFFF78"/>
-                <Label x:Name="lblDescription" Content="Aquest treball es jajajajajaja" HorizontalAlignment="Left" VerticalAlignment="Top" Height="181" Width="376" FontFamily="Consolas" Foreground="#FF000068" Background="#FFFFFFA7" Canvas.Top="27"/>
-            </Canvas>
+        <Grid Margin="10,53,418,298">
+            <Label x:Name="Descripció" Content="Descripció" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="70" Background="#FFFFFF78"/>
+            <TextBox x:Name="lblDescription" HorizontalAlignment="Left" Height="184" TextWrapping="Wrap" Text="Aquest treball es jajajajajaja" VerticalAlignment="Top" Width="376" Margin="0,27,0,0" BorderThickness="0" Background="#FFFFFFA7" FontFamily="Consolas" AcceptsReturn="True" IsReadOnly="True"/>
         </Grid>
         <Grid Margin="0,8,12,0" HorizontalAlignment="Right" Width="144" Height="36" VerticalAlignment="Top">
             <Label x:Name="Preu" Content="Preu" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,0" Width="36" FontSize="13" Background="#FFE6FFE6"/>

@@ -116,4 +116,40 @@ Public Class ElementEditor
         SaveAction()
         Me.Close()
     End Sub
+
+    Private Sub txtTitle_GotFocus(sender As Object, e As RoutedEventArgs) Handles txtTitle.GotFocus
+        If txtTitle.Text = "Escriu un títol" Then txtTitle.Text = ""
+        txtTitle.Foreground = Brushes.Black
+    End Sub
+
+    Private Sub txtDescription_GotFocus(sender As Object, e As RoutedEventArgs) Handles txtDescription.GotFocus
+        If txtDescription.Text = "Fes una petita descripció del teu treball aquí" Then txtDescription.Text = ""
+        txtDescription.Foreground = Brushes.Black
+    End Sub
+
+    Private Sub txtPrice_GotFocus(sender As Object, e As RoutedEventArgs) Handles txtPrice.GotFocus
+        txtPrice.Text = ""
+        txtPrice.Foreground = Brushes.Black
+    End Sub
+
+    Private Sub txtTitle_LostFocus(sender As Object, e As RoutedEventArgs) Handles txtTitle.LostFocus
+        If txtTitle.Text = "" Then
+            txtTitle.Foreground = Brushes.Gray
+            txtTitle.Text = "Escriu un títol"
+        End If
+    End Sub
+
+    Private Sub txtDescription_LostFocus(sender As Object, e As RoutedEventArgs) Handles txtDescription.LostFocus
+        If txtDescription.Text = "" Then
+            txtDescription.Foreground = Brushes.Gray
+            txtDescription.Text = "Fes una petita descripció del teu treball aquí"
+        End If
+    End Sub
+
+    Private Sub txtPrice_LostFocus(sender As Object, e As RoutedEventArgs) Handles txtPrice.LostFocus
+        If txtPrice.Text = "" Then
+            txtPrice.Foreground = Brushes.Gray
+            txtPrice.Text = "0"
+        End If
+    End Sub
 End Class
