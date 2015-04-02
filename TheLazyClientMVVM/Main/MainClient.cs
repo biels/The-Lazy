@@ -69,5 +69,12 @@ namespace TheLazyClientMVVM
         {
             DbClient.DbClient.TestConnection();
         }
+        
+        //prova
+        public Entities.UserEntity getLocalUserInfo()
+        {
+            return localUser;
+        }
+
     }
 }

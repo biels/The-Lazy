@@ -76,6 +76,7 @@ Public Class ElementViewer
             Rating = ModifiedLocalData.rating
             UpdateUIRatingArea()
             UpdateCommentList()
+            BuyCheck()
         End If
     End Sub
     Private Sub imgFavorites_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles imgFavorites.MouseDown
@@ -93,6 +94,11 @@ Public Class ElementViewer
         End If
         Return 0
     End Function
+    Sub BuyCheck()
+        If Element.price > c.localUser.balance Then
+            btnBuy.IsEnabled = False
+        End If
+    End Sub
     Sub setStarred(starred As Boolean)
         Dim n As String = If(starred, "Star", "Draw-Star")
         Dim image As BitmapImage = New BitmapImage()
@@ -110,6 +116,7 @@ Public Class ElementViewer
         Me.Activate()
         dispatcherTimer.Interval = New TimeSpan(0, 0, 25)
         dispatcherTimer.Start()
+
     End Sub
     Private Sub ElementViewer_SizeChanged(sender As Object, e As SizeChangedEventArgs) Handles Me.SizeChanged
         If Not Me.IsLoaded Then Return
@@ -220,6 +227,10 @@ Public Class ElementViewer
     End Sub
 
     Private Sub txtIntroduceComment_TextChanged(sender As Object, e As TextChangedEventArgs) Handles txtIntroduceComment.TextChanged
+
+    End Sub
+
+    Private Sub btnBuy_Click(sender As Object, e As RoutedEventArgs) Handles btnBuy.Click
 
     End Sub
 End Class
