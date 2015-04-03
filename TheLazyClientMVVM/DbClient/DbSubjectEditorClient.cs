@@ -38,7 +38,7 @@ namespace TheLazyClientMVVM.DbClient
                 {
                     ent.description = rdr.GetString("description");
                 }
-                ent.academic_level = DbGroupEditor.getAcademicLevelInfo(rdr.GetInt32("academic_level_id"));
+                ent.academic_level = Com.main.cache.academic_level_cache.getAcademicLevel(rdr.GetInt32("academic_level_id"));
                 ent.color = rdr.GetInt32("color");
                 e.Add(ent);
             }
@@ -68,7 +68,7 @@ namespace TheLazyClientMVVM.DbClient
                 {
                     e.description = rdr.GetString("description");
                 }              
-                e.academic_level = DbGroupEditor.getAcademicLevelInfo(rdr.GetInt32("academic_level_id"));
+                e.academic_level = Com.main.cache.academic_level_cache.getAcademicLevel(rdr.GetInt32("academic_level_id"));
                 e.color = rdr.GetInt32("color");
             }
             rdr.Close();

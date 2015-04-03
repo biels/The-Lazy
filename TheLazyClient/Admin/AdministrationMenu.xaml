@@ -9,6 +9,10 @@
         <Label x:Name="lblPermissionLevel" Content="10" Margin="0,37,19,0" VerticalAlignment="Top" FontSize="36" HorizontalContentAlignment="Center" Height="62" Padding="5,0,5,5" HorizontalAlignment="Right" Width="114"/>
         <Label x:Name="lblPermissionLevelRank" Content="Usuari Normal" Margin="0,81,19,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="114" HorizontalContentAlignment="Center" FontWeight="Bold"/>
         <Button Content="Edita les assignatures..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="157" Click="Button_Click"/>
+        <Label x:Name="lblSqlQueries" Content="Consultes SQL: 0" HorizontalAlignment="Left" Margin="42,116,0,0" VerticalAlignment="Top"/>
+        <Button Content="Actualitza" HorizontalAlignment="Left" Margin="46,138,0,0" VerticalAlignment="Top" Width="60" Click="Button_Click_1"/>
+        <Button x:Name="btnReset" Content="Reseteja" HorizontalAlignment="Left" Margin="109,138,0,0" VerticalAlignment="Top" Width="55" Click="Button_Click_1"/>
+        <CheckBox x:Name="chkCachingEnabked" Content="Habilita la memòria cau" HorizontalAlignment="Left" Margin="48,164,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

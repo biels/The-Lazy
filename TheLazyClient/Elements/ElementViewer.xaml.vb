@@ -29,7 +29,7 @@ Public Class ElementViewer
     End Sub
 
     Public Sub LoadElement(id As Integer)
-        Element = DbClient.DbElementClient.getElementInfo(id)
+        Element = c.cache.element_cache.getElement(id)
     End Sub
     Private _Rating As Integer = -1
     Public Property Rating() As Integer

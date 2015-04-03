@@ -38,6 +38,7 @@ namespace TheLazyClientMVVM.DbClient
         }
         public static bool isOnline()
         {
+            Com.main.sql_query_count++; //Sempre es crida abans de les consultes
             return Com.main.onlineMode;
         }
         public static string formatDateTime(DateTime dateValue)

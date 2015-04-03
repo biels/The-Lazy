@@ -28,11 +28,11 @@ Public Class SubjectEditor
 
     End Property
     Sub FillAcademicLevels()
-        AcademicLevels = DbClient.DbGroupEditor.getAcademicLevelList
+        AcademicLevels = c.cache.academic_level_cache.getAcademicLevelFullList()
     End Sub
     Sub FillCurrentSubjects()
         If SelectedAcademicLevel IsNot Nothing Then
-            _CurrentSubjects = DbClient.DbSubjectEditorClient.getSubjectList(SelectedAcademicLevel.id)
+            _CurrentSubjects = c.cache.subject_cache.getSubjectFullList(SelectedAcademicLevel.id)
         End If
     End Sub
     Sub UpdateMainDropdownUI()

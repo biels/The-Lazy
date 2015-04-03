@@ -32,8 +32,8 @@ namespace TheLazyClientMVVM.DbClient
                 ElementEntity ent = new ElementEntity();
                 //FILL
                 ent.id = rdr.GetInt32("element_id");
-                ent.user = DbUserClient.getUserInfo(rdr.GetInt32("user_id"));
-                ent.subject = DbSubjectEditorClient.getSubjectInfo(rdr.GetInt32("subject_id"));
+                ent.user = Com.main.cache.user_cache.getUser(rdr.GetInt32("user_id"));
+                ent.subject = Com.main.cache.subject_cache.getSubject(rdr.GetInt32("subject_id"));
                 ent.name = rdr.GetString("name");
                 if (rdr["description"] != DBNull.Value)
                 {
@@ -252,7 +252,7 @@ namespace TheLazyClientMVVM.DbClient
                 ElementCommentEntity ent = new ElementCommentEntity();
                 //FILL
                 ent.id = rdr.GetInt32("comment_id");
-                ent.user = DbUserClient.getUserInfo(rdr.GetInt32("user_id"));
+                ent.user = Com.main.cache.user_cache.getUser(rdr.GetInt32("user_id"));
                 if (rdr["text"] != DBNull.Value)
                 {
                     ent.text = rdr.GetString("text");

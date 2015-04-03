@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace TheLazyClientMVVM.Entities
 {
-    public class LocalElementDataEntity
+    public class LocalElementDataEntity : Entity
     {
+        public int id { get; set; }
         public bool favourite { get; set; }
         public int rating { get; set; }
         public ElementPurchaseEntity purchase { get; set; }
