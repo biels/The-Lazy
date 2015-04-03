@@ -68,7 +68,7 @@ Public Class ElementEditor
         Return True
     End Function
     Public Sub LoadElement(id As Integer) 'Per editar
-        Element = DbClient.DbElementClient.getElementInfo(id)
+        Element = c.cache.element_cache.getElement(id, True)
         LoadValues()
     End Sub
     Private Sub ElementEditor_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
@@ -92,7 +92,7 @@ Public Class ElementEditor
         If SelectedAcademicLevel Is Nothing Then Exit Sub
         With cmbSubjects.Items
             .Clear()
-            For Each e As Entities.SubjectEntity In DbClient.DbSubjectEditorClient.getSubjectList(SelectedAcademicLevel.id)
+            For Each e As Entities.SubjectEntity In c.cache.subject_cache.getSubjectFullList(SelectedAcademicLevel.id)
                 .Add(e)
             Next
         End With

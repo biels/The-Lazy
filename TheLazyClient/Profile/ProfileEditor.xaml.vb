@@ -25,8 +25,8 @@ Public Class ProfileEditor
     Dim _education_centers As List(Of Entities.EducationCenterEntity)
     Dim _group_codes() As String = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"} ', "L", "M", "N", "O", "P", "Q", "R", "S", "T", "X", "Y", "Z"}
     Sub FillDataFromServer()
-        _academic_levels = DbClient.DbGroupEditor.getAcademicLevelList
-        _education_centers = DbClient.DbGroupEditor.getEducationCenterList
+        _academic_levels = c.cache.academic_level_cache.getAcademicLevelFullList()
+        _education_centers = c.cache.education_center_cache.getEducationCenterFullList()
     End Sub
     Sub FillComboboxes()
         With cmbAcademicLevel.Items

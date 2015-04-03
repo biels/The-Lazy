@@ -23,12 +23,12 @@ namespace TheLazyClientMVVM
         public List<SubjectEntity> _Subjects { get; set; }
         public void init()
         {
-            _AcademicLevels = DbClient.DbAcademicLevelClient.getAcademicLevelList();
+            _AcademicLevels = Com.main.cache.academic_level_cache.getAcademicLevelFullList();
         }
         public void updateSubjectList(AcademicLevelEntity academic_level)
         {
             if (academic_level == null) { return; }
-            _Subjects = DbClient.DbSubjectEditorClient.getSubjectList(academic_level.id);
+            _Subjects = Com.main.cache.subject_cache.getSubjectFullList(academic_level.id);
         }
         
     }

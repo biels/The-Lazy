@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheLazyClientMVVM.Entities
 {
-    public class ElementCommentEntity
+    public class ElementCommentEntity : Entity
     {
         public int id { get; set; }
         public int element_id { get; set; } //Va dins un element

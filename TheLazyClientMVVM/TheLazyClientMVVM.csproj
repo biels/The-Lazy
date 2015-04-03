@@ -70,6 +70,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\SubjectCache.cs" />
+    <Compile Include="Cache\EducationCenterCache.cs" />
+    <Compile Include="Cache\AcademicLevelCache.cs" />
+    <Compile Include="Cache\ElementCache.cs" />
+    <Compile Include="Cache\UserCache.cs" />
     <Compile Include="Chat\ChatManager.cs" />
     <Compile Include="Chat\ChatRoom.cs" />
     <Compile Include="Chat\ChatWindowHandler.cs" />
@@ -88,12 +93,15 @@
     <Compile Include="Entities\ElementCommentEntity.cs" />
     <Compile Include="Entities\ElementEntity.cs" />
     <Compile Include="Entities\ElementPurchaseEntity.cs" />
+    <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\LocalElementDataEntity.cs" />
     <Compile Include="Entities\SubjectEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="FileExplorer\FileExploreHandler.cs" />
     <Compile Include="FileExplorer\RemoteFileInfo.cs" />
     <Compile Include="Main\ElementFilter.cs" />
+    <Compile Include="Cache\LocalCache.cs" />
+    <Compile Include="Main\LocalConfig.cs" />
     <Compile Include="Main\LoginManager.cs" />
     <Compile Include="Main\MainClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

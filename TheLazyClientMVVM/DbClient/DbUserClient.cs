@@ -80,14 +80,14 @@ namespace TheLazyClientMVVM.DbClient
                 }
                 if (rdr["education_center_id"] != DBNull.Value)
                 {
-                    e.education_center = getEduactionCenterInfo(rdr.GetInt32("education_center_id"));
+                    e.education_center = getEducationCenterInfo(rdr.GetInt32("education_center_id"));
                 }
             }           
             rdr.Close();
             c.Close();
             return e;
         }
-        public static EducationCenterEntity getEduactionCenterInfo(int id)
+        public static EducationCenterEntity getEducationCenterInfo(int id)
         {
             if (!DbClient.isOnline()) { return null; }
             EducationCenterEntity e = new EducationCenterEntity();

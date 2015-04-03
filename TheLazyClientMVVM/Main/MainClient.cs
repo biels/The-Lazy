@@ -21,8 +21,12 @@ namespace TheLazyClientMVVM
         public LoginManager loginManager = new LoginManager();
         public ChatManager chatManager = new ChatManager();
         public Entities.UserEntity localUser;
+        public Cache.LocalCache cache = new Cache.LocalCache();
         public List<string> registrats = new List<string>();
         public ElementFilter filter = new ElementFilter();
+        public int sql_query_count = 0;
+        public int cached_query_count = 0;
+        public LocalConfig config = new LocalConfig();
         public void init()
         {
             // wcfClient.init();
@@ -42,7 +46,7 @@ namespace TheLazyClientMVVM
         }
         public void updateLocalUser()
         {
-            localUser = DbClient.DbUserClient.getUserInfo(loginManager.username);
+            localUser = DbClient.DbUserClient.getUserInfo(loginManager.username); //Sempre independent de la memòria cau
         }
         public void getHeadingInfo()
         {
@@ -63,7 +67,7 @@ namespace TheLazyClientMVVM
         }
         public Entities.UserEntity getUserInfo(string name)
         {
-            return DbClient.DbUserClient.getUserInfo(name);
+            return Com.main.cache.user_cache.getUser(name);
         }
         public void connectionParametersRefreshed()
         {

@@ -10,13 +10,13 @@ Public Class GroupEditor
     Private _AcademicLevels As List(Of AcademicLevelEntity)
     Public ReadOnly Property AcademicLevels() As List(Of AcademicLevelEntity)
         Get
-            Return TheLazyClientMVVM.DbClient.DbGroupEditor.getAcademicLevelList()
+            Return c.cache.academic_level_cache.getAcademicLevelFullList()
         End Get
 
     End Property
     Public Sub Init()
-        _EducationCenters = TheLazyClientMVVM.DbClient.DbGroupEditor.getEducationCenterList()
-        _AcademicLevels = TheLazyClientMVVM.DbClient.DbGroupEditor.getAcademicLevelList()
+        _EducationCenters = c.cache.education_center_cache.getEducationCenterFullList()
+        _AcademicLevels = c.cache.academic_level_cache.getAcademicLevelFullList()
     End Sub
     'Private _Groups As List(Of GroupEntity)
     'Public ReadOnly Property Groups As List(Of GroupEntity)
