@@ -33,8 +33,7 @@ namespace TheLazyClientMVVM
             DbClient.DbClient.TestConnection();
 
             filter.init();
-
-            
+           
             //Entities.UserEntity u = DbClient.DbUserClient.getUserInfo("biel");
 
             //connectionParametersRefreshed();
@@ -46,7 +45,7 @@ namespace TheLazyClientMVVM
         }
         public void updateLocalUser()
         {
-            localUser = DbClient.DbUserClient.getUserInfo(loginManager.username); //Sempre independent de la memòria cau
+            localUser = cache.user_cache.getUser(loginManager.username, true); // DIRECT, Sempre independent de la memòria cau
         }
         public void getHeadingInfo()
         {

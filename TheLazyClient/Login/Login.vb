@@ -231,22 +231,22 @@ Public Class Login
     End Sub
     'Introduir
     Private Sub backIntroduirUsuari_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backIntroduirUsuari.DoWork
-
-        ' IntroduirUsuari(e.Argument)
-
+        'IntroduirUsuari(e.Argument)
+        c.getHeadingInfo()
+        c.initChatService()
+        Application.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, New Action(
+        Sub()
+            UpdateMainWindow()
+        End Sub))
     End Sub
 
     Private Sub backIntroduirUsuari_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles backIntroduirUsuari.RunWorkerCompleted
         Me.Close()
     End Sub
 
-
-
-
     Private Sub txtContrasenya_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
     End Sub
-
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs)
 
