@@ -98,6 +98,7 @@ namespace TheLazyClientMVVM.DbClient
             LocalElementDataEntity e = new LocalElementDataEntity();
             e.favourite = getFavourite(user_id, element_id);
             e.rating = getElementRating(user_id, element_id);
+            e.purchase = getElementPurchaseInfoForUser(user_id, element_id);
             return e;
         }
         public static int getFavouriteCount(int element_id)
@@ -167,7 +168,6 @@ namespace TheLazyClientMVVM.DbClient
         public static int getElementRatingCount(int element_id)
         {
             if (!DbClient.isOnline()) { return -1; }
-            bool e = false;
             MySqlConnection c = DbClient.getConnection();
             c.Open();
 
@@ -177,7 +177,7 @@ namespace TheLazyClientMVVM.DbClient
             cmd.CommandText = String.Format(
                 "SELECT COUNT(*) FROM element_ratings WHERE element_id={0}",
                 element_id);
-            int s = 200;
+            int s = -1;
             try
             {
                 s = Convert.ToInt32(cmd.ExecuteScalar().ToString());
@@ -185,6 +185,7 @@ namespace TheLazyClientMVVM.DbClient
             c.Close();
             return s;
         }
+
         public static int getElementRating(int user_id, int element_id) //Pot retornar -1
         {
             if (!DbClient.isOnline()) { return -1; }
@@ -317,7 +318,32 @@ namespace TheLazyClientMVVM.DbClient
             c.Close();
             return true;
         }
-       
+        //Purchase info & operations
+        public static int getFilteredElementPurchaseCount(string where_clause)
+        {
+            if (!DbClient.isOnline()) { return -1; }
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format(
+                "SELECT COUNT(*) FROM element_purchases {0}",
+                where_clause);
+            int s = -1;
+            try
+            {
+                s = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+            }
+            catch { }
+            c.Close();
+            return s;
+        }
+        public static int getElementPurchaseCount(int element_id)
+        {
+            return getFilteredElementPurchaseCount(String.Format("WHERE element_id={0}", element_id));
+        }
         public static List<ElementPurchaseEntity> getFilteredElementPurchaseList(string where_clause)
         {
             if (!DbClient.isOnline()) { return null; }
@@ -344,7 +370,7 @@ namespace TheLazyClientMVVM.DbClient
             c.Close();
             return e;
         }
-        public static List<ElementPurchaseEntity> getUserElementsPurchaseList(int user_id)
+        public static List<ElementPurchaseEntity> getUserElementPurchaseList(int user_id)
         {
             List<ElementPurchaseEntity> l = getFilteredElementPurchaseList(String.Format("WHERE user_id={0}", user_id));
             return l;
@@ -357,6 +383,33 @@ namespace TheLazyClientMVVM.DbClient
                 return l[0];
             }
             return null;
+        }        
+        public static int buyElement(string user_id, string element_id)
+        {
+            if (!Com.main.onlineMode) { return -1; }
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "BuyElement";
+
+            cmd.Parameters.AddWithValue("_user_id", user_id);
+            cmd.Parameters["_user_id"].Direction = ParameterDirection.Input;
+
+            cmd.Parameters.AddWithValue("_element_id", element_id);
+            cmd.Parameters["_element_id"].Direction = ParameterDirection.Input;
+
+            cmd.Parameters.AddWithValue("_purchase_id", MySqlDbType.String);
+            cmd.Parameters["_purchase_id"].Direction = ParameterDirection.Output;
+
+            cmd.ExecuteNonQuery();
+
+            c.Close();
+            int result = (int)cmd.Parameters["_purchase_id"].Value;
+            return result;
         }
+
     }
 }

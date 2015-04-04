@@ -13,6 +13,10 @@ namespace TheLazyClientMVVM.Entities
         public int rating { get; set; }
         public ElementPurchaseEntity purchase { get; set; }
 
+        public bool isUnlocked()
+        {
+            return purchase != null;
+        }
         public override int GetHashCode()
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
