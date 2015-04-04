@@ -44,6 +44,7 @@ namespace TheLazyClientMVVM.DbClient
                 ent.update_time = DateTime.Parse(rdr.GetString("update_time")); 
 
                 ent.favourite_amount = getFavouriteCount(ent.id);
+                ent.purchase_count = getElementPurchaseCount(ent.id);
 
                 ent.local_data = getLocalElementData(Com.main.localUser.id, ent.id);
 

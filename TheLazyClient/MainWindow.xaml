@@ -50,7 +50,7 @@
             <TabItem Header="Elements">
                 <Grid Background="#FFE5E5E5">
                     <ScrollViewer Margin="10,38,10,10" >
-                        <StackPanel x:Name="pnlElements" Background="#FFE0F3F7" RenderTransformOrigin="-1,0" ScrollViewer.HorizontalScrollBarVisibility="Visible" CanVerticallyScroll="True" CanHorizontallyScroll="True" ScrollViewer.CanContentScroll="True" Height="335">
+                        <StackPanel x:Name="pnlElements" Background="#FFE0F3F7" RenderTransformOrigin="-1,0" ScrollViewer.HorizontalScrollBarVisibility="Visible" CanVerticallyScroll="True" CanHorizontallyScroll="True" ScrollViewer.CanContentScroll="True" Height="335" MaxWidth="582">
                             <StackPanel.ScrollOwner>
                                 <ScrollViewer HorizontalScrollBarVisibility="Visible"/>
                             </StackPanel.ScrollOwner>
