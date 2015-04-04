@@ -27,10 +27,8 @@ Class MainWindow
     Private Sub MainWindow_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         Dim frm As New Login
         frm.ShowDialog()
-        '
-        c.getHeadingInfo()
-        UpdateHeading()
-        c.initChatService()
+        'Loginform > Invoke() > UpdateUI()
+
         SetChatHandlers()
     End Sub
     Const NO_STATUS_TEXT As String = "Introdueix un estat..."

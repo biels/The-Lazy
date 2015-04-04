@@ -6,4 +6,5 @@
     Public Function c() As TheLazyClientMVVM.MainClient
         Return TheLazyClientMVVM.Com.main
     End Function
+
 End Module

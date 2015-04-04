@@ -36,9 +36,11 @@
         Return Brushes.Blue
     End Function
     Public Sub UpdateMainWindow()
-        Dim w As MainWindow = Application.Current.MainWindow
-        w.UpdateHeading()
+        GetMainWindow.UpdateHeading()
     End Sub
+    Public Function GetMainWindow() As MainWindow
+        Return Application.Current.MainWindow
+    End Function
     Public Function TimeAgo(dt As DateTime) As String
         Dim span As TimeSpan = DateTime.Now - dt
         If span.Days > 365 Then
