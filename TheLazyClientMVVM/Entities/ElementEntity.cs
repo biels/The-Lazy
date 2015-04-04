@@ -29,7 +29,7 @@ namespace TheLazyClientMVVM.Entities
         //EXTRES
         public bool isFromLocalUser()
         {
-            return id == Com.main.localUser.id;
+            return user.id == Com.main.localUser.id;
         }
         public bool hasBeenModified()
         {
