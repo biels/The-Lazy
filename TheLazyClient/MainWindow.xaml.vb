@@ -32,7 +32,7 @@ Class MainWindow
         SetChatHandlers()
     End Sub
     Const NO_STATUS_TEXT As String = "Introdueix un estat..."
-    Public Sub UpdateHeading()
+    Public Sub UpdateUI()
         lblUsername.Content = String.Format("{0} ({1})", c.localUser.real_name, c.localUser.username)
         lblCredits.Content = c.localUser.balance
         lstUsers.Items.Clear()
@@ -42,7 +42,16 @@ Class MainWindow
         For Each user As String In c.registrats
             lstUsers.Items.Add(user)
         Next
+    End Sub
+    <Obsolete("Utilitza UpdateHeavyElements() o UpdateUI().")> _
+    Public Sub UpdateHeading() 'Legacy
+        UpdateUI()
         'PROVA
+        FillElementsTab()
+        'FillPurchaseElementsTab()
+        FillElementTabComboboxes()
+    End Sub
+    Public Sub UpdateHeavyElements()
         FillElementsTab()
         'FillPurchaseElementsTab()
         FillElementTabComboboxes()
