@@ -426,6 +426,7 @@
     <Content Include="Libraries\SelectorConnexions.dll" />
     <Content Include="Libraries\Xceed.Wpf.DataGrid.dll" />
     <Content Include="Libraries\Xceed.Wpf.Toolkit.dll" />
+    <Resource Include="media\Icones\Box-Down.png" />
     <Resource Include="media\Icones\Comment-Add.png" />
     <Resource Include="media\Icones\Comment-Delete.png" />
     <Resource Include="media\Icones\Comment-Edit.png" />
