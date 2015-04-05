@@ -47,6 +47,7 @@ namespace TheLazyClientMVVM
         public async Task getFilteredElementsAsync()
         {
             if (busy) return; busy = true;
+            RequestStarted();
             id_list = await getFilteredElementIDs();
             RequestDefined(id_list);
             current_element_list.Clear();
