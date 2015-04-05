@@ -21,6 +21,7 @@ namespace TheLazyClientMVVM.Entities
         //CONSULTES EXTERNES
         public int favourite_amount { get; set; }
         public int average_rating { get; set; }
+        public int purchase_count { get; set; }
 
         //INFO LOCAL
         public LocalElementDataEntity local_data { get; set; }
@@ -28,11 +29,7 @@ namespace TheLazyClientMVVM.Entities
         //EXTRES
         public bool isFromLocalUser()
         {
-            return id == Com.main.localUser.id;
-        }
-        public bool isUnlockedForLocalUser()
-        {
-            return false;
+            return user.id == Com.main.localUser.id;
         }
         public bool hasBeenModified()
         {

@@ -38,7 +38,7 @@
     Public Sub UpdateMainWindow()
         GetMainWindow.UpdateHeading()
     End Sub
-    Public Function GetMainWindow() As MainWindow
+    Public Function GetMainWindow() As MainWindowElements
         Return Application.Current.MainWindow
     End Function
     Public Function TimeAgo(dt As DateTime) As String

@@ -19,7 +19,7 @@
         <Label x:Name="lblTitle" Content="Resum: Tema 10 i 11" Margin="6,6,430,0" VerticalAlignment="Top" FontFamily="Showcard Gothic" FontSize="22" Height="36" Foreground="#FFD31919"/>
         <Grid Margin="10,53,418,298">
             <Label x:Name="Descripció" Content="Descripció" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="70" Background="#FFFFFF78"/>
-            <TextBox x:Name="lblDescription" HorizontalAlignment="Left" Height="184" TextWrapping="Wrap" Text="Aquest treball es jajajajajaja" VerticalAlignment="Top" Width="376" Margin="0,27,0,0" BorderThickness="0" Background="#FFFFFFA7" FontFamily="Consolas" AcceptsReturn="True" IsReadOnly="True"/>
+            <TextBox x:Name="lblDescription" HorizontalAlignment="Left" Height="184" TextWrapping="Wrap" Text="Aquest treball es jajajajajaja" VerticalAlignment="Top" Width="376" Margin="0,27,0,0" BorderThickness="0" Background="#FFFFFFA7" FontFamily="Consolas" AcceptsReturn="True" IsReadOnly="True" Foreground="#FF000068"/>
         </Grid>
         <Grid Margin="0,8,12,0" HorizontalAlignment="Right" Width="144" Height="36" VerticalAlignment="Top">
             <Label x:Name="Preu" Content="Preu" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,0" Width="36" FontSize="13" Background="#FFE6FFE6"/>
@@ -47,9 +47,9 @@
             <Label x:Name="lblTotalPurchases" Content="28" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Width="57" HorizontalContentAlignment="Center" Height="42" ToolTip="Nombre de compres totals de l'element" Margin="1,13,0,0"/>
 
         </Grid>
-        <Grid Margin="10,0,0,9" Height="56" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="395">
+        <Grid Margin="10,0,0,17" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="395">
             <Label x:Name="Descripció_Copy" Content="Autor" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="70" Background="#FFFFFF78"/>
-            <Label x:Name="lblCreatorName" Content="Biel Simon (biel) @ 22/02/2015 - fa 5 dies" HorizontalAlignment="Left" Margin="0,24,0,0" VerticalAlignment="Top" Height="24" Width="376" FontFamily="Consolas" Foreground="#FF000068" Background="#FFFFFFA7"/>
+            <TextBox x:Name="lblCreatorName" Text="Biel Simon (biel) @ 22/02/2015 - fa 5 dies" HorizontalAlignment="Left" Margin="0,24,0,1" Width="376" FontFamily="Consolas" Foreground="#FF000068" Background="#FFFFFFA7" IsReadOnly="True" TextWrapping="Wrap"/>
         </Grid>
         <Grid Margin="396,170,24,143">
             <ScrollViewer Margin="0,27,0,0">
@@ -57,7 +57,7 @@
             </ScrollViewer>
             <Label x:Name="Descripció1" Content="Comentaris" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="70" Background="#FFA7EFFF"/>
         </Grid>
-        <Grid Margin="10,269,0,71" HorizontalAlignment="Left" Width="375">
+        <Grid Margin="10,269,0,72" HorizontalAlignment="Left" Width="375">
             <Label x:Name="Descripció3" Content="Imatge" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="70" Background="#FFFFFF78"/>
             <Label x:Name="lblDescription1" Content="[Imatge]" FontFamily="Consolas" Foreground="#FF000068" Background="#FFFFFFA7" Margin="0,27,0,1"/>
         </Grid>

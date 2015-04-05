@@ -119,39 +119,13 @@ Public Class Login
         Catch ex As Exception
         End Try
     End Function
-    Sub AbansDeLogin()
 
-        'pnlDescarregant.Visible = True
-        'pnlDescarregant.BackColor = Color.LightYellow
-        'lblPercentatge.Text = "------"
-        'lblMb.Text = "S'està connectant..."
-        'lblPercentatge.Refresh()
-        'lblMb.Refresh()
-        'Dim descarr As New Descarregador
-        'AddHandler descarr.DercarregaIniciada, AddressOf DercarregaIniciada
-        'AddHandler descarr.DercarregaFinalitzada, AddressOf DercarregaFinalitzada
-        'AddHandler descarr.ProgrésActualitzat, AddressOf ProgrésActualitzat
-        'AddHandler descarr.DercarregaFallada, AddressOf DercarregaFallada
-        'With descarr
-        '    .URL = ArxiuDadesRemot
-        '    .NomArxiu = ""
-        '    .ComençaDescàrrega()
-        'End With
-
-    End Sub
 
     Sub Carregant(value As Boolean)
         progComprovant.Visible = value
         ' Me.Invalidate()
     End Sub
 
-
-
-
-
-    Private Sub TextboxDinàmic2_TextChanged(sender As System.Object, e As System.EventArgs)
-
-    End Sub
     Sub CrearCompte()
         Dim frm As New frmRegister
         Me.Visible = False
@@ -177,7 +151,6 @@ Public Class Login
 
 
     Private Sub Timer1_Tick(sender As System.Object, e As System.EventArgs) Handles Timer1.Tick
-        AbansDeLogin()
         Timer1.Enabled = False
     End Sub
 
@@ -203,8 +176,6 @@ Public Class Login
         End If
     End Sub
     Private Sub backVerificarUsuari_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backVerificarUsuari.DoWork
-
-        ' System.Threading.Thread.Sleep(1000)
         VerificarUsuari(e.Argument(0), e.Argument(1))
     End Sub
     Private Sub backVerificarUsuari_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles backVerificarUsuari.RunWorkerCompleted
@@ -236,7 +207,11 @@ Public Class Login
         c.initChatService()
         Application.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, New Action(
         Sub()
-            UpdateMainWindow()
+            GetMainWindow().UpdateUI()
+        End Sub))
+        Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, New Action(
+        Sub()
+            GetMainWindow().UpdateHeavyElements()
         End Sub))
     End Sub
 
@@ -244,13 +219,6 @@ Public Class Login
         Me.Close()
     End Sub
 
-    Private Sub txtContrasenya_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-    End Sub
-
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs)
-
-    End Sub
     Private _CircleColor As System.Drawing.Color
     Public Property CircleColor() As System.Drawing.Color
         Get
@@ -266,21 +234,6 @@ Public Class Login
         If TypeOf sender Is Form Then
             Dim g As System.Drawing.Graphics = e.Graphics
             g.DrawEllipse(New System.Drawing.Pen(CircleColor, 16), e.ClipRectangle)
-            'Dim rectSCenter As PointF = New PointF(e.ClipRectangle.Width / 2 + e.ClipRectangle.Left, e.ClipRectangle.Width / 2 + e.ClipRectangle.Top)
-            'Dim gp As New Drawing2D.GraphicsPath()
-            'gp.AddEllipse(e.ClipRectangle)
-            'Dim pgb As New Drawing2D.PathGradientBrush(gp)
-
-            'pgb.CenterPoint = rectSCenter
-            'pgb.CenterColor = Color.White
-            'pgb.Blend.Factors = New Single() {0.33, 0.33, 0.33}
-            'pgb.FocusScales = New PointF(0.3F, 0.8F)
-            'pgb.SurroundColors = New Color() {Color.DarkOrchid, Color.Yellow, Color.Green}
-
-
-            ''G.FillPath(pgb, gp)
-            ''Dim b As Brush = New TextureBrush(Entity.Icon(MasterCommon.EntityType.Archer))
-            'g.FillPie(pgb, e.ClipRectangle, 0, 360)
         End If
 
     End Sub
@@ -293,54 +246,4 @@ Public Class Login
         c.connectionParametersRefreshed()
     End Sub
 
-
-    Private Sub Label3_Click_1(sender As Object, e As EventArgs) Handles lblAddr.Click
-        'Dim frm As New frmServerSelect
-        'Me.Visible = False
-        'frm.ShowDialog()
-        'Me.Visible = True
-    End Sub
-    'Public Delegate Sub LoginConfirmDelegate(p As MasterCommon.LoginResultPacket)
-    'Sub LoginConfirm(p As MasterCommon.LoginResultPacket)
-    '    'If Me.InvokeRequired Then
-    '    '    Invoke(New LoginConfirmDelegate(AddressOf LoginConfirm), p)
-    '    'Else
-    '    '    Dim Result As LoginResult = p.Result
-    '    '    Carregant(False)
-    '    '    Select Case Result
-    '    '        Case LoginResult.Success
-    '    '            Client.LocalInfo.UserName = p.Name
-    '    '            Client.LocalInfo.LoggedIn = True
-    '    '            Invoke(New MethodInvoker(AddressOf Me.Close))
-    '    '        Case LoginResult.WrongPassword
-    '    '            txtContrasenya.Text = ""
-    '    '            txtContrasenya.BackColor = Color.OrangeRed
-    '    '            CircleColor = Color.Orange
-    '    '        Case LoginResult.UsernameNotFound
-    '    '            txtUsuari.Text = ""
-    '    '            txtContrasenya.Text = ""
-    '    '            txtUsuari.BackColor = Color.OrangeRed
-    '    '            CircleColor = Color.Orange
-    '    '        Case LoginResult.Undefined
-    '    '            CircleColor = Color.Gray
-    '    '        Case LoginResult.Banned
-    '    '            CircleColor = Color.Violet
-    '    '            MsgBox("Aquest jugador està banejat!")
-    '    '    End Select
-    '    'End If
-
-    'End Sub
-
-    Private Sub txtContrasenya_TextChanged_1(sender As Object, e As EventArgs) Handles txtContrasenya.TextChanged
-
-    End Sub
-
-
-    Private Sub progComprovant_Click(sender As Object, e As EventArgs) Handles progComprovant.Click
-
-    End Sub
-
-    Private Sub txtUsuari_TextChanged(sender As Object, e As EventArgs) Handles txtUsuari.TextChanged
-
-    End Sub
 End Class

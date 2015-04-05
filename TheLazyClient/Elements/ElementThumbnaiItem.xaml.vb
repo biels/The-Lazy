@@ -19,9 +19,17 @@ Public Class ElementThumbnaiItem
         imgFavourite.Visibility = If(Element.local_data.favourite, Windows.Visibility.Visible, Windows.Visibility.Collapsed)
         imgEditGo.Visibility = If(Element.isFromLocalUser, Windows.Visibility.Visible, Windows.Visibility.Collapsed)
         grdGrid.Background = If(Element.isFromLocalUser, New SolidColorBrush(Windows.Media.Color.FromRgb(90, 200, 255)), New SolidColorBrush(Windows.Media.Color.FromRgb(255, 246, 205)))
+        UpdateWidth()
+    End Sub
+    Sub UpdateWidth()
+        Try
+            Me.Width = DirectCast(Me.Parent, StackPanel).ActualWidth
+        Catch ex As Exception
+            Me.Width = 604 'Valor *Hardcoded*
+        End Try
     End Sub
 
-    Sub OpenElementView()
+    Sub OpenElementView()        
         Dim frm As New ElementViewer
         frm.LoadElement(Element.id)
         frm.WindowStartupLocation = WindowStartupLocation.CenterScreen

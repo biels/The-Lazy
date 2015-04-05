@@ -26,10 +26,12 @@ Public Class ElementViewer
         ModifiedLocalData = New Entities.LocalElementDataEntity
         ModifiedLocalData.favourite = _Element.local_data.favourite
         ModifiedLocalData.rating = _Element.local_data.rating
+        ModifiedLocalData.purchase = _Element.local_data.purchase
     End Sub
 
-    Public Sub LoadElement(id As Integer)
-        Element = c.cache.element_cache.getElement(id)
+    Public Sub LoadElement(id As Integer, Optional direct As Boolean = False)
+        Title = "[Carregant...]"
+        Element = c.cache.element_cache.getElement(id, direct)
     End Sub
     Private _Rating As Integer = -1
     Public Property Rating() As Integer
@@ -70,13 +72,14 @@ Public Class ElementViewer
             lblAcademicCenter.Content = Element.user.education_center.name
             lblAcademicLevel.Content = Element.subject.academic_level.name
             lblSubject.Content = Element.subject
-            lblCreatorName.Content = String.Format("{0} ({1}) @ {2} ({3}){4}", Element.user.real_name, Element.user.username, Element.create_time, TimeAgo(Element.create_time), If(Element.hasBeenModified, String.Format(", modificat el {0} ({1})", Element.update_time, TimeAgo(Element.update_time)), "")) 'Biel Simon (biel) @ 22/02/2015 - fa 5 dies
+            lblCreatorName.Text = String.Format("{0} ({1}) @ {2} ({3}){4}", Element.user.real_name, Element.user.username, Element.create_time, TimeAgo(Element.create_time), If(Element.hasBeenModified, String.Format(", modificat el {0} ({1})", Element.update_time, TimeAgo(Element.update_time)), "")) 'Biel Simon (biel) @ 22/02/2015 - fa 5 dies
+            lblTotalPurchases.Content = Element.purchase_count
             setStarred(ModifiedLocalData.favourite)
             lblFavouriteAmount.Content = Element.favourite_amount + FavouriteIncrement()
             Rating = ModifiedLocalData.rating
             UpdateUIRatingArea()
             UpdateCommentList()
-            BuyCheck()
+            UpdateBuyButtonUI()
         End If
     End Sub
     Private Sub imgFavorites_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles imgFavorites.MouseDown
@@ -94,13 +97,10 @@ Public Class ElementViewer
         End If
         Return 0
     End Function
-    'EII'
-    'EII'
-    'EII'
-    Sub BuyCheck()
+    Sub UpdateBuyButtonUI()
         Dim balance As Integer = c.localUser.balance
-        Dim require As Integer
-        If IsBought() = True Then
+        Dim required As Integer
+        If ModifiedLocalData.isUnlocked Then
             btnBuy.IsEnabled = True
             btnBuy.Background = Brushes.Orange
             btnBuy.Content = "Obrir"
@@ -108,22 +108,16 @@ Public Class ElementViewer
         End If
         If Element.isFromLocalUser Then
             btnBuy.IsEnabled = True
-            btnBuy.Background = Brushes.Orange
-            btnBuy.Content = "Veure"
+            btnBuy.Background = Brushes.DeepSkyBlue
+            btnBuy.Content = "Veure element propi"
             Exit Sub
         End If
         If Element.price > c.localUser.balance Then
             btnBuy.IsEnabled = False
-            require = Element.price - balance
-            btnBuy.Content = "Et falten " + require.ToString + " monedes"
+            required = Element.price - balance
+            btnBuy.Content = "Et falten " + required.ToString + " monedes"
         End If
     End Sub
-    Function IsBought() As Boolean
-        If ModifiedLocalData.purchase Is Nothing Then
-            Return False
-        End If
-        Return True
-    End Function
     Sub setStarred(starred As Boolean)
         Dim n As String = If(starred, "Star", "Draw-Star")
         Dim image As BitmapImage = New BitmapImage()
@@ -135,6 +129,7 @@ Public Class ElementViewer
 
     Private Sub ElementViewer_Closing(sender As Object, e As ComponentModel.CancelEventArgs) Handles Me.Closing
         SaveLocalInfo()
+        GetMainWindow.UpdateUI()
     End Sub
 
     Private Sub ElementViewer_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
@@ -152,12 +147,15 @@ Public Class ElementViewer
         rtnRatingControl.Width += m
     End Sub
     Sub SaveLocalInfo()
-        ' If ModifiedLocalData.GetHashCode <> (Element.local_data).GetHashCode Then
-        DbClient.DbElementClient.setFavourite(c.localUser.id, Element.id, ModifiedLocalData.favourite)
-        DbClient.DbElementClient.setElementRating(c.localUser.id, Element.id, ModifiedLocalData.rating)
-        ' End If
+        If ModifiedLocalData.GetHashCode <> (Element.local_data).GetHashCode Then
+            DbClient.DbElementClient.setFavourite(c.localUser.id, Element.id, ModifiedLocalData.favourite)
+            DbClient.DbElementClient.setElementRating(c.localUser.id, Element.id, ModifiedLocalData.rating)
+        End If
     End Sub
-
+    Public Sub FullReload()
+        SaveLocalInfo()
+        LoadElement(Element.id, True)
+    End Sub
     Private Sub dispatcherTimer_Tick(sender As Object, e As EventArgs) Handles dispatcherTimer.Tick
         SaveLocalInfo()
         UpdateCommentList()
@@ -256,16 +254,33 @@ Public Class ElementViewer
     End Sub
 
     Private Sub btnBuy_Click(sender As Object, e As RoutedEventArgs) Handles btnBuy.Click
-        If IsBought() = True Or Element.user.id = c.localUser.id Then
+        If ModifiedLocalData.isUnlocked Or Element.isFromLocalUser Then
             Dim frm = New ElementExplorer()
             frm.Show()
             Exit Sub
         End If
-        If IsBought() = False Then
-            'fer compra
-            MsgBox("Compra completa")
-            BuyCheck()
-
+        If Not ModifiedLocalData.isUnlocked Then
+            Dim dr As Microsoft.VisualBasic.MsgBoxResult = MsgBox(String.Format("Estas segur que vols comprar aquest element? Aquesta acció costa {0} cr.", Element.price), MsgBoxStyle.YesNo)
+            If dr = MsgBoxResult.Yes Then
+                Dim r As Integer = DbClient.DbElementClient.buyElement(c.localUser.id, Element.id)
+                'CODIS: [-1] Invalid ElementID, [-2] Not enough money, [-3] Danger zone break, [-4] Buy yourself attempt, [-5] Already bought, [>0] Done, out = purchaseID
+                Select Case r
+                    Case Is > 0
+                        MsgBox("Has desbloquejat l'element!", MsgBoxStyle.Information)
+                    Case Is = -1
+                        MsgBox("Error: Element invàlid.", MsgBoxStyle.Critical)
+                    Case Is = -2
+                        MsgBox("Crèdits insuficients, operació anul·lada.", MsgBoxStyle.Information)
+                    Case Is = -3
+                        MsgBox("Hi ha hagut un error en l'operació", MsgBoxStyle.Exclamation)
+                    Case Is = -4
+                        MsgBox("No pots comprar el teu propi element!", MsgBoxStyle.Exclamation)
+                    Case Is = -5
+                        MsgBox("Ja has comprat aquest element anteriorment, operació anul·lada.", MsgBoxStyle.Information)
+                End Select
+                FullReload()
+            End If
         End If
     End Sub
+  
 End Class
