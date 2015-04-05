@@ -12,6 +12,31 @@ namespace TheLazyClientMVVM.DbClient
 {
     public class DbElementClient
     {
+        //BASAT EN IDs
+        public static List<int> getFilteredElementIDList(string where_clause, string order_by_clause = "ORDER BY create_time DESC", int limit = 50)
+        {
+            if (!DbClient.isOnline()) { return null; }
+            List<int> e = new List<int>();
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format(
+                "SELECT element_id FROM elements {0} {1} LIMIT {2}",
+                where_clause, order_by_clause, limit);
+
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                e.Add(rdr.GetInt32("element_id"));
+            }
+            rdr.Close();
+            c.Close();
+            return e;
+        }
+        //TRADICIONAL
         public static List<ElementEntity> getFilteredElementList(string where_clause)
         {
             if (!DbClient.isOnline()) { return null; }
@@ -57,6 +82,7 @@ namespace TheLazyClientMVVM.DbClient
         public static ElementEntity getElementInfo(int element_id)
         {
             List<ElementEntity> l = getFilteredElementList(String.Format("WHERE element_id={0}", element_id));
+            System.Threading.Thread.Sleep(500);
             if (l.Count > 0){
                 return l[0];
             }            

@@ -30,6 +30,7 @@ Public Class ElementViewer
     End Sub
 
     Public Sub LoadElement(id As Integer, Optional direct As Boolean = False)
+        Title = "[Carregant...]"
         Element = c.cache.element_cache.getElement(id, direct)
     End Sub
     Private _Rating As Integer = -1
