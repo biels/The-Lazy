@@ -25,7 +25,7 @@ Public Class ElementThumbnaiItem
         Try
             Me.Width = DirectCast(Me.Parent, StackPanel).ActualWidth
         Catch ex As Exception
-            Me.Width = 583 'Valor *Hardcoded*
+            Me.Width = 604 'Valor *Hardcoded*
         End Try
     End Sub
 

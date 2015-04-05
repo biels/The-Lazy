@@ -19,6 +19,8 @@ namespace TheLazyClientMVVM
         List<ElementEntity> current_element_list = new List<ElementEntity>();
         bool busy = false;
         //Events
+        public event RequestStartedEventHandler RequestStarted;
+        public delegate void RequestStartedEventHandler();
         public event RequestDefinedEventHandler RequestDefined;
         public delegate void RequestDefinedEventHandler(List<int> id_list);
         public event ElementRecievedEventHandler ElementRecieved;

@@ -214,15 +214,21 @@ Class MainWindowElements
     End Sub
     'Element list updating
     Private Sub SetFilterHandlers()
+        AddHandler c.filter.RequestStarted, AddressOf OnRequestStarted
         AddHandler c.filter.RequestDefined, AddressOf OnRequestDefined
         AddHandler c.filter.ElementRecieved, AddressOf OnElementRecieved
         AddHandler c.filter.RequestComplete, AddressOf OnRequestComplete
     End Sub
-    Sub OnRequestDefined(id_list As List(Of Integer))
+    Sub OnRequestStarted()
         pnlElements.Children.Clear()
         btnUpdateElements.IsEnabled = False
-        btnUpdate.Content = String.Format("Actualitzant...")
         progElementUpdateProgress.Visibility = Windows.Visibility.Visible
+        progElementUpdateProgress.IsIndeterminate = True
+        btnUpdate.Content = String.Format("Preaprant...")
+    End Sub
+    Sub OnRequestDefined(id_list As List(Of Integer))
+        progElementUpdateProgress.IsIndeterminate = False
+        btnUpdate.Content = String.Format("Actualitzant...")
     End Sub
     Sub OnElementRecieved(e As Entities.ElementEntity, progress As Integer, total As Integer)
         Dim control As New ElementThumbnaiItem
