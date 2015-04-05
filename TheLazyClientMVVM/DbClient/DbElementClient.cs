@@ -82,7 +82,6 @@ namespace TheLazyClientMVVM.DbClient
         public static ElementEntity getElementInfo(int element_id)
         {
             List<ElementEntity> l = getFilteredElementList(String.Format("WHERE element_id={0}", element_id));
-            System.Threading.Thread.Sleep(500);
             if (l.Count > 0){
                 return l[0];
             }            
