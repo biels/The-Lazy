@@ -5,6 +5,18 @@
     Function ConvertToDrawingColor(c As System.Windows.Media.Color) As System.Drawing.Color
         Return System.Drawing.Color.FromArgb(c.A, c.R, c.G, c.B)
     End Function
+    Function ColorToInt(c As System.Drawing.Color) As Integer
+        Return c.ToArgb()
+    End Function
+    Function ColorToInt(c As System.Windows.Media.Color) As Integer
+        Return ColorToInt(ConvertToDrawingColor(c))
+    End Function
+    Private Function DrawingColorFromInt(c As Integer) As System.Drawing.Color
+        Return System.Drawing.Color.FromArgb(c)
+    End Function
+    Function ColorFromInt(c As Integer) As System.Windows.Media.Color
+        Return ConvertToMediaColor(DrawingColorFromInt(c))
+    End Function
     Function FindItemContaining(items As IEnumerable, target As Object) As Object
         If items Is Nothing Then Return Nothing
         If target Is Nothing Then Return Nothing
