@@ -4,8 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="49.624" d:DesignWidth="362.03">
-    <Grid>
+             d:DesignHeight="49.624" Width="232.697">
+    <Grid Background="#FFFFF6CD">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Image Height="50" Width="51"/>
+        <Grid Grid.Column="1">
+            <Label Content="Nom del fitxer" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="87"/>
+            <Label Content="Mida del fitxer" HorizontalAlignment="Left" Margin="0,24,0,0" VerticalAlignment="Top" Width="87"/>
+            <Label x:Name="lblFileName" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="87,0,0,0" Height="24" Width="123"/>
+            <Label x:Name="lblFileSize" Content="Label" HorizontalAlignment="Left" Margin="87,24,0,0" VerticalAlignment="Top"/>
+        </Grid>
+        <Button Content="" Width="38" Height="30" BorderBrush="{x:Null}" Grid.Column="2">
+            <Button.Background>
+                <ImageBrush ImageSource="/TheLazyClient;component/media/Icones/Download.png"/>
+            </Button.Background>
+        </Button>
 
     </Grid>
 </UserControl>

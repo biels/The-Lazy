@@ -29,7 +29,7 @@ Public Class ElementThumbnaiItem
         End Try
     End Sub
 
-    Sub OpenElementView()        
+    Sub OpenElementView()
         Dim frm As New ElementViewer
         frm.LoadElement(Element.id)
         frm.WindowStartupLocation = WindowStartupLocation.CenterScreen

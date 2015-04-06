@@ -27,14 +27,14 @@ namespace TheLazyClientMVVM.FileExplorer
 
         //FTP
         FtpClient conn = new FtpClient();
-        void init()
+        public void init()
         {
             conn.Host = host;
             conn.Credentials = new NetworkCredential(username, password);
             conn.SetWorkingDirectory(relative_path);//lloc relatiu
         }
         //List
-        void updateFileList() //Actualitzar List<RemoteFileInfo> Files
+        public void updateFileList() //Actualitzar List<RemoteFileInfo> Files
         {
             conn.Connect();
             foreach (FtpListItem item in conn.GetListing(conn.GetWorkingDirectory(),
@@ -101,7 +101,6 @@ namespace TheLazyClientMVVM.FileExplorer
             procces_kb = procces / 1024;
             ProgressUpdatedEvent(procces_kb, total_size);
         }
-
         //download
         public async void downloadFile(string file_name, string local_path) //Aniria bé asinrònica - StreamWriter
         {
@@ -150,7 +149,7 @@ namespace TheLazyClientMVVM.FileExplorer
             ProgressUpdatedEvent(procces_kb, total_size);
         }
         //Delete
-        void deleteFile(string file_name) //Simple ordre FTP amb la lliberia, veure exemples
+       public void deleteFile(string file_name) //Simple ordre FTP amb la lliberia, veure exemples
         {
             conn.Connect();
             if(conn == null) { return; }
