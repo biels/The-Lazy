@@ -103,7 +103,7 @@ namespace TheLazyClientMVVM.FileExplorer
         }
 
         //download
-        public async void downloadFile(string file_name, string local_path) //Aniria bé asinrònica - StreamWriter
+        public async void downloadFileAsync(string file_name, string local_path) //Aniria bé asinrònica - StreamWriter
         {
             conn.Connect();
             if (conn == null){ return; }

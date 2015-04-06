@@ -18,12 +18,13 @@ Public Class SubjectEditor
         End Get
 
     End Property
+    Dim selectedSubjectIndex As Integer = -1
     Private _CurrentSubjects As New List(Of Entities.SubjectEntity)
     Public ReadOnly Property SelectedSubject() As Entities.SubjectEntity
         Get
-            If lstSubjects.SelectedIndex = -1 Then Return Nothing
+            If selectedSubjectIndex = -1 Then Return Nothing
             If _CurrentSubjects Is Nothing Then Return Nothing
-            Return _CurrentSubjects(lstSubjects.SelectedIndex)
+            Return _CurrentSubjects(selectedSubjectIndex)
         End Get
 
     End Property
@@ -32,7 +33,7 @@ Public Class SubjectEditor
     End Sub
     Sub FillCurrentSubjects()
         If SelectedAcademicLevel IsNot Nothing Then
-            _CurrentSubjects = c.cache.subject_cache.getSubjectFullList(SelectedAcademicLevel.id)
+            _CurrentSubjects = c.cache.subject_cache.getSubjectFullList(SelectedAcademicLevel.id, True)
         End If
     End Sub
     Sub UpdateMainDropdownUI()
@@ -45,14 +46,16 @@ Public Class SubjectEditor
         End With       
     End Sub
     Sub UpdateAcademicLevelDependencies()
+        updateListOnSelectionChanged = False
         'MainList
         FillCurrentSubjects()
         With lstSubjects.Items
             .Clear()
             For Each e As Entities.SubjectEntity In _CurrentSubjects
-                .Add(e)
+                .Add(New ListBoxItem() With {.Content = e, .Background = New SolidColorBrush(ColorFromInt(e.color))})
             Next
         End With
+        updateListOnSelectionChanged = True
     End Sub
     Sub LoadSelectionToMainView()
         If SelectedSubject Is Nothing Then Exit Sub
@@ -60,14 +63,18 @@ Public Class SubjectEditor
             txtName.Text = .name
             txtShortCode.Text = .shortcode
             txtDescription.Text = .description
+            btnChooseColor.Background = New SolidColorBrush(ColorFromInt(.color))
+            'btnChooseColor.Background = New SolidColorBrush(Color.FromRgb(44, 66, 200))
         End With
+
     End Sub
     Sub SaveCurrentSubject()
         If SelectedSubject Is Nothing Then
             MsgBox("Selecciona una assignatura!")
             Exit Sub
         End If
-        DbClient.DbSubjectEditorClient.updateSubject(SelectedSubject.id, txtName.Text, txtShortCode.Text.ToUpper, 0, SelectedAcademicLevel.id, txtDescription.Text)
+        Dim c As System.Windows.Media.Color = DirectCast(btnChooseColor.Background, SolidColorBrush).Color
+        DbClient.DbSubjectEditorClient.updateSubject(SelectedSubject.id, txtName.Text, txtShortCode.Text.ToUpper, ColorToInt(c), SelectedAcademicLevel.id, txtDescription.Text)
     End Sub
     Private Sub SubjectEditor_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         FillAcademicLevels()
@@ -76,7 +83,7 @@ Public Class SubjectEditor
     Private Sub Button_Click_1(sender As Object, e As RoutedEventArgs)
         Dim c As New System.Windows.Forms.ColorDialog
         If c.ShowDialog() = Forms.DialogResult.OK Then
-            'btnChooseColor.Background.SetValue(New DependencyProperty) = ConvertToMediaColor(c.Color)
+            btnChooseColor.Background = New SolidColorBrush(ConvertToMediaColor(c.Color))
         End If
 
     End Sub
@@ -89,8 +96,10 @@ Public Class SubjectEditor
     Private Sub cmbAcademicLevels_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbAcademicLevels.SelectionChanged
         UpdateAcademicLevelDependencies()
     End Sub
-
+    Dim updateListOnSelectionChanged As Boolean = True
     Private Sub lstSubjects_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles lstSubjects.SelectionChanged
+        SaveCurrentSubject()
+        selectedSubjectIndex = lstSubjects.SelectedIndex
         LoadSelectionToMainView()
     End Sub
     Private Function StringFromRichTextBox(ByVal rtb As RichTextBox) As String
@@ -158,8 +167,9 @@ Public Class SubjectEditor
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As RoutedEventArgs) Handles btnSave.Click
-        Dim selectedindex As Integer = lstSubjects.SelectedIndex
-        If selectedindex <= 0 Then Exit Sub
+        Dim selectedindex As Integer = selectedSubjectIndex
+        If selectedindex < 0 Then Exit Sub
+        lstSubjects.SelectedIndex = selectedindex
         SaveCurrentSubject()
         UpdateAcademicLevelDependencies()
         lstSubjects.SelectedIndex = selectedindex
