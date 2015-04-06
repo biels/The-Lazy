@@ -22,6 +22,7 @@
             </Button>
             <Label x:Name="lblFileStat" Content="títol" FontSize="14" VerticalContentAlignment="Center" FontWeight="Bold" Grid.Column="1" VerticalAlignment="Center"/>
         </Grid>
-        <StackPanel x:Name="pnlFileViwer" Background="#FFE0F3F7" Grid.Row="1"/>
+        <StackPanel x:Name="pnlFileViwer" Background="#FFE0F3F7" Grid.Row="1" Margin="0,0,0,10"/>
+        <ProgressBar Grid.Row="1" VerticalAlignment="Bottom" Height="10"/>
     </Grid>
 </UserControl>
