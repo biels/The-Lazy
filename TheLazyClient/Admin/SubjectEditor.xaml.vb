@@ -24,6 +24,7 @@ Public Class SubjectEditor
         Get
             If selectedSubjectIndex = -1 Then Return Nothing
             If _CurrentSubjects Is Nothing Then Return Nothing
+            If (_CurrentSubjects.Count - 1) < selectedSubjectIndex Then Return Nothing
             Return _CurrentSubjects(selectedSubjectIndex)
         End Get
 
@@ -35,6 +36,9 @@ Public Class SubjectEditor
         If SelectedAcademicLevel IsNot Nothing Then
             _CurrentSubjects = c.cache.subject_cache.getSubjectFullList(SelectedAcademicLevel.id, True)
         End If
+        If _CurrentSubjects.Count > 0 Then
+            lstSubjects.SelectedIndex = 0
+        End If
     End Sub
     Sub UpdateMainDropdownUI()
         'AcademicLevles
@@ -43,6 +47,9 @@ Public Class SubjectEditor
             For Each e As Entities.AcademicLevelEntity In AcademicLevels
                 .Add(e)
             Next
+            If .Count > 0 Then
+                cmbAcademicLevels.SelectedIndex = 0
+            End If
         End With       
     End Sub
     Sub UpdateAcademicLevelDependencies()
@@ -68,9 +75,9 @@ Public Class SubjectEditor
         End With
 
     End Sub
-    Sub SaveCurrentSubject()
-        If SelectedSubject Is Nothing Then
-            MsgBox("Selecciona una assignatura!")
+    Sub SaveSelectedSubject()
+        If SelectedSubject Is Nothing Or SelectedAcademicLevel Is Nothing Then
+            'MsgBox("Selecciona una assignatura!")
             Exit Sub
         End If
         Dim c As System.Windows.Media.Color = DirectCast(btnChooseColor.Background, SolidColorBrush).Color
@@ -92,13 +99,14 @@ Public Class SubjectEditor
         Me.Close()
     End Sub
 
- 
+
     Private Sub cmbAcademicLevels_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbAcademicLevels.SelectionChanged
+        selectedSubjectIndex = -1
         UpdateAcademicLevelDependencies()
     End Sub
     Dim updateListOnSelectionChanged As Boolean = True
     Private Sub lstSubjects_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles lstSubjects.SelectionChanged
-        SaveCurrentSubject()
+        SaveSelectedSubject()
         selectedSubjectIndex = lstSubjects.SelectedIndex
         LoadSelectionToMainView()
     End Sub
@@ -170,7 +178,7 @@ Public Class SubjectEditor
         Dim selectedindex As Integer = selectedSubjectIndex
         If selectedindex < 0 Then Exit Sub
         lstSubjects.SelectedIndex = selectedindex
-        SaveCurrentSubject()
+        SaveSelectedSubject()
         UpdateAcademicLevelDependencies()
         lstSubjects.SelectedIndex = selectedindex
         LoadSelectionToMainView()
@@ -183,8 +191,14 @@ Public Class SubjectEditor
         End If
     End Sub
 
-    Private Sub txtShortCode_TextChanged(sender As Object, e As TextChangedEventArgs) Handles txtShortCode.TextChanged
-        'If chkAutogenerate Is Nothing Then Exit Sub
-        'chkAutogenerate.IsChecked = False
+
+    Private Sub btnRemoveCurrent_Click(sender As Object, e As RoutedEventArgs) Handles btnRemoveCurrent.Click
+        Dim selectedindex As Integer = selectedSubjectIndex
+        If selectedindex < 0 Then Exit Sub
+        If DbClient.DbSubjectEditorClient.deleteSubject(SelectedSubject.id) Then
+            UpdateAcademicLevelDependencies()
+        Else
+            MsgBox("No s'ha pogut esborrar, possiblement hi hagin elements fent-hi referèrncia.")
+        End If
     End Sub
 End Class
