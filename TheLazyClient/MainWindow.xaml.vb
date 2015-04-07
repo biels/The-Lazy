@@ -137,7 +137,7 @@ Class MainWindowElements
         With cmbSubjectFilter.Items
             .Clear()
             For Each e As Entities.SubjectEntity In c.filter._Subjects
-                .Add(e)
+                .Add(New ComboBoxItem() With {.Content = e, .Foreground = New SolidColorBrush(ColorFromInt(e.color))})
             Next
         End With
     End Sub
