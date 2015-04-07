@@ -105,5 +105,29 @@ namespace TheLazyClientMVVM.DbClient
             c.Close();
             return true;
         }
+        public static bool deleteSubject(int subject_id)
+        {
+            if (!DbClient.isOnline()) { return false; }
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format(
+                "DELETE FROM subjects WHERE subject_id={0} LIMIT 1",
+                subject_id);
+            bool r = false;
+            try
+            {
+                cmd.ExecuteNonQuery();
+                r = true;
+            }
+            catch (Exception)
+            {
+
+            }
+            c.Close();
+            return r;
+        }
     }
 }
