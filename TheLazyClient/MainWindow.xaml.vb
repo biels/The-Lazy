@@ -100,12 +100,14 @@ Class MainWindowElements
     End Sub
 
     Private Sub btnPerfil_Click(sender As Object, e As RoutedEventArgs) Handles btnPerfil.Click
+        MsgBox("Funció no implementada")
+    End Sub
+    Private Sub btnPerfilEdit_Click(sender As Object, e As RoutedEventArgs) Handles btnPerfilEdit.Click
         Dim frm As New ProfileEditor
         frm.ShowDialog()
         c.getHeadingInfo()
-        UpdateHeading()
+        UpdateUI()
     End Sub
-
     Private Sub btnExit_Click(sender As Object, e As RoutedEventArgs) Handles btnExit.Click
         End
     End Sub
@@ -245,4 +247,6 @@ Class MainWindowElements
         progElementUpdateProgress.Visibility = Windows.Visibility.Collapsed
         'MsgBox("Completada")
     End Sub
+
+    
 End Class

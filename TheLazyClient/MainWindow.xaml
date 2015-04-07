@@ -94,7 +94,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button x:Name="btnPerfil_Copy" HorizontalAlignment="Left" Height="23" Margin="630,60,0,0" VerticalAlignment="Top" Width="27" FontSize="14" Foreground="#FFB00800">
+        <Button x:Name="btnPerfilEdit" HorizontalAlignment="Left" Height="23" Margin="630,60,0,0" VerticalAlignment="Top" Width="27" FontSize="14" Foreground="#FFB00800">
             <Image Height="23" Width="17" Source="media/Icones/Pencil.png"/>
         </Button>
     </Grid>
