@@ -119,6 +119,9 @@
     <Compile Include="Elements\FileExplorer\RemoteFilesystemViewer.xaml.vb">
       <DependentUpon>RemoteFilesystemViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extra features\Stealth mode\StealthModeUI.xaml.vb">
+      <DependentUpon>StealthModeUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="General.vb" />
     <Compile Include="Login\frmRegister.designer.vb">
       <DependentUpon>frmRegister.vb</DependentUpon>
@@ -153,6 +156,7 @@
       <DependentUpon>UserProfileViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\ColorExtensions.vb" />
+    <Compile Include="Utils\KeyboardListener.vb" />
     <Compile Include="Utils\Utils.vb" />
     <Compile Include="Worker.vb" />
     <Page Include="Admin\SubjectEditor.xaml">
@@ -188,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Elements\FileExplorer\RemoteFilesystemViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Extra features\Stealth mode\StealthModeUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -30,6 +30,7 @@ Class MainWindowElements
         'Loginform > Invoke() > UpdateUI()
         SetFilterHandlers()
         SetChatHandlers()
+        AddKeyboadHandlers()
     End Sub
 
     Const NO_STATUS_TEXT As String = "Introdueix un estat..."
@@ -248,5 +249,33 @@ Class MainWindowElements
         'MsgBox("Completada")
     End Sub
 
-    
+    'Stealth mode
+    Sub StealthSwitch(value As Boolean)
+        Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, New Action(
+        Sub()
+            For Each w As Window In Application.Current.Windows
+                If value Then
+                    w.Hide()
+                Else
+                    w.Show()
+                End If
+            Next
+
+        End Sub))
+    End Sub
+
+    Dim stealth As Boolean = False
+    Sub AddKeyboadHandlers()
+        AddHandler hook.KeyDown, AddressOf OnKey
+    End Sub
+    Private Sub btnStealth_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles btnStealth.MouseDown
+        Dim frm As New StealthModeUI
+        frm.ShowDialog()
+    End Sub
+    Sub OnKey(sender As Object, e As RawKeyEventArgs)
+        If e.Key = Key.Escape Then
+            stealth = Not stealth
+            StealthSwitch(stealth)
+        End If
+    End Sub
 End Class
