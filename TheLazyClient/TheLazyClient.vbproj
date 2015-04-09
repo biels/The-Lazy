@@ -148,6 +148,9 @@
     <Compile Include="Profile\ProfileViewer.xaml.vb">
       <DependentUpon>ProfileViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Profile\ProfileViewerControl.xaml.vb">
+      <DependentUpon>ProfileViewerControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ResultWindow\Logger.vb" />
     <Compile Include="ResultWindow\ResultWindow.xaml.vb">
       <DependentUpon>ResultWindow.xaml</DependentUpon>
@@ -224,6 +227,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Profile\ProfileViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Profile\ProfileViewerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

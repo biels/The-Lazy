@@ -101,7 +101,8 @@ Class MainWindowElements
     End Sub
 
     Private Sub btnPerfil_Click(sender As Object, e As RoutedEventArgs) Handles btnPerfil.Click
-        MsgBox("Funció no implementada")
+        Dim frm As New ProfileViewer
+        frm.ShowDialog()
     End Sub
     Private Sub btnPerfilEdit_Click(sender As Object, e As RoutedEventArgs) Handles btnPerfilEdit.Click
         Dim frm As New ProfileEditor
