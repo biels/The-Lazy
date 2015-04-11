@@ -4,19 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="49.624" Width="232.697">
+             d:DesignHeight="49.624" Width="329.848">
     <Grid Background="#FFFFF6CD">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Image Height="50" Width="51"/>
+        <Image x:Name="imgIcon" Height="50" Width="51"/>
         <Grid Grid.Column="1">
-            <Label x:Name="lblFileName" Content="Nom del fitxer" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="144"/>
-            <Label x:Name="lblFileSize" Content="Mida del fitxer" VerticalAlignment="Bottom"/>
+            <Label x:Name="lblFileName" Content="Document.docx" Height="24" VerticalAlignment="Top"/>
+            <Label x:Name="lblFileSize" Content="Document de Microsoft Word, 554 Kb" VerticalAlignment="Bottom"/>
         </Grid>
-        <Button Content="" Width="38" Height="30" BorderBrush="{x:Null}" Grid.Column="2">
+        <Button x:Name="imgDownload" Content="" Width="38" Height="32" BorderBrush="{x:Null}" Grid.Column="2">
             <Button.Background>
                 <ImageBrush ImageSource="/TheLazyClient;component/media/Icones/Download.png"/>
             </Button.Background>
