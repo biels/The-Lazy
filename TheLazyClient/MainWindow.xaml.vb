@@ -28,8 +28,9 @@ Class MainWindowElements
         Dim frm As New Login
         frm.ShowDialog()
         'Loginform > Invoke() > UpdateUI()
-        SetFilterHandlers()
+        'SetFilterHandlers()
         SetChatHandlers()
+        AddKeyboadHandlers()
     End Sub
 
     Const NO_STATUS_TEXT As String = "Introdueix un estat..."
@@ -48,26 +49,19 @@ Class MainWindowElements
     Public Sub UpdateHeading() 'Legacy
         UpdateUI()
         'PROVA
-        c.filter.getFilteredElementsAsync()
+        'c.filter.getFilteredElementsAsync()
         'FillPurchaseElementsTab()
-        FillElementTabComboboxes()
+        'FillElementTabComboboxes()
     End Sub
     Public Sub UpdateHeavyElements()
         'FillElementsTab()
         'FillPurchaseElementsTab()
-        c.filter.getFilteredElementsAsync()
-        FillElementTabComboboxes()
+        'c.filter.getFilteredElementsAsync()
+        'FillElementTabComboboxes()
     End Sub
-    Sub FillElementsTab()
-        pnlElements.Children.Clear()
-        For Each e As Entities.ElementEntity In c.filter.getFilteredElements()
-            Dim control As New ElementThumbnaiItem
-            control.Element = e
-            pnlElements.Children.Add(control)
-        Next
-    End Sub
+
     'prova
-    ' Sub FillPurchaseElementsTab()
+    'Sub FillPurchaseElementsTab()
     'pnlPurchaseElements.Children.Clear()
     'For Each e As Entities.ElementPurchaseEntity In c.
     'End Sub
@@ -100,12 +94,15 @@ Class MainWindowElements
     End Sub
 
     Private Sub btnPerfil_Click(sender As Object, e As RoutedEventArgs) Handles btnPerfil.Click
+        Dim frm As New ProfileViewer
+        frm.ShowDialog()
+    End Sub
+    Private Sub btnPerfilEdit_Click(sender As Object, e As RoutedEventArgs) Handles btnPerfilEdit.Click
         Dim frm As New ProfileEditor
         frm.ShowDialog()
         c.getHeadingInfo()
-        UpdateHeading()
+        UpdateUI()
     End Sub
-
     Private Sub btnExit_Click(sender As Object, e As RoutedEventArgs) Handles btnExit.Click
         End
     End Sub
@@ -120,39 +117,7 @@ Class MainWindowElements
     End Sub
 
     '------------------
-    Sub FillElementTabComboboxes()
-        If c.filter._AcademicLevels Is Nothing Then Exit Sub
-        With cmbAcademicLevels.Items
-            .Clear()
-            For Each e As Entities.AcademicLevelEntity In c.filter._AcademicLevels
-                .Add(e)
-            Next
-        End With
-
-    End Sub
-    Sub UpdateSubjectsCombobox()
-        If c.filter._Subjects Is Nothing Then Exit Sub
-        With cmbSubjectFilter.Items
-            .Clear()
-            For Each e As Entities.SubjectEntity In c.filter._Subjects
-                .Add(e)
-            Next
-        End With
-    End Sub
-    '------------------
-
-    Private Sub cmbAcademicLevels_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbAcademicLevels.SelectionChanged
-        c.filter.updateSubjectList(cmbAcademicLevels.SelectedItem)
-        UpdateSubjectsCombobox()
-    End Sub
-
-    Private Sub cmbSubjectFilter_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbSubjectFilter.SelectionChanged
-        c.filter.getFilteredElementsAsync()
-    End Sub
-
-    Private Sub Button_Click_2(sender As Object, e As RoutedEventArgs)
-        c.filter.getFilteredElementsAsync()
-    End Sub
+    
     'Messaging
     Sub SetChatHandlers()
         AddHandler c.chatManager.rooms(0).MessageRecieved, AddressOf MessageRecieved
@@ -212,37 +177,35 @@ Class MainWindowElements
         End If
 
     End Sub
-    'Element list updating
-    Private Sub SetFilterHandlers()
-        AddHandler c.filter.RequestStarted, AddressOf OnRequestStarted
-        AddHandler c.filter.RequestDefined, AddressOf OnRequestDefined
-        AddHandler c.filter.ElementRecieved, AddressOf OnElementRecieved
-        AddHandler c.filter.RequestComplete, AddressOf OnRequestComplete
+    
+
+    'Stealth mode
+    Sub StealthSwitch(value As Boolean)
+        Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, New Action(
+        Sub()
+            For Each w As Window In Application.Current.Windows
+                If value Then
+                    w.Hide()
+                Else
+                    w.Show()
+                End If
+            Next
+
+        End Sub))
     End Sub
-    Sub OnRequestStarted()
-        pnlElements.Children.Clear()
-        btnUpdateElements.IsEnabled = False
-        progElementUpdateProgress.Visibility = Windows.Visibility.Visible
-        progElementUpdateProgress.IsIndeterminate = True
-        btnUpdate.Content = String.Format("Preaprant...")
+
+    Dim stealth As Boolean = False
+    Sub AddKeyboadHandlers()
+        AddHandler hook.KeyDown, AddressOf OnKey
     End Sub
-    Sub OnRequestDefined(id_list As List(Of Integer))
-        progElementUpdateProgress.IsIndeterminate = False
-        btnUpdate.Content = String.Format("Actualitzant...")
+    Private Sub btnStealth_MouseDown(sender As Object, e As MouseButtonEventArgs) Handles btnStealth.MouseDown
+        Dim frm As New StealthModeUI
+        frm.ShowDialog()
     End Sub
-    Sub OnElementRecieved(e As Entities.ElementEntity, progress As Integer, total As Integer)
-        Dim control As New ElementThumbnaiItem
-        control.Element = e
-        pnlElements.Children.Add(control)
-        'btnUpdate.Content = String.Format("Actualitzant... ({0} de {1})", progress, total)
-        progElementUpdateProgress.Value = progress
-        progElementUpdateProgress.Maximum = total
-    End Sub
-    Sub OnRequestComplete(current_element_list As List(Of Entities.ElementEntity))
-        btnUpdateElements.Content = "Actualitza"
-        btnUpdateElements.IsEnabled = True
-        progElementUpdateProgress.Value = 0
-        progElementUpdateProgress.Visibility = Windows.Visibility.Collapsed
-        'MsgBox("Completada")
+    Sub OnKey(sender As Object, e As RawKeyEventArgs)
+        If e.Key = Key.Escape Then
+            stealth = Not stealth
+            StealthSwitch(stealth)
+        End If
     End Sub
 End Class
