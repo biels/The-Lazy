@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheLazyClientMVVM.Entities;
 
-namespace TheLazyClientMVVM
+namespace TheLazyClientMVVM.Filter
 {
     public class ElementFilter
     {               
         public string search_text { get; set; } //Falta
-        public SubjectEntity subject { get; set; }
+        public AcademicLevelEntity academic_level { get; set; } //Nomès es té en compte si subject == null
+        public SubjectEntity subject { get; set; } //Més prioritat que academic_level
+        public ElementOrderCriteriaEnum order_criteria { get; set; }
+
+        //Info pool
         public List<AcademicLevelEntity> _AcademicLevels { get; set; }
         public List<SubjectEntity> _Subjects { get; set; }
 
@@ -18,6 +23,7 @@ namespace TheLazyClientMVVM
         List<int> id_list = new List<int>();
         List<ElementEntity> current_element_list = new List<ElementEntity>();
         bool busy = false;
+
         //Events
         public event RequestStartedEventHandler RequestStarted;
         public delegate void RequestStartedEventHandler();
@@ -40,7 +46,7 @@ namespace TheLazyClientMVVM
         {
             
             string sql = "";
-            if (subject != null) { String.Format("WHERE subject_id={0}", subject.id); }
+            if (subject != null) {sql = String.Format("WHERE subject_id={0}", subject.id); }
 
             return DbClient.DbElementClient.getFilteredElementList(sql);
         }
@@ -65,12 +71,35 @@ namespace TheLazyClientMVVM
         }
         public async Task<List<int>> getFilteredElementIDs()
         {
-
-            string where_clause = "";
-            if (subject != null) { String.Format("WHERE subject_id={0}", subject.id); }
-
-            return await Task.Run(() => DbClient.DbElementClient.getFilteredElementIDList(where_clause));
+            return await Task.Run(() => DbClient.DbElementClient.getFilteredElementIDList(getWhereClause(), getOrderByClause()));
         }
-
+        public string getWhereClause()
+        {
+            string where_clause = "";
+            if (academic_level != null && subject == null) { where_clause = String.Format("WHERE academic_level={0}", academic_level.id); }
+            if (subject != null) {where_clause = String.Format("WHERE subject_id={0}", subject.id); }
+            return where_clause;
+        }
+        public string getOrderByClause()
+        {
+            //if (order_criteria == null) return "";
+            switch (order_criteria)
+            {
+                case ElementOrderCriteriaEnum.MostRecent:
+                    return String.Format("ORDER BY create_time DESC");
+                //case ElementOrderCriteriaEnum.BestAvgRating:
+                //    return String.Format("ORDERBY create_time DESC");
+            }
+            return "";
+        }
+        public enum ElementOrderCriteriaEnum
+        {
+            [Description("Més recents")]
+            MostRecent,
+            [Description("Més comprats")]
+            MostBought,
+            [Description("Més ben valorats")]
+            BestAvgRating
+        };
     }
 }
