@@ -1,8 +1,11 @@
-﻿<Window x:Name="frame" x:Class="ElementExplorer"
+﻿<Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:TheLazyClient" x:Name="frame" x:Class="ElementExplorer"
     Title="ElementExplorer" Height="361" Width="551">
     <Grid>
-        <StackPanel x:Name="pnlRemoteFileSystem" Margin="10"/>
+        <StackPanel x:Name="pnlRemoteFileSystem" Margin="10">
+            <local:RemoteFilesystemViewer Width="Auto"/>
+        </StackPanel>
     </Grid>
 </Window>

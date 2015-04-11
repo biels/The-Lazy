@@ -13,10 +13,8 @@
         </Grid.ColumnDefinitions>
         <Image Height="50" Width="51"/>
         <Grid Grid.Column="1">
-            <Label Content="Nom del fitxer" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="87"/>
-            <Label Content="Mida del fitxer" HorizontalAlignment="Left" Margin="0,24,0,0" VerticalAlignment="Top" Width="87"/>
-            <Label x:Name="lblFileName" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="87,0,0,0" Height="24" Width="123"/>
-            <Label x:Name="lblFileSize" Content="Label" HorizontalAlignment="Left" Margin="87,24,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblFileName" Content="Nom del fitxer" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="144"/>
+            <Label x:Name="lblFileSize" Content="Mida del fitxer" VerticalAlignment="Bottom"/>
         </Grid>
         <Button Content="" Width="38" Height="30" BorderBrush="{x:Null}" Grid.Column="2">
             <Button.Background>

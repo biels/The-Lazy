@@ -16,7 +16,6 @@ Public Class FileInfoItem
     Sub UpdateUI()
         lblFileName.Content = File.filename
         lblFileSize.Content = File.size
-        ImageFile(getExtension)
     End Sub
     Function getExtension() As String
         Dim array As String() = File.filename.Split(".")
@@ -25,11 +24,10 @@ Public Class FileInfoItem
         End If
         Return ""
     End Function
-    Sub ImageFile(extension As String)
-        Select Case extension
-            Case ".exe"
+    Function getIamgeName() As String
+        Dim extension As String = getExtension()
+        extension = extension.Substring(0, 1).ToUpper & extension.Substring(1, extension.Length - 1)
+        Return String.Format("File-Extension-{0}", getExtension())
+    End Function
 
-
-        End Select
-    End Sub
 End Class

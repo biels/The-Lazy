@@ -19,30 +19,20 @@ Public Class RemoteFilesystemViewer
             _Element = value
         End Set
     End Property
-    Private _File As FileExplorer.FileExploreHandler
-    Public Property File As FileExplorer.FileExploreHandler
-        Get
-            Return _File
-        End Get
-        Set(ByVal value As FileExplorer.FileExploreHandler)
-            _File = value
-            UpdateUI()
-        End Set
-    End Property
     Sub UpdateUI()
-        File.updateFileList()
-        lblFileStat.Content = File.files.Count & "fitxers, " & getTotalSize() & " Kb en total"
+        Handler.updateFileList()
+        lblFileStat.Content = Handler.files.Count & "fitxers, " & getTotalSize() & " Kb en total"
     End Sub
     Function getTotalSize() As Integer
         Dim total_size As Long = 0
-        For Each e As FileExplorer.RemoteFileInfo In File.files
+        For Each e As FileExplorer.RemoteFileInfo In Handler.files
             total_size = total_size + e.size
         Next
         Return total_size
     End Function
     Sub FillFileViwer()
         pnlFileViwer.Children.Clear()
-        For Each e As FileExplorer.RemoteFileInfo In File.files
+        For Each e As FileExplorer.RemoteFileInfo In Handler.files
             Dim control As New FileInfoItem
             control.File = e
             pnlFileViwer.Children.Add(control)
@@ -53,7 +43,7 @@ Public Class RemoteFilesystemViewer
     End Sub
 
     Private Sub RemoteFilesystemViewer_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        File.init()
-        UpdateUI()
+        'Handler.init()
+        'UpdateUI()
     End Sub
 End Class
