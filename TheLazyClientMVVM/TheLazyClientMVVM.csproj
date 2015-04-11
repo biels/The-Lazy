@@ -99,8 +99,9 @@
     <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="FileExplorer\FileExploreHandler.cs" />
     <Compile Include="FileExplorer\RemoteFileInfo.cs" />
-    <Compile Include="Main\ElementFilter.cs" />
+    <Compile Include="Filter\ElementFilter.cs" />
     <Compile Include="Cache\LocalCache.cs" />
+    <Compile Include="Filter\ElementOrderCriteriaEnum.cs" />
     <Compile Include="Main\LocalConfig.cs" />
     <Compile Include="Main\LoginManager.cs" />
     <Compile Include="Main\MainClient.cs" />

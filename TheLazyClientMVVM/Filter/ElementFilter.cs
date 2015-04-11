@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using TheLazyClientMVVM.Entities;
 
-namespace TheLazyClientMVVM
+namespace TheLazyClientMVVM.Filter
 {
     public class ElementFilter
     {               
         public string search_text { get; set; } //Falta
         public SubjectEntity subject { get; set; }
+        public ElementOrderCriteriaEnum order_criteria { get; set; }
+        //Info pool
         public List<AcademicLevelEntity> _AcademicLevels { get; set; }
         public List<SubjectEntity> _Subjects { get; set; }
 
@@ -18,6 +20,7 @@ namespace TheLazyClientMVVM
         List<int> id_list = new List<int>();
         List<ElementEntity> current_element_list = new List<ElementEntity>();
         bool busy = false;
+
         //Events
         public event RequestStartedEventHandler RequestStarted;
         public delegate void RequestStartedEventHandler();
@@ -40,7 +43,7 @@ namespace TheLazyClientMVVM
         {
             
             string sql = "";
-            if (subject != null) { String.Format("WHERE subject_id={0}", subject.id); }
+            if (subject != null) {sql = String.Format("WHERE subject_id={0}", subject.id); }
 
             return DbClient.DbElementClient.getFilteredElementList(sql);
         }
@@ -67,7 +70,7 @@ namespace TheLazyClientMVVM
         {
 
             string where_clause = "";
-            if (subject != null) { String.Format("WHERE subject_id={0}", subject.id); }
+            if (subject != null) {where_clause = String.Format("WHERE subject_id={0}", subject.id); }
 
             return await Task.Run(() => DbClient.DbElementClient.getFilteredElementIDList(where_clause));
         }

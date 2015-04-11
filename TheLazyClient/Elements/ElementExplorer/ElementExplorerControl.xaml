@@ -6,7 +6,7 @@
              mc:Ignorable="d" d:DesignWidth="620" Height="365">
     <Grid>
         <ScrollViewer Margin="0,29,0,0" HorizontalAlignment="Left" Width="621" Height="335" VerticalAlignment="Top" >
-            <StackPanel x:Name="pnlElements" Background="#FFE0F3F7" RenderTransformOrigin="-1,0" ScrollViewer.HorizontalScrollBarVisibility="Visible" CanVerticallyScroll="True" CanHorizontallyScroll="True" ScrollViewer.CanContentScroll="True" Height="335">
+            <StackPanel x:Name="pnlElements" Background="#FFE0F3F7" RenderTransformOrigin="-1,0" ScrollViewer.HorizontalScrollBarVisibility="Visible" CanVerticallyScroll="True" CanHorizontallyScroll="True" ScrollViewer.CanContentScroll="True">
                 <StackPanel.ScrollOwner>
                     <ScrollViewer HorizontalScrollBarVisibility="Visible"/>
                 </StackPanel.ScrollOwner>

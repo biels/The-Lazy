@@ -1,17 +1,18 @@
 ﻿Imports TheLazyClientMVVM
+Imports System.ComponentModel
 
 ''' <summary>
 ''' Control que mostra una llista d'elements basant-se en un filtre.
 ''' </summary>
 ''' <remarks></remarks>
 Public Class ElementExplorerControl
-    Private _Filter As TheLazyClientMVVM.ElementFilter
-    Public Property Filter() As TheLazyClientMVVM.ElementFilter
+    Private _Filter As Filter.ElementFilter
+    Public Property Filter() As Filter.ElementFilter
         Get
             If _Filter Is Nothing Then Return c.filter
             Return _Filter
         End Get
-        Set(ByVal value As TheLazyClientMVVM.ElementFilter)
+        Set(ByVal value As Filter.ElementFilter)
             _Filter = value
         End Set
     End Property
@@ -22,9 +23,9 @@ Public Class ElementExplorerControl
         Init()
     End Sub
     Public Sub Init()
-        If _Initialized Then Exit Sub 'Evitar multi-handlings dels esdeveniments del filtre
+        If _Initialized Or DesignerProperties.GetIsInDesignMode(Me) Then Exit Sub 'Evitar multi-handlings dels esdeveniments del filtre
         SetFilterHandlers()
-        FillElementTabComboboxes()
+        AcademicLevelCombobox()
         Filter.getFilteredElementsAsync()
         _Initialized = True
     End Sub
@@ -62,39 +63,56 @@ Public Class ElementExplorerControl
         'MsgBox("Completada")
     End Sub
     '------------
-    Sub FillElementTabComboboxes()
+    Sub AcademicLevelCombobox()
         If Filter._AcademicLevels Is Nothing Then Exit Sub
         With cmbAcademicLevels.Items
             .Clear()
+            .Add(New ComboBoxItem() With {.Content = "Tots"})
             For Each e As Entities.AcademicLevelEntity In Filter._AcademicLevels
                 .Add(e)
             Next
         End With
-
+        cmbAcademicLevels.SelectedIndex = 0
     End Sub
     Sub UpdateSubjectsCombobox()
         If Filter._Subjects Is Nothing Then Exit Sub
         With cmbSubjectFilter.Items
             .Clear()
+            .Add(New ComboBoxItem() With {.Content = "Tots"})
             For Each e As Entities.SubjectEntity In Filter._Subjects
                 .Add(New ComboBoxItem() With {.Content = e, .Foreground = New SolidColorBrush(ColorFromInt(e.color))})
             Next
         End With
+        cmbSubjectFilter.SelectedIndex = 0
     End Sub
-    '------------------
+    '------------------ ALERTA INDEXS BASE 1 (offset +1)
 
     Private Sub cmbAcademicLevels_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbAcademicLevels.SelectionChanged
-        Filter.updateSubjectList(cmbAcademicLevels.SelectedItem)
-        UpdateSubjectsCombobox()
+        If TypeOf cmbAcademicLevels.SelectedItem Is Entities.AcademicLevelEntity Then
+            Filter.updateSubjectList(cmbAcademicLevels.SelectedItem)
+            cmbSubjectFilter.IsEnabled = True
+            UpdateSubjectsCombobox()
+        Else
+            Filter.subject = Nothing
+            cmbSubjectFilter.IsEnabled = False
+            cmbSubjectFilter.Items.Clear()
+        End If
     End Sub
 
     Private Sub cmbSubjectFilter_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbSubjectFilter.SelectionChanged
+        If cmbSubjectFilter.SelectedIndex <= Filter._Subjects.Count And cmbSubjectFilter.SelectedIndex > 0 Then
+            Filter.subject = Filter._Subjects(cmbSubjectFilter.SelectedIndex - 1) 'Base 1
+        Else
+            Filter.subject = Nothing
+        End If
+
         Filter.getFilteredElementsAsync()
     End Sub
 
     Private Sub Button_Click_2(sender As Object, e As RoutedEventArgs)
         Filter.getFilteredElementsAsync()
     End Sub
+    'Passant informació cap al filtre
 
 
 End Class

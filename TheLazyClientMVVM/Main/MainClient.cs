@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using TheLazyClientMVVM.Chat;
+using TheLazyClientMVVM.Filter;
 
 
 namespace TheLazyClientMVVM
