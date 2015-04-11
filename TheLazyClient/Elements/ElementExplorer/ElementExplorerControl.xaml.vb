@@ -26,6 +26,7 @@ Public Class ElementExplorerControl
         If _Initialized Or DesignerProperties.GetIsInDesignMode(Me) Then Exit Sub 'Evitar multi-handlings dels esdeveniments del filtre
         SetFilterHandlers()
         AcademicLevelCombobox()
+        UpdateCriteriaCombobox()
         Filter.getFilteredElementsAsync()
         _Initialized = True
     End Sub
@@ -111,6 +112,15 @@ Public Class ElementExplorerControl
 
     Private Sub Button_Click_2(sender As Object, e As RoutedEventArgs)
         Filter.getFilteredElementsAsync()
+    End Sub
+    Private Sub UpdateCriteriaCombobox()
+        With cmbOrderCriteria.Items
+            .Clear()
+            For Each v As TheLazyClientMVVM.Filter.ElementFilter.ElementOrderCriteriaEnum In [Enum].GetValues(GetType(TheLazyClientMVVM.Filter.ElementFilter.ElementOrderCriteriaEnum))
+                .Add(GetDescription(v))
+            Next
+        End With
+        cmbOrderCriteria.SelectedItem = FindItemContaining(cmbOrderCriteria.Items, GetDescription(Filter.order_criteria))
     End Sub
     'Passant informació cap al filtre
 

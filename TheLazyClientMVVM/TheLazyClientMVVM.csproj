@@ -101,7 +101,6 @@
     <Compile Include="FileExplorer\RemoteFileInfo.cs" />
     <Compile Include="Filter\ElementFilter.cs" />
     <Compile Include="Cache\LocalCache.cs" />
-    <Compile Include="Filter\ElementOrderCriteriaEnum.cs" />
     <Compile Include="Main\LocalConfig.cs" />
     <Compile Include="Main\LoginManager.cs" />
     <Compile Include="Main\MainClient.cs" />

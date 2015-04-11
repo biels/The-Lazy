@@ -13,7 +13,7 @@
             </StackPanel>
         </ScrollViewer>
         <TextBox x:Name="txtSearchText" HorizontalAlignment="Left" Height="23" Margin="3,0,0,0" TextWrapping="Wrap" Text="Introdueix el text per cercar..." VerticalAlignment="Top" Width="163"/>
-        <ComboBox x:Name="cmbAcademicLevels" HorizontalAlignment="Left" Margin="172,0,0,0" VerticalAlignment="Top" Width="90" Foreground="#FF00952F">
+        <ComboBox x:Name="cmbAcademicLevels" HorizontalAlignment="Left" Margin="172,0,0,0" VerticalAlignment="Top" Width="90" Foreground="#FF00952F" ToolTip="Nivell">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF0F0F0" Offset="0"/>
@@ -21,12 +21,10 @@
                 </LinearGradientBrush>
             </ComboBox.Background>
         </ComboBox>
-        <ComboBox x:Name="cmbSubjectFilter" HorizontalAlignment="Left" Margin="267,0,0,0" VerticalAlignment="Top" Width="125"/>
+        <ComboBox x:Name="cmbSubjectFilter" HorizontalAlignment="Left" Margin="267,0,0,0" VerticalAlignment="Top" Width="125" ToolTip="Assignatura"/>
         <Button x:Name="btnUpdateElements" Content="Actualitza" Margin="514,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="106" Click="Button_Click_2" Height="22"/>
         <ProgressBar x:Name="progElementUpdateProgress" Height="14" Margin="0,350,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="604"/>
-        <ComboBox HorizontalAlignment="Left" Margin="397,0,0,0" VerticalAlignment="Top" Width="112">
-            <Button Content="Els millors"/>
-            <Button Content="Més comprats"/>
+        <ComboBox x:Name="cmbOrderCriteria" HorizontalAlignment="Left" Margin="397,0,0,0" VerticalAlignment="Top" Width="112" ToolTip="Criteri d'ordre descendent">
         </ComboBox>
 
     </Grid>
