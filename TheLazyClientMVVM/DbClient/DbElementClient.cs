@@ -48,7 +48,7 @@ namespace TheLazyClientMVVM.DbClient
             cmd.Connection = c;
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = String.Format(
-                "SELECT * FROM elements {0} ORDER BY create_time DESC LIMIT 50",
+                "SELECT * FROM elements_extended {0} ORDER BY create_time DESC LIMIT 50",
                 where_clause);
 
             MySqlDataReader rdr = cmd.ExecuteReader();
@@ -66,10 +66,13 @@ namespace TheLazyClientMVVM.DbClient
                 }               
                 ent.price = rdr.GetInt32("price");
                 ent.create_time = DateTime.Parse(rdr.GetString("create_time"));
-                ent.update_time = DateTime.Parse(rdr.GetString("update_time")); 
+                ent.update_time = DateTime.Parse(rdr.GetString("update_time"));
 
-                ent.favourite_amount = getFavouriteCount(ent.id);
-                ent.purchase_count = getElementPurchaseCount(ent.id);
+                if (rdr["avg_rating"] != DBNull.Value) ent.average_rating = rdr.GetInt32("avg_rating");
+                ent.rating_amount = rdr.GetInt32("rating_amount");
+                ent.favourite_amount = rdr.GetInt32("favourite_amount");
+                ent.purchase_amount = rdr.GetInt32("purchase_amount");             
+                ent.comment_amount = rdr.GetInt32("comment_amount");
 
                 ent.local_data = getLocalElementData(Com.main.localUser.id, ent.id);
 

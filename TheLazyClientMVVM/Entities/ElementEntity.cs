@@ -19,10 +19,12 @@ namespace TheLazyClientMVVM.Entities
         public DateTime update_time { get; set; }
 
         //CONSULTES EXTERNES
-        public int favourite_amount { get; set; }
         public int average_rating { get; set; }
-        public int purchase_count { get; set; }
-
+        public int favourite_amount { get; set; }
+        public int rating_amount { get; set; }
+        public int purchase_amount { get; set; }
+        public int comment_amount { get; set; }
+        
         //INFO LOCAL
         public LocalElementDataEntity local_data { get; set; }
 

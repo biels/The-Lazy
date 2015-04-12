@@ -73,7 +73,9 @@ Public Class ElementViewer
             lblAcademicLevel.Content = Element.subject.academic_level.name
             lblSubject.Content = Element.subject
             lblCreatorName.Text = String.Format("{0} ({1}) @ {2} ({3}){4}", Element.user.real_name, Element.user.username, Element.create_time, TimeAgo(Element.create_time), If(Element.hasBeenModified, String.Format(", modificat el {0} ({1})", Element.update_time, TimeAgo(Element.update_time)), "")) 'Biel Simon (biel) @ 22/02/2015 - fa 5 dies
-            lblTotalPurchases.Content = Element.purchase_count
+            lblTotalPurchases.Content = Element.purchase_amount
+            lblAvgRating.Content = Element.average_rating / 100
+            lblAvgRating.ToolTip = "Mitjana ponderada intel·ligent basada en les qualificacions dels usuaris" & vbCrLf & If(Element.rating_amount = 0, "No hi ha cap qualificació", String.Format("Basada en l'opinió {2}{0} {1}", Element.rating_amount, If(Element.rating_amount = 1, "usuari", "usuaris"), If(Element.rating_amount = 1, "d'", "de ")))
             setStarred(ModifiedLocalData.favourite)
             lblFavouriteAmount.Content = Element.favourite_amount + FavouriteIncrement()
             Rating = ModifiedLocalData.rating
@@ -144,7 +146,9 @@ Public Class ElementViewer
         If e.NewSize.Width < 600 Then
             e.Handled = True
         End If
-        rtnRatingControl.Width += m
+        If rtnRatingControl.Width + m > 0 Then
+            rtnRatingControl.Width += m
+        End If
     End Sub
     Sub SaveLocalInfo()
         If ModifiedLocalData.GetHashCode <> (Element.local_data).GetHashCode Then
