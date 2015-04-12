@@ -129,5 +129,16 @@ Public Class ElementExplorerControl
         Filter.getFilteredElementsAsync()
     End Sub
     'Passant informació cap al filtre
-    
+    Const DEFAULT_SEARCH_CONTENT As String = "Introdueix el text per cercar..."
+
+    Private Sub txtSearchText_GotKeyboardFocus(sender As Object, e As KeyboardFocusChangedEventArgs) Handles txtSearchText.GotKeyboardFocus
+        If txtSearchText.Text = DEFAULT_SEARCH_CONTENT Then
+            txtSearchText.Text = ""
+        End If
+    End Sub
+    Private Sub txtSearchText_LostKeyboardFocus(sender As Object, e As KeyboardFocusChangedEventArgs) Handles txtSearchText.LostKeyboardFocus
+        If txtSearchText.Text.Trim = "" Then
+            txtSearchText.Text = DEFAULT_SEARCH_CONTENT
+        End If
+    End Sub
 End Class

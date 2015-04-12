@@ -29,9 +29,9 @@
         <Image x:Name="imgFavourite" Margin="11,12,0,-6" VerticalAlignment="Top" Source="/TheLazyClient;component/media/Icones/Bullet-Star.png" Stretch="None" HorizontalAlignment="Left" Width="32" Height="32"/>
         <Image x:Name="imgEditGo" Source="/TheLazyClient;component/media/Icones/Pencil-Go.png" RenderTransformOrigin="-0.688,0.781" Height="32" VerticalAlignment="Center" HorizontalAlignment="Right" Width="32" Stretch="None" Grid.Column="4" Margin="0,3" Grid.ColumnSpan="2"/>
         <Image x:Name="imgPriceIcon" Source="/TheLazyClient;component/media/Icones/Card-Money.png" RenderTransformOrigin="-0.688,0.781" VerticalAlignment="Bottom" Grid.Column="3" Height="20"/>
-        <Label x:Name="lblAcademicLevel" Content="[LVL]" VerticalAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" FontSize="16" Grid.Column="1" Height="30" RenderTransformOrigin="-0.938,0.533" Foreground="#FF7A7A7A"/>
+        <Label x:Name="lblAcademicLevel" Content="[LVL]" VerticalAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" FontSize="16" Grid.Column="1" RenderTransformOrigin="-0.938,0.533" Foreground="#FF7A7A7A" Margin="0,4"/>
 
-        <local:SubjectThumbnail x:Name="controlSubjectTag" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="25"/>
+        <local:SubjectThumbnail x:Name="controlSubjectTag" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="25" Margin="2,0"/>
 
     </Grid>
 </UserControl>

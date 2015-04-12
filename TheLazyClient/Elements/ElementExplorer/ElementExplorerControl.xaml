@@ -12,7 +12,7 @@
                 </StackPanel.ScrollOwner>
             </StackPanel>
         </ScrollViewer>
-        <TextBox x:Name="txtSearchText" HorizontalAlignment="Left" Height="23" Margin="3,0,0,0" TextWrapping="Wrap" Text="Introdueix el text per cercar..." VerticalAlignment="Top" Width="163"/>
+        <TextBox x:Name="txtSearchText" HorizontalAlignment="Left" Height="23" Margin="3,0,0,0" TextWrapping="Wrap" Text="Introdueix el text per cercar..." VerticalAlignment="Top" Width="163" ToolTip="Prem [ENTER] per cercar"/>
         <ComboBox x:Name="cmbAcademicLevels" HorizontalAlignment="Left" Margin="172,0,0,0" VerticalAlignment="Top" Width="90" Foreground="#FF00952F" ToolTip="Nivell">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
