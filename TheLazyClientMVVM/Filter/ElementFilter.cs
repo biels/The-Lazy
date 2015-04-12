@@ -75,9 +75,18 @@ namespace TheLazyClientMVVM.Filter
         }
         public string getWhereClause()
         {
-            string where_clause = "";
-            if (academic_level != null && subject == null) { where_clause = String.Format("WHERE academic_level_id={0}", academic_level.id); }
-            if (subject != null) {where_clause = String.Format("WHERE subject_id={0}", subject.id); }
+            string where_clause = "WHERE";
+            if (academic_level != null && subject == null) { where_clause += String.Format(" academic_level_id={0}", academic_level.id); }
+            if (subject != null) {where_clause += String.Format(" subject_id={0}", subject.id); }
+            if (search_text != "" && search_text != null)
+            {
+                List<String> keywords = search_text.Split(new Char[] { ' ', ',', '.', ':', '\'', '\t' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                string[] meaningless_keywords = new string[] {"de", "del", "dels", "la", "d", "el", "la", "per", "pel" };
+                if (keywords.Count > 1)keywords.RemoveAll((k) => meaningless_keywords.Contains(k));
+                keywords.ForEach((e) => where_clause += String.Format(" {1}name LIKE '%{0}%'", e, (keywords.IndexOf(e) == 0 ? "" : "OR ")));
+                keywords.ForEach((e) => where_clause += String.Format(" {1}description LIKE '%{0}%'", e, "OR "));
+            }
+            if (where_clause == "WHERE") where_clause = "";
             return where_clause;
         }
         public string getOrderByClause()

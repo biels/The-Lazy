@@ -141,4 +141,10 @@ Public Class ElementExplorerControl
             txtSearchText.Text = DEFAULT_SEARCH_CONTENT
         End If
     End Sub
+    Private Sub txtSearchText_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSearchText.KeyDown
+        If e.Key = Key.Enter Then
+            Filter.search_text = txtSearchText.Text
+            Filter.getFilteredElementsAsync()
+        End If
+    End Sub
 End Class
