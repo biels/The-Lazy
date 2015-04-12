@@ -76,7 +76,7 @@ namespace TheLazyClientMVVM.Filter
         public string getWhereClause()
         {
             string where_clause = "";
-            if (academic_level != null && subject == null) { where_clause = String.Format("WHERE academic_level={0}", academic_level.id); }
+            if (academic_level != null && subject == null) { where_clause = String.Format("WHERE academic_level_id={0}", academic_level.id); }
             if (subject != null) {where_clause = String.Format("WHERE subject_id={0}", subject.id); }
             return where_clause;
         }
@@ -87,8 +87,14 @@ namespace TheLazyClientMVVM.Filter
             {
                 case ElementOrderCriteriaEnum.MostRecent:
                     return String.Format("ORDER BY create_time DESC");
-                //case ElementOrderCriteriaEnum.BestAvgRating:
-                //    return String.Format("ORDERBY create_time DESC");
+                case ElementOrderCriteriaEnum.BestAvgRating:
+                    return String.Format("ORDER BY avg_rating DESC");
+                case ElementOrderCriteriaEnum.MostBought:
+                    return String.Format("ORDER BY purchase_amount DESC");
+                case ElementOrderCriteriaEnum.MostExpensive:
+                    return String.Format("ORDER BY price DESC");
+                case ElementOrderCriteriaEnum.Cheapest:
+                    return String.Format("ORDER BY price ASC");
             }
             return "";
         }
@@ -99,7 +105,11 @@ namespace TheLazyClientMVVM.Filter
             [Description("Més comprats")]
             MostBought,
             [Description("Més ben valorats")]
-            BestAvgRating
+            BestAvgRating,
+            [Description("Més cars")]
+            MostExpensive,
+            [Description("Més barats")]
+            Cheapest
         };
     }
 }

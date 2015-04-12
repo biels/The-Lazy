@@ -91,9 +91,11 @@ Public Class ElementExplorerControl
     Private Sub cmbAcademicLevels_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbAcademicLevels.SelectionChanged
         If TypeOf cmbAcademicLevels.SelectedItem Is Entities.AcademicLevelEntity Then
             Filter.updateSubjectList(cmbAcademicLevels.SelectedItem)
+            Filter.academic_level = cmbAcademicLevels.SelectedItem
             cmbSubjectFilter.IsEnabled = True
             UpdateSubjectsCombobox()
         Else
+            Filter.academic_level = Nothing
             Filter.subject = Nothing
             cmbSubjectFilter.IsEnabled = False
             cmbSubjectFilter.Items.Clear()
@@ -122,7 +124,12 @@ Public Class ElementExplorerControl
         End With
         cmbOrderCriteria.SelectedItem = FindItemContaining(cmbOrderCriteria.Items, GetDescription(Filter.order_criteria))
     End Sub
+    Private Sub cmbOrderCriteria_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbOrderCriteria.SelectionChanged
+        Filter.order_criteria = cmbOrderCriteria.SelectedIndex
+        Filter.getFilteredElementsAsync()
+    End Sub
     'Passant informació cap al filtre
 
 
+    
 End Class

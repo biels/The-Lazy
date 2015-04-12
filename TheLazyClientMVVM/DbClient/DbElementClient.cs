@@ -24,7 +24,7 @@ namespace TheLazyClientMVVM.DbClient
             cmd.Connection = c;
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = String.Format(
-                "SELECT element_id FROM elements {0} {1} LIMIT {2}",
+                "SELECT element_id FROM elements_extended {0} {1} LIMIT {2}",
                 where_clause, order_by_clause, limit);
 
             MySqlDataReader rdr = cmd.ExecuteReader();
