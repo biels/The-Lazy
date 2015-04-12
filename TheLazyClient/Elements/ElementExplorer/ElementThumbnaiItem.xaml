@@ -1,8 +1,9 @@
-﻿<UserControl x:Class="ElementThumbnaiItem"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TheLazyClient" x:Class="ElementThumbnaiItem" 
              mc:Ignorable="d" 
              d:DesignHeight="38.432" d:DesignWidth="478.195">
     <Grid x:Name="grdGrid" Background="#FFFFF6CD">
@@ -27,9 +28,10 @@
         </Label>
         <Image x:Name="imgFavourite" Margin="11,12,0,-6" VerticalAlignment="Top" Source="/TheLazyClient;component/media/Icones/Bullet-Star.png" Stretch="None" HorizontalAlignment="Left" Width="32" Height="32"/>
         <Image x:Name="imgEditGo" Source="/TheLazyClient;component/media/Icones/Pencil-Go.png" RenderTransformOrigin="-0.688,0.781" Height="32" VerticalAlignment="Center" HorizontalAlignment="Right" Width="32" Stretch="None" Grid.Column="4" Margin="0,3" Grid.ColumnSpan="2"/>
-        <Label x:Name="lblSubjectTag" Content="[CAT]" VerticalAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" FontSize="16" Grid.Column="2" Height="30" Margin="0,4"/>
         <Image x:Name="imgPriceIcon" Source="/TheLazyClient;component/media/Icones/Card-Money.png" RenderTransformOrigin="-0.688,0.781" VerticalAlignment="Bottom" Grid.Column="3" Height="20"/>
-        <Label x:Name="lblAcademicLevel" Content="[LVL]" VerticalAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" FontSize="16" Grid.Column="1" Height="30" RenderTransformOrigin="-0.938,0.533"/>
+        <Label x:Name="lblAcademicLevel" Content="[LVL]" VerticalAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" FontSize="16" Grid.Column="1" Height="30" RenderTransformOrigin="-0.938,0.533" Foreground="#FF7A7A7A"/>
+
+        <local:SubjectThumbnail x:Name="controlSubjectTag" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="25"/>
 
     </Grid>
 </UserControl>

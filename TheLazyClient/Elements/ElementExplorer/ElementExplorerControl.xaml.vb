@@ -129,7 +129,5 @@ Public Class ElementExplorerControl
         Filter.getFilteredElementsAsync()
     End Sub
     'Passant informació cap al filtre
-
-
     
 End Class

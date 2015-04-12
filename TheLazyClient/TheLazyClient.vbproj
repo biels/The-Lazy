@@ -104,6 +104,9 @@
     <Compile Include="Elements\ElementExplorer\ElementExplorerControl.xaml.vb">
       <DependentUpon>ElementExplorerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Elements\ElementExplorer\SubjectThumbnail.xaml.vb">
+      <DependentUpon>SubjectThumbnail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Elements\FileExplorer\ElementExplorer.xaml.vb">
       <DependentUpon>ElementExplorer.xaml</DependentUpon>
     </Compile>
@@ -178,6 +181,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Elements\ElementExplorer\ElementExplorerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Elements\ElementExplorer\SubjectThumbnail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -155,6 +155,10 @@ Public Class ElementViewer
             DbClient.DbElementClient.setFavourite(c.localUser.id, Element.id, ModifiedLocalData.favourite)
             DbClient.DbElementClient.setElementRating(c.localUser.id, Element.id, ModifiedLocalData.rating)
         End If
+        Task.Run(AddressOf UpdateCache)
+    End Sub
+    Sub UpdateCache()
+        c.cache.element_cache.getElement(Element.id, True)
     End Sub
     Public Sub FullReload()
         SaveLocalInfo()

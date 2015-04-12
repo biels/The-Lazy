@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="SubjectThumbnail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="18" d:DesignWidth="25">
+    <Grid>
+        <Rectangle x:Name="rectBack" Fill="Blue" RadiusY="2.875" RadiusX="2.875"/>
+        <Label x:Name="lblShortcode" Content="CAT" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" Padding="0"/>
+
+    </Grid>
+</UserControl>
