@@ -14,6 +14,8 @@ Public Class ElementThumbnaiItem
         txtTitle.Content = Element.name
         lblDescription.Content = Element.description
         lblPrice.Content = Element.price
+        lblSubjectTag.Content = Element.subject.shortcode
+        lblSubjectTag.Foreground = If(Element.subject.color = 0, Brushes.Black, New SolidColorBrush(ColorFromInt(Element.subject.color)))
         imgPriceIcon.Visibility = If(Element.price = 0, Windows.Visibility.Collapsed, Windows.Visibility.Visible)
         lblPrice.Visibility = imgPriceIcon.Visibility
         imgFavourite.Visibility = If(Element.local_data.favourite, Windows.Visibility.Visible, Windows.Visibility.Collapsed)
