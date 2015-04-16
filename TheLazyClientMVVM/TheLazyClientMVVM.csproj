@@ -98,6 +98,7 @@
     <Compile Include="Entities\SubjectEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="FileExplorer\FileExploreHandler.cs" />
+    <Compile Include="FileExplorer\FileExploreHandlerManager.cs" />
     <Compile Include="FileExplorer\RemoteFileInfo.cs" />
     <Compile Include="Filter\ElementFilter.cs" />
     <Compile Include="Cache\LocalCache.cs" />

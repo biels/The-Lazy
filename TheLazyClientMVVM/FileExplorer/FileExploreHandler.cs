@@ -16,7 +16,10 @@ namespace TheLazyClientMVVM.FileExplorer
         public string host { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-        public string relative_path { get; set; }
+        //public string relative_path { get; set; }
+
+        //Element-specific
+        public int element_id { get; set; }
 
         //EVENTS
         public event ProgressUpdatedEventHandler ProgressUpdatedEvent;
@@ -30,11 +33,23 @@ namespace TheLazyClientMVVM.FileExplorer
         FtpClient ftp = new FtpClient();
         public void init()
         {
+            //Essential
             ftp.Host = host;
             ftp.Credentials = new NetworkCredential(username, password);
-            ftp.SetWorkingDirectory(relative_path);//lloc relatiu
-        }
 
+            //After set-up
+            createMainDirectoryIfNeededAsync();
+            ftp.SetWorkingDirectory(getRelativePath());//lloc relatiu
+        }
+        //Deterministic functions
+        private string getElementDirectory()
+        {
+            return "elements";
+        }
+        private string getRelativePath()
+        {
+            return string.Format("{0}/{1}", getElementDirectory(), element_id);
+        }
         //List
         public async void requestFileListAsync()
         {
@@ -60,15 +75,15 @@ namespace TheLazyClientMVVM.FileExplorer
             ftp.Disconnect();
         }
         //Upload
-        public async void UploadFileAsync(string file_name, string start_path) //Aniria bé asinrònica - StreamReader
+        public async void UploadFileAsync(string file_name, string local_path) //Aniria bé asinrònica - StreamReader
         {
             await Task.Run(() => ftp.Connect());
             if (ftp == null) { return; }
-            string relativeFile_path;
-            relativeFile_path = relative_path + "/" + file_name;
+            //string relativeFile_path;
+            //relativeFile_path = relative_path + "/" + file_name;
 
-            Stream destinationStream = ftp.OpenWrite(relativeFile_path);
-            Stream sourceStream = File.OpenRead(start_path);
+            Stream destinationStream = ftp.OpenWrite(file_name);
+            Stream sourceStream = File.OpenRead(local_path);
 
             //uploadProgressUpdated(sourceStream.Length, sourceStream);
             await sourceStream.CopyToAsync(destinationStream);
@@ -113,10 +128,10 @@ namespace TheLazyClientMVVM.FileExplorer
         {
             await Task.Run(() => ftp.Connect());
             if (ftp == null){ return; }
-            string relativeFile_path;
-            relativeFile_path = relative_path + "/" + file_name;
+            //string relativeFile_path;
+            //relativeFile_path = relative_path + "/" + file_name;
 
-            Stream sourceStream = ftp.OpenRead(relativeFile_path);
+            Stream sourceStream = ftp.OpenRead(file_name);
             Stream destinationStream = File.Create(local_path);
 
             await sourceStream.CopyToAsync(destinationStream);
@@ -156,15 +171,34 @@ namespace TheLazyClientMVVM.FileExplorer
             ProgressUpdatedEvent(procces_kb, total_size);
         }
         //Delete
-       public void deleteFile(string file_name) //Simple ordre FTP amb la lliberia, veure exemples
+        public void deleteFile(string file_name) //Simple ordre FTP amb la lliberia, veure exemples
         {
             ftp.Connect();
-            if(ftp == null) { return; }
-            string relativeFile_path;
-            relativeFile_path = relative_path + "/" + file_name;
+            if (ftp == null) { return; }
+            //string relativeFile_path;
+            //relativeFile_path = relative_path + "/" + file_name;
 
-            ftp.DeleteFile(relativeFile_path);
+            ftp.DeleteFile(file_name);
             ftp.Disconnect();
         }
+       //Delete
+       public async void createDirectoryAsync(string dir_name) //Simple ordre FTP amb la lliberia, veure exemples
+       {           
+           if (ftp == null) { return; }
+           await Task.Run(() => ftp.Connect());
+           await Task.Run(() => ftp.CreateDirectory(dir_name));
+           ftp.Disconnect();
+       }
+       public async void createMainDirectoryIfNeededAsync() //Simple ordre FTP amb la lliberia, veure exemples
+       {
+           if (ftp == null) { return; }
+           await Task.Run(() => ftp.Connect());
+           ftp.SetWorkingDirectory(getElementDirectory());
+           if (ftp.FileExists(element_id.ToString()))
+           {
+               await Task.Run(() => ftp.CreateDirectory(element_id.ToString()));
+           }          
+           ftp.Disconnect();
+       }
     }
 }

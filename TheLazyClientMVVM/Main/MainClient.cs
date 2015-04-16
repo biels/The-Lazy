@@ -8,6 +8,7 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 using TheLazyClientMVVM.Chat;
 using TheLazyClientMVVM.Filter;
+using TheLazyClientMVVM.FileExplorer;
 
 
 namespace TheLazyClientMVVM
@@ -21,6 +22,7 @@ namespace TheLazyClientMVVM
         public WCFClient wcfClient = new WCFClient();
         public LoginManager loginManager = new LoginManager();
         public ChatManager chatManager = new ChatManager();
+        public FileExploreHandlerManager fileExploreHandlerManager = new FileExploreHandlerManager();
         public Entities.UserEntity localUser;
         public Cache.LocalCache cache = new Cache.LocalCache();
         public List<string> registrats = new List<string>();
