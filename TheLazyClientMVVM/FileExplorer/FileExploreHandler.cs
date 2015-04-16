@@ -22,22 +22,30 @@ namespace TheLazyClientMVVM.FileExplorer
         public event ProgressUpdatedEventHandler ProgressUpdatedEvent;
         public delegate void ProgressUpdatedEventHandler(long progress, long total);
         public event EventHandler UploadCompleted;
+        public event EventHandler FileListRecieved;
         //UI
         public List<RemoteFileInfo> files { get; set; } //A mostar a la UI
 
         //FTP
-        FtpClient conn = new FtpClient();
-        void init()
+        FtpClient ftp = new FtpClient();
+        public void init()
         {
-            conn.Host = host;
-            conn.Credentials = new NetworkCredential(username, password);
-            conn.SetWorkingDirectory(relative_path);//lloc relatiu
+            ftp.Host = host;
+            ftp.Credentials = new NetworkCredential(username, password);
+            ftp.SetWorkingDirectory(relative_path);//lloc relatiu
         }
+
         //List
-        void updateFileList() //Actualitzar List<RemoteFileInfo> Files
+        public async void requestFileListAsync()
         {
-            conn.Connect();
-            foreach (FtpListItem item in conn.GetListing(conn.GetWorkingDirectory(),
+            await Task.Run(() => requestFileList());
+            FileListRecieved(this, new EventArgs());
+        }
+        private void requestFileList() //Actualitzar List<RemoteFileInfo> Files
+        {
+            ftp.Connect();
+            files.Clear();
+            foreach (FtpListItem item in ftp.GetListing(ftp.GetWorkingDirectory(),
                 FtpListOption.Modify | FtpListOption.Size))
             {
                 if (FtpFileSystemObjectType.File == item.Type)
@@ -49,18 +57,17 @@ namespace TheLazyClientMVVM.FileExplorer
                     files.Add(ent);
                 }
             }
-            conn.Disconnect();
+            ftp.Disconnect();
         }
         //Upload
-
-        public async void uploadFile(string file_name, string start_path) //Aniria bé asinrònica - StreamReader
+        public async void UploadFileAsync(string file_name, string start_path) //Aniria bé asinrònica - StreamReader
         {
-            conn.Connect();
-            if (conn == null) { return; }
+            await Task.Run(() => ftp.Connect());
+            if (ftp == null) { return; }
             string relativeFile_path;
             relativeFile_path = relative_path + "/" + file_name;
 
-            Stream destinationStream = conn.OpenWrite(relativeFile_path);
+            Stream destinationStream = ftp.OpenWrite(relativeFile_path);
             Stream sourceStream = File.OpenRead(start_path);
 
             //uploadProgressUpdated(sourceStream.Length, sourceStream);
@@ -69,8 +76,8 @@ namespace TheLazyClientMVVM.FileExplorer
 
             destinationStream.Close();
             sourceStream.Close();
-            conn.Disconnect();
-
+            await Task.Run(() => ftp.Disconnect());
+            //Finished event
         }
 
         //void uploadFile(string file_name, string start_path)
@@ -101,16 +108,15 @@ namespace TheLazyClientMVVM.FileExplorer
             procces_kb = procces / 1024;
             ProgressUpdatedEvent(procces_kb, total_size);
         }
-
         //download
         public async void downloadFileAsync(string file_name, string local_path) //Aniria bé asinrònica - StreamWriter
         {
-            conn.Connect();
-            if (conn == null){ return; }
+            await Task.Run(() => ftp.Connect());
+            if (ftp == null){ return; }
             string relativeFile_path;
             relativeFile_path = relative_path + "/" + file_name;
 
-            Stream sourceStream = conn.OpenRead(relativeFile_path);
+            Stream sourceStream = ftp.OpenRead(relativeFile_path);
             Stream destinationStream = File.Create(local_path);
 
             await sourceStream.CopyToAsync(destinationStream);
@@ -118,7 +124,7 @@ namespace TheLazyClientMVVM.FileExplorer
 
             sourceStream.Close();
             destinationStream.Close();
-            conn.Disconnect();
+            await Task.Run(() => ftp.Disconnect());
         }
 
         //void downloadFile(string file_name, string end_path)
@@ -150,15 +156,15 @@ namespace TheLazyClientMVVM.FileExplorer
             ProgressUpdatedEvent(procces_kb, total_size);
         }
         //Delete
-        void deleteFile(string file_name) //Simple ordre FTP amb la lliberia, veure exemples
+       public void deleteFile(string file_name) //Simple ordre FTP amb la lliberia, veure exemples
         {
-            conn.Connect();
-            if(conn == null) { return; }
+            ftp.Connect();
+            if(ftp == null) { return; }
             string relativeFile_path;
             relativeFile_path = relative_path + "/" + file_name;
 
-            conn.DeleteFile(relativeFile_path);
-            conn.Disconnect();
+            ftp.DeleteFile(relativeFile_path);
+            ftp.Disconnect();
         }
     }
 }
