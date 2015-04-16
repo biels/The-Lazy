@@ -24,22 +24,35 @@ namespace TheLazyClientMVVM.FileExplorer
         //EVENTS
         public event ProgressUpdatedEventHandler ProgressUpdatedEvent;
         public delegate void ProgressUpdatedEventHandler(long progress, long total);
-        public event EventHandler UploadCompleted;
+        public event EventHandler UploadCompletedEvent;
+        public event Action DownloadCompletedEvent;
         public event EventHandler FileListRecieved;
         //UI
         public List<RemoteFileInfo> files { get; set; } //A mostar a la UI
 
         //FTP
         FtpClient ftp = new FtpClient();
-        public void init()
+        public FileExploreHandler()
         {
+            files = new List<RemoteFileInfo>();
+        }
+        public async void init()
+        {
+            fillConnectionInfo();
             //Essential
             ftp.Host = host;
             ftp.Credentials = new NetworkCredential(username, password);
 
             //After set-up
-            createMainDirectoryIfNeededAsync();
-            ftp.SetWorkingDirectory(getRelativePath());//lloc relatiu
+            await Task.Run(() => createMainDirectoryIfNeededAsync());
+            //ftp.SetWorkingDirectory(getRelativePath());//lloc relatiu
+        }
+        public void fillConnectionInfo() //Unsafe
+        {
+            SelectorConnexions.ConnectionInfo cinfo = new SelectorConnexions.ConnectionInfo();
+            host = cinfo.Address;
+            username = "thelazy";
+            password = "1234";
         }
         //Deterministic functions
         private string getElementDirectory()
@@ -60,7 +73,7 @@ namespace TheLazyClientMVVM.FileExplorer
         {
             ftp.Connect();
             files.Clear();
-            foreach (FtpListItem item in ftp.GetListing(ftp.GetWorkingDirectory(),
+            foreach (FtpListItem item in ftp.GetListing(getRelativePath(),
                 FtpListOption.Modify | FtpListOption.Size))
             {
                 if (FtpFileSystemObjectType.File == item.Type)
@@ -79,15 +92,15 @@ namespace TheLazyClientMVVM.FileExplorer
         {
             await Task.Run(() => ftp.Connect());
             if (ftp == null) { return; }
-            //string relativeFile_path;
-            //relativeFile_path = relative_path + "/" + file_name;
+            string relativeFile_path;
+            relativeFile_path = getRelativePath() + "/" + file_name;
 
-            Stream destinationStream = ftp.OpenWrite(file_name);
+            Stream destinationStream = ftp.OpenWrite(relativeFile_path);
             Stream sourceStream = File.OpenRead(local_path);
 
             //uploadProgressUpdated(sourceStream.Length, sourceStream);
             await sourceStream.CopyToAsync(destinationStream);
-            UploadCompleted(sourceStream, new EventArgs());
+            UploadCompletedEvent(sourceStream, new EventArgs());
 
             destinationStream.Close();
             sourceStream.Close();
@@ -128,15 +141,14 @@ namespace TheLazyClientMVVM.FileExplorer
         {
             await Task.Run(() => ftp.Connect());
             if (ftp == null){ return; }
-            //string relativeFile_path;
-            //relativeFile_path = relative_path + "/" + file_name;
+            string relativeFile_path;
+            relativeFile_path = getRelativePath() + "/" + file_name;
 
-            Stream sourceStream = ftp.OpenRead(file_name);
+            Stream sourceStream = ftp.OpenRead(relativeFile_path);
             Stream destinationStream = File.Create(local_path);
 
             await sourceStream.CopyToAsync(destinationStream);
-            UploadCompleted(sourceStream, new EventArgs());
-
+            if (DownloadCompletedEvent != null) DownloadCompletedEvent();
             sourceStream.Close();
             destinationStream.Close();
             await Task.Run(() => ftp.Disconnect());
@@ -193,10 +205,11 @@ namespace TheLazyClientMVVM.FileExplorer
        {
            if (ftp == null) { return; }
            await Task.Run(() => ftp.Connect());
-           ftp.SetWorkingDirectory(getElementDirectory());
-           if (ftp.FileExists(element_id.ToString()))
+           //ftp.SetWorkingDirectory("");
+           //ftp.SetWorkingDirectory(getElementDirectory());
+           if (!ftp.DirectoryExists(getRelativePath()))
            {
-               await Task.Run(() => ftp.CreateDirectory(element_id.ToString()));
+               await Task.Run(() => ftp.CreateDirectory(getRelativePath()));
            }          
            ftp.Disconnect();
        }

@@ -41,7 +41,9 @@
         </TabControl>
         <TabControl x:Name="tabMain" HorizontalAlignment="Left" Height="411" Margin="10,96,0,0" VerticalAlignment="Top" Width="647">
             <TabItem Header="Notícies">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <Button x:Name="btnFTP" Content="Connexió protocol" HorizontalAlignment="Left" Margin="47,34,0,0" VerticalAlignment="Top" Width="160"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Elements">
                 <Grid Background="#FFE5E5E5">

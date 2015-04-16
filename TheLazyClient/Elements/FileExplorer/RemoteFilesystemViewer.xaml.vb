@@ -20,11 +20,13 @@ Public Class RemoteFilesystemViewer
         End Get
         Set(ByVal value As Entities.ElementEntity)
             _Element = value
+            Handler = Com.main.fileExploreHandlerManager.getHandler(_Element.id)
+            UpdateUI()
         End Set
     End Property
     Sub UpdateUI()
         UpdateFileList()
-        lblFileStat.Content = Handler.files.Count & "fitxers, " & getTotalSize() & " Kb en total"
+        lblFileStat.Content = Handler.files.Count & "fitxers, " & GetSizeReadable(getTotalSize()) & " en total"
     End Sub
 
     Function getTotalSize() As Integer
@@ -66,5 +68,9 @@ Public Class RemoteFilesystemViewer
     'Event Handlers
     Private Sub ElementListRecieved_Event() Handles Handler.FileListRecieved
         UpdateUI()
+    End Sub
+
+    Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
+        Handler.requestFileListAsync()
     End Sub
 End Class

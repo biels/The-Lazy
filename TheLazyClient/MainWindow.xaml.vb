@@ -208,4 +208,10 @@ Class MainWindowElements
             StealthSwitch(stealth)
         End If
     End Sub
+
+    Private Sub btnFTP_Click(sender As Object, e As RoutedEventArgs) Handles btnFTP.Click
+        Dim w As New ElementExplorer
+        w.Element = New Entities.ElementEntity With {.id = 4}
+        w.Show()
+    End Sub
 End Class

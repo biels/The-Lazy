@@ -4,8 +4,6 @@
     xmlns:local="clr-namespace:TheLazyClient" x:Name="frame" x:Class="ElementExplorer"
     Title="ElementExplorer" Height="361" Width="551">
     <Grid>
-        <StackPanel x:Name="pnlRemoteFileSystem" Margin="10">
-            <local:RemoteFilesystemViewer Width="Auto"/>
-        </StackPanel>
+        <local:RemoteFilesystemViewer x:Name="controlElementExplorer" Width="Auto" Height="Auto"/>
     </Grid>
 </Window>

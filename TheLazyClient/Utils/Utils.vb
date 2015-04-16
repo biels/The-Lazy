@@ -111,4 +111,40 @@ Module Utils
         Return enumerationValue.ToString()
 
     End Function
+    Public Function GetSizeReadable(i As Long) As String
+        Dim sign As String = (If(i < 0, "-", ""))
+        Dim readable As Double = (If(i < 0, -i, i))
+        Dim suffix As String
+        If i >= &H1000000000000000L Then
+            ' Exabyte
+            suffix = "EB"
+            readable = CDbl(i >> 50)
+        ElseIf i >= &H4000000000000L Then
+            ' Petabyte
+            suffix = "PB"
+            readable = CDbl(i >> 40)
+        ElseIf i >= &H10000000000L Then
+            ' Terabyte
+            suffix = "TB"
+            readable = CDbl(i >> 30)
+        ElseIf i >= &H40000000 Then
+            ' Gigabyte
+            suffix = "GB"
+            readable = CDbl(i >> 20)
+        ElseIf i >= &H100000 Then
+            ' Megabyte
+            suffix = "MB"
+            readable = CDbl(i >> 10)
+        ElseIf i >= &H400 Then
+            ' Kilobyte
+            suffix = "KB"
+            readable = CDbl(i)
+        Else
+            ' Byte
+            Return i.ToString(sign & Convert.ToString("0 B"))
+        End If
+        readable = readable / 1024
+
+        Return Convert.ToString(sign & readable.ToString("0.### ")) & suffix
+    End Function
 End Module

@@ -15,7 +15,7 @@
                 <ColumnDefinition Width="60*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Width="41" Height="38" BorderBrush="{x:Null}" Grid.Column="2">
+            <Button Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Width="41" Height="38" BorderBrush="{x:Null}" Grid.Column="2" Click="Button_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="/TheLazyClient;component/media/Icones/Box-Down.png" Stretch="None"/>
                 </Button.Background>
