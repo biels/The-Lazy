@@ -10,7 +10,9 @@ namespace TheLazyClientMVVM.Filter
 {
     public class ElementFilter
     {               
-        public string search_text { get; set; } //Falta
+        //Filter criteria        
+        public string search_text { get; set; }
+        public string username { get; set; } //Ignorat si == null
         public AcademicLevelEntity academic_level { get; set; } //Nomès es té en compte si subject == null
         public SubjectEntity subject { get; set; } //Més prioritat que academic_level
         public ElementOrderCriteriaEnum order_criteria { get; set; }
@@ -81,7 +83,7 @@ namespace TheLazyClientMVVM.Filter
             if (search_text != "" && search_text != null)
             {
                 List<String> keywords = search_text.Split(new Char[] { ' ', ',', '.', ':', '\'', '\t' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-                string[] meaningless_keywords = new string[] {"de", "del", "dels", "la", "d", "el", "la", "per", "pel" };
+                string[] meaningless_keywords = new string[] {"de", "del", "dels", "els", "les", "la", "d", "l", "el", "la", "per", "pel" };
                 if (keywords.Count > 1)keywords.RemoveAll((k) => meaningless_keywords.Contains(k));
                 keywords.ForEach((e) => where_clause += String.Format(" {1}name LIKE '%{0}%'", e, (keywords.IndexOf(e) == 0 ? "" : "OR ")));
                 keywords.ForEach((e) => where_clause += String.Format(" {1}description LIKE '%{0}%'", e, "OR "));

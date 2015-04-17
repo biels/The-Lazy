@@ -4,6 +4,6 @@
     xmlns:local="clr-namespace:TheLazyClient" x:Class="ProfileViewer"
     Title="ProfileViewer" Height="417" Width="594">
     <Grid>
-        <local:ProfileViewerControl/>
+        <local:ProfileViewerControl x:Name="control"/>
     </Grid>
 </Window>

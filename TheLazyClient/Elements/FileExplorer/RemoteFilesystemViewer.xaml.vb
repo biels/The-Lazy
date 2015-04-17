@@ -25,6 +25,7 @@ Public Class RemoteFilesystemViewer
         End Set
     End Property
     Sub UpdateUI()
+        progProgress.IsIndeterminate = True
         UpdateFileList()
         lblFileStat.Content = Handler.files.Count & "fitxers, " & GetSizeReadable(getTotalSize()) & " en total"
     End Sub
@@ -44,6 +45,7 @@ Public Class RemoteFilesystemViewer
             AddHandler control.DownloadClick, AddressOf control_DownloadClick_Event
             pnlFileViwer.Children.Add(control)
         Next
+        progProgress.IsIndeterminate = False
     End Sub
     Sub control_DownloadClick_Event(File As FileExplorer.RemoteFileInfo)
         Dim dialog As New Microsoft.Win32.SaveFileDialog

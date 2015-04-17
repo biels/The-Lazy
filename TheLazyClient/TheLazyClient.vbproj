@@ -151,10 +151,10 @@
     <Compile Include="Profile\ProfileEditor.xaml.vb">
       <DependentUpon>ProfileEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Profile\ProfileViewer.xaml.vb">
+    <Compile Include="Profile\PofileViewer\ProfileViewer.xaml.vb">
       <DependentUpon>ProfileViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Profile\ProfileViewerControl.xaml.vb">
+    <Compile Include="Profile\PofileViewer\ProfileViewerControl.xaml.vb">
       <DependentUpon>ProfileViewerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ResultWindow\Logger.vb" />
@@ -240,11 +240,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Profile\ProfileViewer.xaml">
+    <Page Include="Profile\PofileViewer\ProfileViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Profile\ProfileViewerControl.xaml">
+    <Page Include="Profile\PofileViewer\ProfileViewerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

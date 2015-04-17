@@ -95,6 +95,8 @@ Class MainWindowElements
 
     Private Sub btnPerfil_Click(sender As Object, e As RoutedEventArgs) Handles btnPerfil.Click
         Dim frm As New ProfileViewer
+        frm.Username = c.localUser.username
+        frm.WindowStartupLocation = Windows.WindowStartupLocation.CenterOwner
         frm.ShowDialog()
     End Sub
     Private Sub btnPerfilEdit_Click(sender As Object, e As RoutedEventArgs) Handles btnPerfilEdit.Click

@@ -25,6 +25,7 @@ Public Class ElementExplorerControl
     Public Sub Init()
         If _Initialized Or DesignerProperties.GetIsInDesignMode(Me) Then Exit Sub 'Evitar multi-handlings dels esdeveniments del filtre
         SetFilterHandlers()
+        Filter.init()
         AcademicLevelCombobox()
         UpdateCriteriaCombobox()
         Filter.getFilteredElementsAsync()
