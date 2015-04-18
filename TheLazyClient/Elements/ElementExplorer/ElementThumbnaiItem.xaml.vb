@@ -11,7 +11,7 @@ Public Class ElementThumbnaiItem
         End Set
     End Property
     Sub UpdateUI()
-        txtTitle.Content = Element.name
+        txtTitle.Content = String.Format("{1} {0}", Element.name, If(Element.draft, "[Esborrany]", ""))
         lblDescription.Content = Element.description
         lblPrice.Content = Element.price
         lblAcademicLevel.Content = Element.subject.academic_level
