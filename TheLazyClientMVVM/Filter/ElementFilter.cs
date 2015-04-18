@@ -38,6 +38,7 @@ namespace TheLazyClientMVVM.Filter
         public delegate void RequestCompleteEventHandler(List<ElementEntity> current_element_list);
         public void init()
         {
+            draft_show_criteria = DraftShowCriteria.All;
             _AcademicLevels = Com.main.cache.academic_level_cache.getAcademicLevelFullList();
         }
         public void updateSubjectList(AcademicLevelEntity academic_level)
@@ -121,7 +122,6 @@ namespace TheLazyClientMVVM.Filter
         };
         public enum DraftShowCriteria
         {
-            [Description("Més recents")]
             None,
             LocalUserOnly,
             All

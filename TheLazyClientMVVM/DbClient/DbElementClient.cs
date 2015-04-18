@@ -63,7 +63,8 @@ namespace TheLazyClientMVVM.DbClient
                 if (rdr["description"] != DBNull.Value)
                 {
                     ent.description = rdr.GetString("description");
-                }               
+                }
+                ent.draft = (rdr.GetInt16("draft") == 1 ? true : false);
                 ent.price = rdr.GetInt32("price");
                 ent.create_time = DateTime.Parse(rdr.GetString("create_time"));
                 ent.update_time = DateTime.Parse(rdr.GetString("update_time"));
