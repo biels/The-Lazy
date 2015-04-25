@@ -1,29 +1,55 @@
-﻿<Window x:Class="ElementEditor"
+﻿<Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:TheLazyClient" x:Class="ElementEditor"
     Title="ElementEditor" Height="312.633" Width="518.966">
-    <Grid Height="278" VerticalAlignment="Top" HorizontalAlignment="Left" Width="503">
-        <Grid Margin="10,10,0,0" HorizontalAlignment="Left" Width="224" Height="50" VerticalAlignment="Top">
-            <TextBox x:Name="txtTitle"  HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" FontSize="16" Background="#FFF3CACA" Text="Escriu un títol" Foreground="Gray" Margin="0,0,-12,0"/>
+    <Grid Margin="0,0,8,4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250*"/>
+            <ColumnDefinition Width="253*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="btnPublish" Content="Publica" Margin="0,0,10,10" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom" Grid.Column="1" Background="#FFD10000" FontWeight="Bold"/>
+        <Grid Margin="10,10,16,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <TextBox x:Name="txtTitle" Height="28" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Background="#FFF3CACA" Text="Escriu un títol" Foreground="Gray" Margin="0,0,-1,0"/>
+            </Grid>
+            <Grid Margin="0,9,0,2" Grid.Row="1">
+                <TextBox x:Name="txtDescription" Margin="0,26,0,0" TextWrapping="Wrap" Background="#FFFFFFA7" Text="Fes una petita descripció del teu treball aquí" Foreground="Gray"/>
+                <Label Content="Descripció" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFFFFF78"/>
+            </Grid>
+            <Grid Margin="0,7,0,0" HorizontalAlignment="Left" Width="224" Height="56" VerticalAlignment="Top" Grid.Row="2">
+                <Image HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="51" Margin="54,19,0,0" Source="/TheLazyClient;component/media/Icones/Card-Money.png"/>
+                <TextBox x:Name="txtPrice" Margin="0,26,0,0" TextWrapping="Wrap" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Right" Background="#FFDFFFBE" HorizontalAlignment="Left" Width="54" Height="21" VerticalAlignment="Top" Text="0" Foreground="Gray"/>
+                <Label Content="Preu" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFA7FFA7"/>
+            </Grid>
         </Grid>
-        <Grid Margin="10,54,0,0" HorizontalAlignment="Left" Width="224" Height="149" VerticalAlignment="Top">
-            <TextBox x:Name="txtDescription" Margin="0,26,0,0" TextWrapping="Wrap" Background="#FFFFFFA7" Text="Fes una petita descripció del teu treball aquí" Foreground="Gray" HorizontalAlignment="Left" Width="224" Height="123" VerticalAlignment="Top"/>
-            <Label Content="Descripció" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFFFFF78"/>
+        <Grid Grid.Column="1" Margin="10,11,10,38">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Margin="2,0,7,0" Background="White" Height="49" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="113"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Background="#FFFFDE96" Margin="0,0,-9,-9" Grid.ColumnSpan="2" Height="58" VerticalAlignment="Top"/>
+                <ComboBox x:Name="cmbAcademicLevel" HorizontalAlignment="Right" Margin="0,0,10,1" Width="93" Height="22" VerticalAlignment="Bottom"/>
+                <ComboBox x:Name="cmbSubjects" Margin="18,26,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                <Label Content="Institut" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#FFFDD057" Margin="0,0,56,0"/>
+                <Label Content="Assignatura" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFFDD057" Margin="18,0,0,0" Grid.Column="1"/>
+            </Grid>
+            <Grid Margin="0,20,0,5" Background="#FFE5E5E5" Grid.Row="1">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Cal desar l'element com a esborrany per poder afegir fitxers." TextWrapping="Wrap" TextAlignment="Center"/>
+            </Grid>
+            <Button Content="Afegeix fitxer" HorizontalAlignment="Left" Margin="2,0,0,0" VerticalAlignment="Top" Width="231" Grid.Row="2" Height="20"/>
         </Grid>
-        <Button x:Name="btnPublish" Content="Publica" Margin="0,0,10,10" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom"/>
-        <Grid Margin="10,222,0,0" HorizontalAlignment="Left" Width="224" Height="56" VerticalAlignment="Top">
-            <Image HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="51" Margin="54,19,0,0" Source="/TheLazyClient;component/media/Icones/Card-Money.png"/>
-            <TextBox x:Name="txtPrice" Margin="0,26,0,0" TextWrapping="Wrap" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Right" Background="#FFDFFFBE" HorizontalAlignment="Left" Width="54" Height="21" VerticalAlignment="Top" Text="0" Foreground="Gray"/>
-            <Label Content="Preu" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFA7FFA7"/>
-        </Grid>
-        <Grid Margin="260,36,0,0" Background="White" Height="49" VerticalAlignment="Top" HorizontalAlignment="Left" Width="224">
-            <Grid HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="233" Background="#FFFFDE96" Margin="0,0,-9,-9"/>
-            <ComboBox x:Name="cmbAcademicLevel" HorizontalAlignment="Right" Margin="0,0,121,1" Width="93" Height="22" VerticalAlignment="Bottom"/>
-            <ComboBox x:Name="cmbSubjects" Margin="131,26,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="93"/>
-            <Label Content="Institut" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#FFFDD057" Margin="0,0,167,0"/>
-            <Label Content="Assignatura" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#FFFDD057" Margin="0,0,21,0"/>
-        </Grid>
-        <Grid HorizontalAlignment="Left" Height="102" Margin="260,101,0,0" VerticalAlignment="Top" Width="233" Background="#FFE5E5E5"/>
-        <Button Content="Afegeix fitxer" HorizontalAlignment="Left" Margin="260,208,0,0" VerticalAlignment="Top" Width="233"/>
+        <Button x:Name="btnPublish_Copy" Content="Desa l'esborrany" Margin="0,0,90,10" HorizontalAlignment="Right" Width="105" Height="20" VerticalAlignment="Bottom" Grid.Column="1" Background="#FF949994" FontWeight="Bold"/>
     </Grid>
 </Window>

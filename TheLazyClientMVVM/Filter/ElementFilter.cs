@@ -16,6 +16,7 @@ namespace TheLazyClientMVVM.Filter
         public AcademicLevelEntity academic_level { get; set; } //Nomès es té en compte si subject == null
         public SubjectEntity subject { get; set; } //Més prioritat que academic_level
         public ElementOrderCriteriaEnum order_criteria { get; set; }
+        public DraftShowCriteria draft_show_criteria { get; set; } //Mostra els esborranys
 
         //Info pool
         public List<AcademicLevelEntity> _AcademicLevels { get; set; }
@@ -37,20 +38,13 @@ namespace TheLazyClientMVVM.Filter
         public delegate void RequestCompleteEventHandler(List<ElementEntity> current_element_list);
         public void init()
         {
+            draft_show_criteria = DraftShowCriteria.All;
             _AcademicLevels = Com.main.cache.academic_level_cache.getAcademicLevelFullList();
         }
         public void updateSubjectList(AcademicLevelEntity academic_level)
         {
             if (academic_level == null) { return; }
             _Subjects = Com.main.cache.subject_cache.getSubjectFullList(academic_level.id);
-        }
-        public  List<ElementEntity> getFilteredElements()
-        {
-            
-            string sql = "";
-            if (subject != null) {sql = String.Format("WHERE subject_id={0}", subject.id); }
-
-            return DbClient.DbElementClient.getFilteredElementList(sql);
         }
         public async Task getFilteredElementsAsync()
         {
@@ -80,13 +74,17 @@ namespace TheLazyClientMVVM.Filter
             string where_clause = "WHERE";
             if (academic_level != null && subject == null) { where_clause += String.Format(" academic_level_id={0}", academic_level.id); }
             if (subject != null) {where_clause += String.Format(" subject_id={0}", subject.id); }
+            if (draft_show_criteria != DraftShowCriteria.All) { where_clause += String.Format("{0} (draft={1}{2})", (where_clause == "WHERE" ? "" : " AND"), 0, (draft_show_criteria == DraftShowCriteria.LocalUserOnly ? String.Format(" OR user_id={0}", Com.main.localUser.id) : "")); }            
             if (search_text != "" && search_text != null)
             {
                 List<String> keywords = search_text.Split(new Char[] { ' ', ',', '.', ':', '\'', '\t' }, StringSplitOptions.RemoveEmptyEntries).ToList();
                 string[] meaningless_keywords = new string[] {"de", "del", "dels", "els", "les", "la", "d", "l", "el", "la", "per", "pel" };
                 if (keywords.Count > 1)keywords.RemoveAll((k) => meaningless_keywords.Contains(k));
+                where_clause += (where_clause == "WHERE" ? "" : " AND");
+                where_clause += " (";
                 keywords.ForEach((e) => where_clause += String.Format(" {1}name LIKE '%{0}%'", e, (keywords.IndexOf(e) == 0 ? "" : "OR ")));
                 keywords.ForEach((e) => where_clause += String.Format(" {1}description LIKE '%{0}%'", e, "OR "));
+                where_clause += ")";
             }
             if (where_clause == "WHERE") where_clause = "";
             return where_clause;
@@ -121,6 +119,12 @@ namespace TheLazyClientMVVM.Filter
             MostExpensive,
             [Description("Més barats")]
             Cheapest
+        };
+        public enum DraftShowCriteria
+        {
+            None,
+            LocalUserOnly,
+            All
         };
     }
 }

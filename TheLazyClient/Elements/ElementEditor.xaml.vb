@@ -31,6 +31,7 @@ Public Class ElementEditor
         Else
             btnPublish.Content = "Aplica"
         End If
+
     End Sub
     Sub SaveAction()
         If CanSave() Then

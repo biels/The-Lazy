@@ -63,7 +63,8 @@ namespace TheLazyClientMVVM.DbClient
                 if (rdr["description"] != DBNull.Value)
                 {
                     ent.description = rdr.GetString("description");
-                }               
+                }
+                ent.draft = (rdr.GetInt16("draft") == 1 ? true : false);
                 ent.price = rdr.GetInt32("price");
                 ent.create_time = DateTime.Parse(rdr.GetString("create_time"));
                 ent.update_time = DateTime.Parse(rdr.GetString("update_time"));
@@ -99,7 +100,7 @@ namespace TheLazyClientMVVM.DbClient
             cmd.Connection = c;
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = String.Format(
-                "INSERT INTO elements VALUES(null, {0}, {1}, \"{2}\", \"{3}\", {4}, null, null)",
+                "INSERT INTO elements VALUES(null, {0}, {1}, \"{2}\", \"{3}\", {4}, 0, null, null)",
                 user_id, subject_id, name, description, price);
             cmd.ExecuteNonQuery();
             c.Close();
@@ -116,6 +117,21 @@ namespace TheLazyClientMVVM.DbClient
             cmd.CommandText = String.Format(
                 "UPDATE elements SET user_id={1}, subject_id={2}, name=\"{3}\", description=\"{4}\", price={5} WHERE element_id={0}",
                 element_id, user_id, subject_id, name, description, price);
+            cmd.ExecuteNonQuery();
+            c.Close();
+            return true;
+        }
+        public static bool setDraft(int element_id, bool draft)
+        {
+            if (!DbClient.isOnline()) { return false; }
+            MySqlConnection c = DbClient.getConnection();
+            c.Open();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = String.Format(
+                "UPDATE elements SET draft={1} WHERE element_id={0}",
+                element_id, (draft ? 1 : 0));
             cmd.ExecuteNonQuery();
             c.Close();
             return true;
