@@ -28,6 +28,7 @@ Public Class ElementExplorerControl
         Filter.init()
         AcademicLevelCombobox()
         UpdateCriteriaCombobox()
+        UpdateFilterCombobox()
         Filter.getFilteredElementsAsync()
         _Initialized = True
     End Sub
@@ -127,6 +128,23 @@ Public Class ElementExplorerControl
     End Sub
     Private Sub cmbOrderCriteria_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbOrderCriteria.SelectionChanged
         Filter.order_criteria = cmbOrderCriteria.SelectedIndex
+        Filter.getFilteredElementsAsync()
+    End Sub
+    Private Sub UpdateFilterCombobox()
+        If Filter.username <> "" Then
+            cmbFilterCriteria.Visibility = Windows.Visibility.Collapsed
+            Exit Sub
+        End If
+        With cmbFilterCriteria.Items
+            .Clear()
+            For Each v As TheLazyClientMVVM.Filter.ElementFilter.TypeFilterCriteriaEnum In [Enum].GetValues(GetType(TheLazyClientMVVM.Filter.ElementFilter.TypeFilterCriteriaEnum))
+                .Add(GetDescription(v))
+            Next
+        End With
+        cmbOrderCriteria.SelectedItem = FindItemContaining(cmbOrderCriteria.Items, GetDescription(Filter.type_filter_criteria))
+    End Sub
+    Private Sub cmbFilterCriteria_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbFilterCriteria.SelectionChanged
+        Filter.type_filter_criteria = cmbFilterCriteria.SelectedIndex
         Filter.getFilteredElementsAsync()
     End Sub
     'Passant informació cap al filtre

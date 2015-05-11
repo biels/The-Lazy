@@ -16,6 +16,7 @@ namespace TheLazyClientMVVM.Filter
         public AcademicLevelEntity academic_level { get; set; } //Nomès es té en compte si subject == null
         public SubjectEntity subject { get; set; } //Més prioritat que academic_level
         public ElementOrderCriteriaEnum order_criteria { get; set; }
+        public TypeFilterCriteriaEnum type_filter_criteria { get; set; }
         public DraftShowCriteria draft_show_criteria { get; set; } //Mostra els esborranys
 
         //Info pool
@@ -74,7 +75,18 @@ namespace TheLazyClientMVVM.Filter
             string where_clause = "WHERE";
             if (academic_level != null && subject == null) { where_clause += String.Format(" academic_level_id={0}", academic_level.id); }
             if (subject != null) {where_clause += String.Format(" subject_id={0}", subject.id); }
-            if (draft_show_criteria != DraftShowCriteria.All) { where_clause += String.Format("{0} (draft={1}{2})", (where_clause == "WHERE" ? "" : " AND"), 0, (draft_show_criteria == DraftShowCriteria.LocalUserOnly ? String.Format(" OR user_id={0}", Com.main.localUser.id) : "")); }            
+            if (draft_show_criteria != DraftShowCriteria.All) { where_clause += String.Format("{0} (draft={1}{2})", (where_clause == "WHERE" ? "" : " AND"), 0, (draft_show_criteria == DraftShowCriteria.LocalUserOnly ? String.Format(" OR user_id={0}", Com.main.localUser.id) : "")); }
+            if (type_filter_criteria != TypeFilterCriteriaEnum.All)
+            {
+                if (type_filter_criteria == TypeFilterCriteriaEnum.DraftsOnly)
+                {
+                    where_clause += String.Format("{0} draft={1}", (where_clause == "WHERE" ? "" : " AND"), 1);
+                }
+                if (type_filter_criteria == TypeFilterCriteriaEnum.Foreign || type_filter_criteria == TypeFilterCriteriaEnum.OwnOnly)
+                {
+                    where_clause += String.Format("{0} user_id{2}{1}", (where_clause == "WHERE" ? "" : " AND"), Com.main.localUser.id, type_filter_criteria == TypeFilterCriteriaEnum.OwnOnly ? "=" : "!=");
+                }
+            }
             if (search_text != "" && search_text != null)
             {
                 List<String> keywords = search_text.Split(new Char[] { ' ', ',', '.', ':', '\'', '\t' }, StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -119,6 +131,19 @@ namespace TheLazyClientMVVM.Filter
             MostExpensive,
             [Description("Més barats")]
             Cheapest
+        };
+        public enum TypeFilterCriteriaEnum
+        {
+            [Description("Propis")]
+            OwnOnly,
+            [Description("Aliens")]
+            Foreign,
+            [Description("Esborranys")]
+            Bought,
+            [Description("Comprats")]
+            DraftsOnly,
+            [Description("Tots")]
+            All
         };
         public enum DraftShowCriteria
         {
