@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TheLazyClient" x:Class="ProfileViewerControl" 
              mc:Ignorable="d" 
-             d:DesignHeight="380" d:DesignWidth="580">
+             d:DesignHeight="400" d:DesignWidth="630">
     <Grid>
         <TabControl>
             <TabControl.Background>
@@ -24,7 +24,7 @@
             </TabItem>
             <TabItem Header="Elements" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="65">
                 <Grid Background="#FFE5E5E5">
-                    <local:ElementExplorerControl x:Name="controlElementViewer" Margin="0,5,0,0"/>
+                    <local:ElementExplorerControl x:Name="controlElementViewer" Margin="0,6,0,0" VerticalAlignment="Top"/>
 
                 </Grid>
             </TabItem>
