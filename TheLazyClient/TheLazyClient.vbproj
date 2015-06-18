@@ -148,6 +148,9 @@
     <Compile Include="Profile\GroupEditor.xaml.vb">
       <DependentUpon>GroupEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Profile\PofileViewer\ProfileUserViwer.xaml.vb">
+      <DependentUpon>ProfileUserViwer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Profile\ProfileEditor.xaml.vb">
       <DependentUpon>ProfileEditor.xaml</DependentUpon>
     </Compile>
@@ -233,6 +236,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Profile\GroupEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Profile\PofileViewer\ProfileUserViwer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

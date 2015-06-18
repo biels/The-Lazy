@@ -22,6 +22,8 @@ Public Class ProfileViewerControl
         controlElementViewer.Filter = Filter
         controlElementViewer.Init()
         _Initialized = True
+
+
     End Sub
 
     Private Sub txtProfileName_GotFocus(sender As Object, e As RoutedEventArgs) Handles txtProfileName.GotFocus

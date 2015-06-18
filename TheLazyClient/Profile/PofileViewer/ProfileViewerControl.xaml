@@ -21,7 +21,6 @@
                         <GradientStop Color="#FF075978" Offset="1"/>
                     </LinearGradientBrush>
                 </TabItem.Background>
-                <Grid Background="#FFE5E5E5"/>
             </TabItem>
             <TabItem Header="Elements" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="65">
                 <Grid Background="#FFE5E5E5">
