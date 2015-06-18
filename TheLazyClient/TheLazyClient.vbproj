@@ -148,8 +148,14 @@
     <Compile Include="Profile\GroupEditor.xaml.vb">
       <DependentUpon>GroupEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Profile\PofileViewer\ProfileUserViwer.xaml.vb">
-      <DependentUpon>ProfileUserViwer.xaml</DependentUpon>
+    <Compile Include="Profile\PofileViewer\Tabs\History\HistoryEntryViewer.xaml.vb">
+      <DependentUpon>HistoryEntryViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\PofileViewer\Tabs\History\ProfileHistoryTab.xaml.vb">
+      <DependentUpon>ProfileHistoryTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\PofileViewer\Tabs\Main\ProfileMainViewTab.xaml.vb">
+      <DependentUpon>ProfileMainViewTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="Profile\ProfileEditor.xaml.vb">
       <DependentUpon>ProfileEditor.xaml</DependentUpon>
@@ -239,7 +245,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Profile\PofileViewer\ProfileUserViwer.xaml">
+    <Page Include="Profile\PofileViewer\Tabs\History\HistoryEntryViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Profile\PofileViewer\Tabs\History\ProfileHistoryTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Profile\PofileViewer\Tabs\Main\ProfileMainViewTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

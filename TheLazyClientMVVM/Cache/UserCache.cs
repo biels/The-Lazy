@@ -18,6 +18,7 @@ namespace TheLazyClientMVVM.Cache
         {
             Predicate<UserEntity> match = new Predicate<UserEntity>(e => id == e.id);
             UserEntity cached = users.FirstOrDefault(e => match(e) && e.isValid());
+            
             if (cached != null && !direct) 
             {
                 Com.main.cached_query_count++;

@@ -94,6 +94,7 @@
     <Compile Include="Entities\ElementEntity.cs" />
     <Compile Include="Entities\ElementPurchaseEntity.cs" />
     <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\HistoryEntity.cs" />
     <Compile Include="Entities\LocalElementDataEntity.cs" />
     <Compile Include="Entities\SubjectEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="FileExplorer\RemoteFileInfo.cs" />
     <Compile Include="Filter\ElementFilter.cs" />
     <Compile Include="Cache\LocalCache.cs" />
+    <Compile Include="History\HistoryFilter.cs" />
     <Compile Include="Main\LocalConfig.cs" />
     <Compile Include="Main\LoginManager.cs" />
     <Compile Include="Main\MainClient.cs" />

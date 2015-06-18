@@ -11,7 +11,7 @@ namespace TheLazyClientMVVM.Entities
         public int id { get; set; }
         public UserEntity user { get; set; } //Semi buit*
         public int price { get; set; }
-        public int element_id { get; set; }
+        public int element_id { get; set; } //elemententity
         public DateTime create_time { get; set; }
     }
 }
