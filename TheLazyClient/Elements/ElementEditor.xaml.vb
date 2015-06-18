@@ -56,7 +56,6 @@ Public Class ElementEditor
         If txtTitle.Text.Length > 32 Then err.Add("El títol pot contenir com a màxim 32 caràcters.")
         If cmbAcademicLevel.SelectedIndex = -1 Then err.Add("Selecciona un nivell acadèmic.")
         If cmbSubjects.SelectedIndex = -1 Then err.Add("Selecciona una assignatura.")
-
         If err.Count > 0 Then
             Dim s As String = "No es pot completar l'operació, detalls: "
             For Each err_m As String In err

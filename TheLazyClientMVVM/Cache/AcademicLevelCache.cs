@@ -33,7 +33,7 @@ namespace TheLazyClientMVVM.Cache
             }
         }
         public List<AcademicLevelEntity> getAcademicLevelFullList(bool direct = false) //Cal inicialitzar
-        {         
+        {                    
             bool allValid = academic_levels.TrueForAll(e => e.isValid());
             if (allValid && !direct && filled)
             {
