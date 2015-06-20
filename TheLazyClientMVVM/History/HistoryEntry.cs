@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheLazyClientMVVM.Entities
 {
-    class HistoryEntity : Entity
+    class HistoryEntry
     {
         public int id { get; set; }
         public string reason {get; set;} //null / Unlock Connexió lvl 5

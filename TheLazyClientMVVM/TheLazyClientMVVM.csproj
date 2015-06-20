@@ -94,7 +94,7 @@
     <Compile Include="Entities\ElementEntity.cs" />
     <Compile Include="Entities\ElementPurchaseEntity.cs" />
     <Compile Include="Entities\Entity.cs" />
-    <Compile Include="Entities\HistoryEntity.cs" />
+    <Compile Include="History\HistoryEntry.cs" />
     <Compile Include="Entities\LocalElementDataEntity.cs" />
     <Compile Include="Entities\SubjectEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
