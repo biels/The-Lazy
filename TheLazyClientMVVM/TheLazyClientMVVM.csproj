@@ -70,6 +70,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Achievements\AchievementLogic.cs" />
+    <Compile Include="Achievements\AchievementManager.cs" />
+    <Compile Include="Achievements\Logic\AConnectSpreeLogic.cs" />
     <Compile Include="Cache\SubjectCache.cs" />
     <Compile Include="Cache\EducationCenterCache.cs" />
     <Compile Include="Cache\AcademicLevelCache.cs" />
@@ -79,7 +82,6 @@
     <Compile Include="Chat\ChatRoom.cs" />
     <Compile Include="Chat\ChatWindowHandler.cs" />
     <Compile Include="Chat\IrcHandler.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Com.cs" />
     <Compile Include="DbClient\DbAcademicLevelClient.cs" />
     <Compile Include="DbClient\DbClient.cs" />

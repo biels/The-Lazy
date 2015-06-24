@@ -148,6 +148,12 @@
     <Compile Include="Profile\GroupEditor.xaml.vb">
       <DependentUpon>GroupEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Profile\PofileViewer\Tabs\Achievements\AchievementTab.xaml.vb">
+      <DependentUpon>AchievementTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\PofileViewer\Tabs\Achievements\AchievementViewer.xaml.vb">
+      <DependentUpon>AchievementViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Profile\PofileViewer\Tabs\History\HistoryEntryViewer.xaml.vb">
       <DependentUpon>HistoryEntryViewer.xaml</DependentUpon>
     </Compile>
@@ -242,6 +248,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Profile\GroupEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Profile\PofileViewer\Tabs\Achievements\AchievementTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Profile\PofileViewer\Tabs\Achievements\AchievementViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

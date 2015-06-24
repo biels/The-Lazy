@@ -9,6 +9,7 @@ using MySql.Data.MySqlClient;
 using TheLazyClientMVVM.Chat;
 using TheLazyClientMVVM.Filter;
 using TheLazyClientMVVM.FileExplorer;
+using TheLazyClientMVVM.Achievements;
 
 
 namespace TheLazyClientMVVM
@@ -27,6 +28,7 @@ namespace TheLazyClientMVVM
         public Cache.LocalCache cache = new Cache.LocalCache();
         public List<string> registrats = new List<string>();
         public ElementFilter filter = new ElementFilter();
+        public AchievementManager achievementManager = new AchievementManager();
         public int sql_query_count = 0;
         public int cached_query_count = 0;
         public LocalConfig config = new LocalConfig();
@@ -36,6 +38,7 @@ namespace TheLazyClientMVVM
             DbClient.DbClient.TestConnection();
 
             filter.init();
+            achievementManager.init();
            
             //Entities.UserEntity u = DbClient.DbUserClient.getUserInfo("biel");
 
